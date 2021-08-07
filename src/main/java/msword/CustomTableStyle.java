@@ -185,7 +185,7 @@ public class CustomTableStyle {
         endTable(table);
     }
 
-    public static void appendToTable4(XWPFTable table, ValidGoal goal) {
+    public static void appendToTable4(XWPFTable table, ValidGoal goal,  ValidGoal newGoal) {
         for (ExcelCell input_c : goal.getAllInputs()) {
             Cell input = input_c.getCell();
             XWPFTableRow row = table.createRow();
@@ -198,12 +198,12 @@ public class CustomTableStyle {
                     ,input_c.getValue()
                     , goal.getOutput().getR1c1()
                     , goal.getOutput().getValue()
-                    ,"",String.valueOf(goal.g),""
+                    ,"",String.valueOf(newGoal.getSpecification()),""
             );
         }
     }
 
-    public static void getTable_Style4(XWPFDocument doc, HashMap<String, ValidGoal> goals) {
+    public static void getTable_Style4(XWPFDocument doc, HashMap<String, ValidGoal> goals, HashMap<String, ValidGoal> newGoals) {
         XWPFTable table = getCustomTable(doc, 5, 7);
         table.getRow(0).setHeight(700);
         table.getRow(3).setHeight(600);
@@ -222,7 +222,7 @@ public class CustomTableStyle {
         addToTable(types.Content, table, 4, INPUT_CELL, "Input value",
                 OUTPUT_CELL, "Output " + RESULT, "Calculated " + RESULT, "Expected " + RESULT, "Test " + RESULT);
         for (Map.Entry<String, ValidGoal> goal : goals.entrySet()) {
-            appendToTable4(table, goal.getValue());
+            appendToTable4(table, goal.getValue(),newGoals.get(goal.getKey()));
         }
         endTable(table);
     }
