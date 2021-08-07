@@ -56,7 +56,7 @@ public static double getTargetOutput(String specification){
         if (ifEqual(SPECIFICATION, excel.getCellValue().toString())) {
             return excel.findNextCellStrValue();
         } else
-            return excel.getCellValue().toString();
+            return excel.getCellValue().toString().replace(SPECIFICATION+":","");
     }
 
     public static boolean checkBlue(Excel excel, Cell cell) {
