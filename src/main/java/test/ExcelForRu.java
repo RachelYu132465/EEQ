@@ -1,9 +1,16 @@
 package test;
 
+import dataStructure.ValidGoal;
+import mainFlow.ProduceWordFile;
+import mainFlow.VBS;
+import mainFlow.extract;
+import msexcel.Excel;
 import validate.Specification;
+import validate.excelFormulaValidator;
 
 import javax.swing.filechooser.FileSystemView;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -37,11 +44,11 @@ public class ExcelForRu {
                ;
         System.out.println(s.numberInSpec);
         List<String> SpecificationList = null;
-//        HashMap<String, ValidGoal> TobeProcessed = null;
-//        String fileName = "test1.xlsx";
-//        Object result = extract.extractData(fileName);
-//        SpecificationList = (List<String>) ((Object[]) result)[0];
-//        TobeProcessed = (HashMap<String, ValidGoal>) ((Object[]) result)[1];
+        HashMap<String, ValidGoal> TobeProcessed = null;
+        String fileName = "test1.xlsx";
+        Object result = extract.extractData(fileName);
+        SpecificationList = (List<String>) ((Object[]) result)[0];
+        TobeProcessed = (HashMap<String, ValidGoal>) ((Object[]) result)[1];
 //
 ////        for(String specification : SpecificationList){
 ////            System.out.println(specification);
@@ -57,16 +64,17 @@ public class ExcelForRu {
 ////            System.out.println("____"+e.getValue().getInput());
 ////        }
 //
-//        VBS.execVBSFile(VBS.produceVBSFile(fileName,TobeProcessed));
-//        Thread.sleep(3000);
-//
-//        String produced_vbsFileName =fileName.split("\\.")[0] + VBS.vbsExcelName + "." + fileName.split("\\.")[1];
-//        Excel producedExcel =Excel.loadExcel(proj_path + produced_vbsFileName);
-//        producedExcel.assignSheet(0);
-//        HashMap<String, ValidGoal> Validated = excelFormulaValidator.getValidatedValues(
-//                TobeProcessed,producedExcel);
-//        ProduceWordFile.writeToWord(Validated);
-//        System.out.println("finish");
+        VBS.execVBSFile(VBS.produceVBSFile(fileName,TobeProcessed));
+        Thread.sleep(3000);
+
+        String produced_vbsFileName =fileName.split("\\.")[0] + VBS.vbsExcelName + "." + fileName.split("\\.")[1];
+        Excel producedExcel =Excel.loadExcel(proj_path + produced_vbsFileName);
+        producedExcel.assignSheet(0);
+        HashMap<String, ValidGoal> Validated = excelFormulaValidator.getValidatedValues(
+                TobeProcessed,producedExcel);
+
+        ProduceWordFile.writeToWord(TobeProcessed,Validated);
+        System.out.println("finish");
 
 
     }

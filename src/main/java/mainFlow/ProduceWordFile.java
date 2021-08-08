@@ -16,7 +16,7 @@ import static msword.ManageTable.*;
 import static msword.ManageText.*;
 
 public class ProduceWordFile {
-    public static void writeToWord(HashMap<String, ValidGoal> goals) throws IOException {
+    public static void writeToWord(HashMap<String, ValidGoal> goals, HashMap<String, ValidGoal> newGoals) throws IOException {
         XWPFDocument doc = new XWPFDocument();
         CustomTableStyle.getTable_Style1(doc,"","",goals);
         addNewLines(doc);
@@ -27,7 +27,7 @@ public class ProduceWordFile {
         CustomTableStyle.getTable_Style3(doc,goals);
         addNewLines(doc);
 
-        CustomTableStyle.getTable_Style4(doc,goals);
+        CustomTableStyle.getTable_Style4(doc,goals,newGoals);
         FileOutputStream out = new FileOutputStream("final result.docx");
         doc.write(out);
         out.close();
