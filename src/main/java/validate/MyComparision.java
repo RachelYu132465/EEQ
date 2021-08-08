@@ -21,9 +21,13 @@ public class MyComparision {
     public String unAccepatbleOperator;
     public double numberInSpec;
     public double OOSNumber;
-    public Operator myOperator;
+//    public Operator myOperator;
     public double[] OOSNum;
 
+    @Override
+    public String toString(){
+        return "hasMin:"+ hasMin + ";hasMax:" +hasMax + ";val:"+Arrays.toString(num) +";vals"+Arrays.toString(numS);
+    }
     public MyComparision(String specification) {
 
         this.specification = specification;
@@ -208,9 +212,9 @@ public class MyComparision {
 
 
 
-    public void setMyOperator(Operator myOperator) {
-        this.myOperator = myOperator;
-    }
+//    public void setMyOperator(Operator myOperator) {
+//        this.myOperator = myOperator;
+//    }
 
     public double getOOSNumber() {
         return OOSNumber;

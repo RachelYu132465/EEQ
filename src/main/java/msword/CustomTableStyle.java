@@ -165,7 +165,7 @@ public class CustomTableStyle {
             row.createCell();
             addToTable(types.Content, table, table.getNumberOfRows() - 1,
                     goal.getValue().getOutput().getR1c1(),
-                    "operator:" + goal.getValue().getSpecification().getNumberInSpec()
+                    "operator:" +""
             );
         }
     }
@@ -198,7 +198,7 @@ public class CustomTableStyle {
                     ,input_c.getValue()
                     , goal.getOutput().getR1c1()
                     , goal.getOutput().getValue()
-                    ,"",String.valueOf(goal.getSpecification().getNumberInSpec()),""
+                    ,"","",""
 
             );
         }

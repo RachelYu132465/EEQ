@@ -47,7 +47,7 @@ public class VBS {
             if (data != null) {
                 //每個output都要另存目標值在最下面一列
                 excel.assignCell(++tgtCellIdx);
-                excel.setCellValue(data.getSpecification().getOOSNumber());
+                excel.setCellValue(data.getMyComparision().getOOSNum()[0]);
 //                allTgt.put(getR1C1Idx(data.getOutput().getCell()),
 //                        new ExcelCell(
 //                                getR1C1Idx(excel.getCurCell()),

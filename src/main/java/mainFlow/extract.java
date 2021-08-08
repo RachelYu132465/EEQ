@@ -29,6 +29,7 @@ public class extract {
 
         //需求一
         for (Cell formulaCell : allFomulaCell) {
+
             String specification = findSpecification(excel, formulaCell.getRowIndex(), formulaCell.getColumnIndex());
 
             HashSet<ExcelCell> inputCells = excelFormulaValidator.getInputCells(excel, formulaCell);
@@ -47,7 +48,7 @@ public class extract {
             if (inputCell != null) {
                 goal.setInput(inputCell);
             }
-            goal.setSpecification(specification);
+            goal.setMyComparision(specification);
             goal.setAllInputs(inputCells);
             SpecificationList.add(specification);
             TobeProcessed.put(getR1C1Idx(formulaCell), goal);

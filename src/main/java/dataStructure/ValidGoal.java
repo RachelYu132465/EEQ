@@ -2,16 +2,20 @@ package dataStructure;
 
 import msexcel.ExcelCell;
 import org.apache.poi.ss.usermodel.Cell;
-import validate.Specification;
+import validate.MyComparision;
 
 import java.util.HashSet;
 
 public class ValidGoal {
     ExcelCell input;
     ExcelCell output;
-//    double targetOutput;
-    Specification specification;
+String title;
+
+    //    double targetOutput;
+   MyComparision myComparision;
     HashSet<ExcelCell> allInputs;
+
+
 
     public ValidGoal() {
         input = new ExcelCell();
@@ -25,18 +29,13 @@ public class ValidGoal {
         this.allInputs = allInputs;
     }
 
-    public ValidGoal(Cell input, Cell output, Specification targetOutput,HashSet<ExcelCell> allInputs) {
-        this.input = new ExcelCell(input);
-        this.output = new ExcelCell(output);
-        this.specification = targetOutput;
-        this.allInputs = allInputs;
+    public ValidGoal(Cell input, Cell output, MyComparision targetOutput,HashSet<ExcelCell> allInputs) {
+
+        this.myComparision = targetOutput;
     }
 
     public ValidGoal(Cell input, Cell output, String specification,HashSet<ExcelCell> allInputs) {
-        this.input = new ExcelCell(input);
-        this.output = new ExcelCell(output);
-        this.specification = new Specification(specification);
-        this.allInputs = allInputs;
+        new ValidGoal( input,  output,  new MyComparision(specification), allInputs);
     }
 
     public HashSet<ExcelCell> getAllInputs() {
@@ -54,14 +53,20 @@ public class ValidGoal {
     public void setOutput(ExcelCell output) {
         this.output = output;
     }
-
-    public Specification getSpecification() {
-        return specification;
+    public MyComparision getMyComparision() {
+        return myComparision;
     }
 
-    public void setSpecification(String specification) {
-        Specification s =new Specification(specification);
-        this.specification = s;
+    public void setMyComparision(String specification) {
+        this.myComparision = new MyComparision(specification);
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 //    public double getTargetOutput() {
 //        return targetOutput;
@@ -83,7 +88,7 @@ public class ValidGoal {
     public String toString() {
         return "input:" + input + System.getProperty("line.separator")
                 + "inputs:" + allInputs + System.getProperty("line.separator")
-                + "output:" + output + System.getProperty("line.separator");
-//                + "target:" + targetOutput + System.getProperty("line.separator");
+                + "output:" + output + System.getProperty("line.separator")
+                + "target:" + myComparision + System.getProperty("line.separator");
     }
 }

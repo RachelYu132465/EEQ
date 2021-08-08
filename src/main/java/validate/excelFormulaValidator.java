@@ -7,16 +7,42 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Pattern;
 
 import static common.StringProcessor.replaceCustomSymbol;
 import static validate.excelFormulaProcessor.findFormulaForValidate;
 
 public class excelFormulaValidator {
+
+    public static void main(String[] args) {
+        customValidator();
+    }
+
+    public static final String Y = "y";
+
+    public static void customValidator() {
+        Scanner sc = new Scanner(System.in);
+        String userInput;
+
+
+        userInput = "";
+        System.out.println("是否手動設定規格?是請輸入:y;否請按enter");
+
+        if (sc.nextLine().trim().isBlank()) {
+
+        }
+        while (!sc.hasNext("[yY]")) {
+            sc.next();
+            System.out.println("是請輸入:y;否請按enter");
+        }
+        userInput = sc.next();
+        System.out.println(userInput);
+
+        System.out.println("Thank you! Got " + userInput);
+//
+
+    }
 
     //possibility:RSQ,D15:D19,
     public static HashSet<Cell> getCellByRef(Excel excel, String keyword) {
@@ -82,14 +108,14 @@ public class excelFormulaValidator {
             HashSet<ExcelCell> newInputCells = new HashSet<>();
 
             Cell outputCell = expectedExcel.getCell(outputR1C1);
-            Cell inputCell =null;
-            if(prev.getInput().getR1c1()!= null)
-             inputCell = expectedExcel.getCell(prev.getInput().getR1c1());
+            Cell inputCell = null;
+            if (prev.getInput().getR1c1() != null)
+                inputCell = expectedExcel.getCell(prev.getInput().getR1c1());
             for (ExcelCell c : prev.getAllInputs()) {
                 newInputCells.add(new ExcelCell(expectedExcel.getCell(Excel.getR1C1Idx(c.getCell()))));
             }
 
-            ValidGoal newv = new ValidGoal(inputCell, outputCell, prev.getSpecification(), newInputCells);
+            ValidGoal newv = new ValidGoal(inputCell, outputCell, prev.getMyComparision(), newInputCells);
             result.put(outputR1C1, newv);
         }
         return result;
