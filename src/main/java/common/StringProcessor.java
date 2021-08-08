@@ -4,7 +4,8 @@ import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringProcessor {
 
@@ -25,11 +26,21 @@ public class StringProcessor {
 
     }
 
+    //傳入array的時候，contain字彙是第二個參數!
     public static boolean ifContain(String toBeCompared, String CellValue) {
-        if (StringUtils.isNotBlank(CellValue) && CellValue.toLowerCase().contains(toBeCompared)) return true;
+        if (StringUtils.isNotBlank(CellValue) && CellValue.toLowerCase().contains(toBeCompared.toLowerCase())) return true;
         else return false;
     }
 
+    public static boolean ifContainStrings(String CellValue, String[] toBeCompared) {
+        for  (String s: toBeCompared ) {
+            if (StringUtils.isNotBlank(CellValue) && CellValue.toLowerCase().contains(s.toLowerCase())) {
+                return true;
+            }
+        }
+             return false;
+
+    }
     public static boolean ifEqual(String toBeCompared, String CellValue) {
         if (StringUtils.isNotBlank(CellValue) && replaceSpecialSymbol(CellValue.toLowerCase(), "").equals(toBeCompared))
             return true;

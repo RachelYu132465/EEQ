@@ -1,16 +1,32 @@
 package validate;
 
 import common.StringProcessor;
+enum Operator{
+    targetSmall,targetBig,targetInBetween;
 
+    Operator() {
+    }
+}
 public class Specification {
     public String specification;
     public String accepatbleOperator;
     public String unAccepatbleOperator;
    public double numberInSpec;
     public double OOSNumber;
+public Operator myOperator;
+Boolean hasMax;
+Boolean hasMin;
+    public Operator getMyOperator() {
+        return myOperator;
+    }
+
+    public void setMyOperator(Operator myOperator) {
+        this.myOperator = myOperator;
+    }
 
     public double getOOSNumber() {
         return OOSNumber;
+
     }
 
     public void setOOSNumber(double OOSNumber) {
@@ -27,25 +43,37 @@ public class Specification {
    }
 
     private Specification setOperator(String specification) {
-
-        if (StringProcessor.ifContain(specification, "not less than")
-||      StringProcessor.ifContain(specification, "≧")
-        ) {
-            setAccepatbleOperator(">=");
-            setUnAccepatbleOperator("<");
+//List<String> targetBig = new ArrayList<String>();
+        String[] targetBig ={"not less than" ,"≧"};
+        String[] targetSmall ={"not more than","≦"};
+        String[] targetInBetween ={"within","and","~"};
+        if(StringProcessor.ifContainStrings(specification,targetInBetween)){
 
         }
+        else if (StringProcessor.ifContainStrings(specification,targetBig))
+        {
+            setAccepatbleOperator(">=");
+            setUnAccepatbleOperator("<");
+setMyOperator(Operator.targetBig);
+        }
 
-        else if (StringProcessor.ifContain(specification, "not more than")
-                ||      StringProcessor.ifContain(specification, "≦")) {
+        else if (StringProcessor.ifContainStrings(specification,targetSmall))
+             {
             setAccepatbleOperator("<=");
             setUnAccepatbleOperator(">");
-
+                 setMyOperator(Operator.targetSmall);
+        }
+        else if (StringProcessor.ifContainStrings(specification,targetSmall))
+        {
+            setAccepatbleOperator("<=");
+            setUnAccepatbleOperator(">");
+            setMyOperator(Operator.targetSmall);
         }
         else System.out.println("in class SpecificationProcessor, operator not set correctly");
             return this;
 
     }
+
 
     public double getNumberInSpec() {
         return numberInSpec;
