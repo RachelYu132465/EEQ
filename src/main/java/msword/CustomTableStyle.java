@@ -198,7 +198,7 @@ public class CustomTableStyle {
                     ,input_c.getValue()
                     , goal.getOutput().getR1c1()
                     , goal.getOutput().getValue()
-                    ,"",String.valueOf(goal.g),""
+                    ,"",String.valueOf(goal.getSpecification().getNumberInSpec()),""
             );
         }
     }
