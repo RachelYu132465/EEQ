@@ -36,6 +36,7 @@ import javax.swing.filechooser.FileSystemView;
 
 public class Excel {
 
+    public static final String CellAddrR1C1Rex ="^[A-Z][0-9]+";
     File file;
     Workbook curWb;
     Sheet curSheet;

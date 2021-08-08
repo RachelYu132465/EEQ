@@ -16,32 +16,44 @@ import static validate.excelFormulaProcessor.findFormulaForValidate;
 public class excelFormulaValidator {
 
     public static void main(String[] args) {
-        customValidator();
+        scanForSpecificationOption();
     }
 
     public static final String Y = "y";
 
-    public static void customValidator() {
+    public static String scanForSpecificationCellAddr() {
         Scanner sc = new Scanner(System.in);
-        String userInput;
+        String CellC1R1="";
+            System.out.println("請輸入R1C1:");
+            while (sc.hasNext()) {
+                CellC1R1 = sc.next();
+                if(CellC1R1.matches(Excel.CellAddrR1C1Rex)){
+                    break;
+                }
+                System.out.println("格式錯誤，請輸入R1C1");
+            }
+        System.out.println("輸入儲存格:" + CellC1R1);
+        System.out.println("======================");
+        return CellC1R1;
+    }
 
-
-        userInput = "";
+    public static String scanForSpecificationOption() {
+        Scanner sc = new Scanner(System.in);
+        String userInput = "";
         System.out.println("是否手動設定規格?是請輸入:y;否請按enter");
 
-        if (sc.nextLine().trim().isBlank()) {
-
+        userInput = sc.nextLine();
+        if (userInput.isBlank()) {
+            System.out.println("使用預設方式找規格");
+            return "";
+        }else{
+            while (!userInput.matches("[yY]")) {
+                System.out.println("是請輸入:y;否請按enter");
+                sc.next();
+            }
+            System.out.println("請輸入規格的儲存格位置(R1C1)");
+            return scanForSpecificationCellAddr();
         }
-        while (!sc.hasNext("[yY]")) {
-            sc.next();
-            System.out.println("是請輸入:y;否請按enter");
-        }
-        userInput = sc.next();
-        System.out.println(userInput);
-
-        System.out.println("Thank you! Got " + userInput);
-//
-
     }
 
     //possibility:RSQ,D15:D19,
@@ -64,7 +76,7 @@ public class excelFormulaValidator {
             if (Pattern.matches("^[$][A-Z][$][0-9]+", keyword)) {
                 cellRef = keyword.replaceAll("\\$", "");
             }
-            if (Pattern.matches("^[A-Z][0-9]+", keyword)) {
+            if (Pattern.matches(Excel.CellAddrR1C1Rex, keyword)) {
                 cellRef = keyword;
             }
             if (!cellRef.isBlank() && excel.getCell(cellRef) != null) {

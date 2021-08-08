@@ -14,8 +14,8 @@ import java.util.List;
 
 import static msexcel.Excel.getR1C1Idx;
 import static test.ExcelForRu.proj_path;
-import static validate.excelFormulaProcessor.findAllBlueFormulaCall;
-import static validate.excelFormulaProcessor.findSpecification;
+import static validate.excelFormulaProcessor.*;
+import static validate.excelFormulaValidator.scanForSpecificationOption;
 
 public class extract {
     public static Object extractData(String FileName) {
@@ -29,9 +29,14 @@ public class extract {
 
         //需求一
         for (Cell formulaCell : allFomulaCell) {
-
-            String specification = findSpecification(excel, formulaCell.getRowIndex(), formulaCell.getColumnIndex());
-
+            System.out.println("Formula cell:" + formulaCell.getAddress().formatAsString());
+            String specificationR1C1 = scanForSpecificationOption();
+            String specification = "";
+            if (specificationR1C1.trim().isBlank()){
+                specification= findSpecification(excel, formulaCell.getRowIndex(), formulaCell.getColumnIndex());
+            }else{
+                specification =  excel.getCellValue(specificationR1C1).toString().replace(SPECIFICATION+":","");
+            }
             HashSet<ExcelCell> inputCells = excelFormulaValidator.getInputCells(excel, formulaCell);
             ExcelCell inputCell = null;
             ValidGoal goal = new ValidGoal();

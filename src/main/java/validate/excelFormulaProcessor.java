@@ -14,8 +14,8 @@ import java.util.List;
 
 import static common.StringProcessor.*;
 public class excelFormulaProcessor {
-    static final String SPECIFICATION = "specification";
-    static final String ERROR = "error";
+    public static final String SPECIFICATION = "specification";
+    public static final String ERROR = "error";
 
 public static double getTargetOutput(String specification){
 

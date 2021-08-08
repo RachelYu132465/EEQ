@@ -37,12 +37,12 @@ public class ExcelForRu {
     public static void main(String[] args) throws IOException, InterruptedException {
 
         System.out.println(proj_path);
-//       Specification s =new Specification( ("The RSD is not more than 2.0%"))
-//               ;
+//       Specification s =new Specification( ("The RSD is not more than 2.0%"));
 //        System.out.println(s.numberInSpec);
         List<String> SpecificationList = null;
         HashMap<String, ValidGoal> TobeProcessed = null;
-        String fileName = "test1.xlsx";
+//        String fileName = "test1.xlsx";
+        String fileName ="R000012383-LAB Spreadsheet數字.xlsx";
         Object result = extract.extractData(fileName);
         SpecificationList = (List<String>) ((Object[]) result)[0];
         TobeProcessed = (HashMap<String, ValidGoal>) ((Object[]) result)[1];
