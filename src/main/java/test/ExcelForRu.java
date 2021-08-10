@@ -43,7 +43,8 @@ public class ExcelForRu {
         List<String> SpecificationList = null;
         HashMap<String, ValidGoal> TobeProcessed = null;
         String fileName = "test1.xlsx";
-        Object result = extract.extractData(fileName);
+         extract.extractData(fileName);
+        Object result =extract.extractData;
         SpecificationList = (List<String>) ((Object[]) result)[0];
         TobeProcessed = (HashMap<String, ValidGoal>) ((Object[]) result)[1];
 

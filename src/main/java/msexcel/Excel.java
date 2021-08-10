@@ -1,21 +1,6 @@
 package msexcel;
 
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-
 import com.gembox.spreadsheet.*;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
@@ -24,15 +9,20 @@ import org.apache.poi.hssf.usermodel.HSSFFormulaEvaluator;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.CellReference;
 import org.apache.poi.hssf.util.HSSFColor;
-import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.usermodel.Row.MissingCellPolicy;
 import org.apache.poi.ss.util.CellRangeAddress;
-import org.apache.poi.xssf.usermodel.XSSFColor;
-import org.apache.poi.xssf.usermodel.XSSFFormulaEvaluator;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xssf.usermodel.*;
 
 import javax.swing.filechooser.FileSystemView;
+import java.io.*;
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 public class Excel {
 
@@ -829,6 +819,71 @@ public class Excel {
         Row row = this.curSheet.getRow(cellReference.getRow());
         Cell cell = row.getCell(cellReference.getRow());
         if (cell != null) setCellValue(cell, value);
+    }
+
+    public String getfontColor() {
+        // CellStyle styles= this.getCurCell().getCellStyle();
+        // int fontIndex = styles.getFontIndex();
+        // IndexedColors color =IndexedColors.fromInt(fontIndex);
+
+        XSSFCellStyle cs = ((XSSFCellStyle) this.getCurCell().getCellStyle());
+        XSSFFont font = cs.getFont();
+        // Getting Font color
+        XSSFColor color = font.getXSSFColor();
+        if (color == null) {
+            System.out.println("NULL");
+            return "NULL";
+        } else {
+            // System.out.println("Font color : " + color.getARGBHex());
+            return color.getARGBHex().toString();
+        }
+
+
+    }
+    public String findBlackTitleAtLeft(int rowIdx, int colIdx) {
+        for (int k = colIdx - 1; k >= 0; k--) {
+            this.assignRow(rowIdx);
+            this.assignCell(k);
+            System.out.println("  rowidx:" + k);
+            XSSFCellStyle cs = ((XSSFCellStyle) this.getCurCell().getCellStyle());
+            XSSFFont font = cs.getFont();
+            XSSFColor color = font.getXSSFColor();
+            System.out.println("Font color : " + color.getARGBHex());
+            if ((this.getCellValue().toString().isEmpty()))
+                return "";
+
+            else if (!(this.getCellValue().toString().isEmpty())) {
+                if (this.getfontColor().equals("NULL") || this.getfontColor().equals("FF000000")) {
+                    System.out.println("if loop" + k);
+                    return this.getCellValue().toString();
+
+                }
+            }
+        }
+        return "";
+    }
+
+    public String findBlackTitleAtTop(int rowIdx, int colIdx) {
+        for (int k = rowIdx - 1; k >= 0; k--) {
+            this.assignRow(k);
+            this.assignCell(colIdx);
+
+            System.out.println("  rowidx:" + k);
+            // XSSFCellStyle cs = ((XSSFCellStyle)
+            // this.getCurCell().getCellStyle());
+            // XSSFFont font = cs.getFont();
+            // XSSFColor color = font.getXSSFColor();
+            // System.out.println("Font color : " + color.getARGBHex());
+            if (!(this.getCellValue().toString().isEmpty())) {
+                if (this.getfontColor().equals("NULL") || this.getfontColor().equals("FF000000")) {
+
+                    // System.out.println("if loop" + k);
+                    return this.getCellValue().toString();
+
+                }
+            }
+        }
+        return "";
     }
 
     public void reEvaluateFormula() {

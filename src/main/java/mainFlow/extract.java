@@ -1,60 +1,72 @@
 package mainFlow;
 
 import dataStructure.ValidGoal;
+import dataStructure.mySheet;
 import msexcel.Excel;
-import msexcel.ExcelCell;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
-import validate.excelFormulaValidator;
+import validate.excelFormulaProcessor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 
-import static msexcel.Excel.getR1C1Idx;
 import static test.ExcelForRu.proj_path;
-import static validate.excelFormulaProcessor.findAllBlueFormulaCall;
-import static validate.excelFormulaProcessor.findSpecification;
 
 public class extract {
-    public static Object extractData(String FileName) {
+    public static Object[] extractData;
+
+    public static void extractData(String FileName) {
 
         List<String> SpecificationList = new ArrayList<String>();
         HashMap<String, ValidGoal> TobeProcessed = new HashMap<String, ValidGoal>();
         Excel excel = Excel.loadExcel(proj_path + FileName);
-        excel.assignSheet(0);
 
-        List<Cell> allFomulaCell = findAllBlueFormulaCall(excel);
 
-        //需求一
-        for (Cell formulaCell : allFomulaCell) {
+        int sheetSize = excel.getNumberOfSheets();
+        for (int a = 0; a < sheetSize; a++) {
 
-            String specification = findSpecification(excel, formulaCell.getRowIndex(), formulaCell.getColumnIndex());
+            excel.assignSheet(a);
 
-            HashSet<ExcelCell> inputCells = excelFormulaValidator.getInputCells(excel, formulaCell);
-            ExcelCell inputCell = null;
-            ValidGoal goal = new ValidGoal();
-            goal.setOutput(new ExcelCell(formulaCell));
-//            goal.setOutput(new ExcelCell(getR1C1Idx(formulaCell),
-//                    findFormulaForValidate(excel.getCellValue_OriginalFormula(formulaCell).toString()), formulaCell));
+            if (mySheet.checkSheet(excel.getSheet())) {
 
-            for (ExcelCell c : inputCells) {
-                if (c.getCell().getCellType() != CellType.FORMULA) {
-                    inputCell = c;
-                    break;
-                }
-            }
-            if (inputCell != null) {
-                goal.setInput(inputCell);
-            }
-            goal.setMyComparision(specification);
-            goal.setAllInputs(inputCells);
-            SpecificationList.add(specification);
-            TobeProcessed.put(getR1C1Idx(formulaCell), goal);
+                mySheet mysheet = new mySheet();
+
+                mysheet = excelFormulaProcessor.collectCellByFontColor(excel, mysheet);
+
+
+//                List<Cell> allBlueFormulaCall = mysheet.G3;
+//
+//                //需求一
+//                for (Cell formulaCell : allBlueFormulaCall) {
+//
+//                    String specification = findSpecification(excel, formulaCell.getRowIndex(), formulaCell.getColumnIndex());
+//
+//                    HashSet<ExcelCell> inputCells = excelFormulaValidator.getInputCells(excel, formulaCell);
+//                    ExcelCell inputCell = null;
+//                    ValidGoal goal = new ValidGoal();
+//                    goal.setOutput(new ExcelCell(formulaCell));
+////            goal.setOutput(new ExcelCell(getR1C1Idx(formulaCell),
+////                    findFormulaForValidate(excel.getCellValue_OriginalFormula(formulaCell).toString()), formulaCell));
+//
+//                    for (ExcelCell c : inputCells) {
+//                        if (c.getCell().getCellType() != CellType.FORMULA) {
+//                            inputCell = c;
+//                            break;
+//                        }
+//                    }
+//                    if (inputCell != null) {
+//                        goal.setInput(inputCell);
+//                    }
+//                    goal.setMyComparision(specification);
+//                    goal.setAllInputs(inputCells);
+//                    SpecificationList.add(specification);
+//                    TobeProcessed.put(getR1C1Idx(formulaCell), goal);
+//                }
+//
+////        excel.saveToFile();
+//                extractData = new Object[]{SpecificationList, TobeProcessed};
+//            }
+
+            }else break;
         }
-
-//        excel.saveToFile();
-        return new Object[]{SpecificationList, TobeProcessed};
     }
 }
