@@ -9,13 +9,11 @@ import java.util.HashSet;
 public class ValidGoal {
     ExcelCell input;
     ExcelCell output;
-String title;
+    String title;
 
     //    double targetOutput;
-   MyComparision myComparision;
+    MyComparision myComparision;
     HashSet<ExcelCell> allInputs;
-
-
 
     public ValidGoal() {
         input = new ExcelCell();
@@ -29,13 +27,13 @@ String title;
         this.allInputs = allInputs;
     }
 
-    public ValidGoal(Cell input, Cell output, MyComparision targetOutput,HashSet<ExcelCell> allInputs) {
+    public ValidGoal(Cell input, Cell output, MyComparision targetOutput, HashSet<ExcelCell> allInputs) {
 
         this.myComparision = targetOutput;
     }
 
-    public ValidGoal(Cell input, Cell output, String specification,HashSet<ExcelCell> allInputs) {
-        new ValidGoal( input,  output,  new MyComparision(specification), allInputs);
+    public ValidGoal(Cell input, Cell output, String specification, HashSet<ExcelCell> allInputs) {
+        new ValidGoal(input, output, new MyComparision(specification), allInputs);
     }
 
     public HashSet<ExcelCell> getAllInputs() {
@@ -53,6 +51,7 @@ String title;
     public void setOutput(ExcelCell output) {
         this.output = output;
     }
+
     public MyComparision getMyComparision() {
         return myComparision;
     }

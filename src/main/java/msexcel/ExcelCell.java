@@ -5,10 +5,20 @@ import org.apache.poi.ss.usermodel.Cell;
 import static msexcel.Excel.getCellValue;
 
 public class ExcelCell {
+    String note;
     String r1c1;
     //formula cell will store formula
     String value;
     Cell cell;
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
     public String getR1c1() {
         return r1c1;
     }
