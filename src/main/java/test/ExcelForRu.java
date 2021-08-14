@@ -41,10 +41,13 @@ public class ExcelForRu {
 //        System.out.println(s.numberInSpec);
         List<String> SpecificationList = null;
         HashMap<String, ValidGoal> TobeProcessed = null;
+
 //        String fileName = "test1.xlsx";
         String fileName ="R000012383-LAB Spreadsheet數字.xlsx";
-        Object result = extract.extractData(fileName);
-        SpecificationList = (List<String>) ((Object[]) result)[0];
+       extract.extractData(fileName);
+        Object result =extract.getExtractData();
+
+                SpecificationList = (List<String>) ((Object[]) result)[0];
         TobeProcessed = (HashMap<String, ValidGoal>) ((Object[]) result)[1];
 
 //        for(String specification : SpecificationList){

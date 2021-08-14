@@ -1,30 +1,32 @@
 package validate;
 
+import common.NumberProcessor;
+import dataStructure.mySheet;
 import msexcel.Excel;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.xssf.usermodel.XSSFColor;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import test.ExcelForRu;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static common.StringProcessor.*;
+
 public class excelFormulaProcessor {
     public static final String SPECIFICATION = "specification";
     public static final String ERROR = "error";
 
-public static double getTargetOutput(String specification){
+    public static double getTargetOutput(String specification) {
 
-    if(specification.contains("%")){
-        return Double.valueOf(specification.replaceAll("[^(0-9|.)]", ""))/100;
+        if (specification.contains("%")) {
+            return Double.valueOf(specification.replaceAll("[^(0-9|.)]", "")) / 100;
+        }
+
+        return Double.valueOf(specification.replaceAll("[^(0-9|.)]", ""));
     }
-
-    return Double.valueOf(specification.replaceAll("[^(0-9|.)]", ""));
-}
 
 
     /*
@@ -56,82 +58,129 @@ public static double getTargetOutput(String specification){
         if (ifEqual(SPECIFICATION, excel.getCellValue().toString())) {
             return excel.findNextCellStrValue();
         } else
-            return excel.getCellValue().toString().replace(SPECIFICATION+":","");
+            return excel.getCellValue().toString().replace(SPECIFICATION + ":", "");
     }
 
-    public static boolean checkBlue(Excel excel, Cell cell) {
+    public static void main(String[] args) {
+        Excel test = Excel.loadExcel(ExcelForRu.proj_path + "/test1.xlsx");
+        System.out.println(test.getFile().getAbsolutePath());
+        mySheet mysheet =new mySheet();
+//        checkFontColor(test, test.assignSheet(1).assignRow(18).assignCell(4).getCurCell());
+        collectCellByFontColor(test,mysheet);
+        System.out.println( mysheet.toString());
+    }
+
+    public static String checkFontColor(Excel excel, Cell cell) {
+        System.out.println(excel.getCellValue());
         CellStyle c = cell.getCellStyle();
-        ////For xls (HSSFWorkbook)  or index =12
-        if (excel.getWorkbook() instanceof HSSFWorkbook) {
-            System.out.println("HSSF:" + ((HSSFWorkbook) excel.getWorkbook()).getInternalWorkbook().getFontRecordAt(c.getFontIndexAsInt()).getColorPaletteIndex());
+        if(!(c ==null)) {
+            ////For xls (HSSFWorkbook)  or index =12
+            if (excel.getWorkbook() instanceof HSSFWorkbook) {
+                System.out.println("HSSF:" + ((HSSFWorkbook) excel.getWorkbook()).getInternalWorkbook().getFontRecordAt(c.getFontIndexAsInt()).getColorPaletteIndex());
 
-        }
-        //For xlsx (XSSFWorkbook) rgb="FF0000CC"/> AND index =0
-        //or index =12
-        if (excel.getWorkbook() instanceof XSSFWorkbook) {
-            XSSFColor color = ((XSSFWorkbook) excel.getWorkbook()).getFontAt(c.getFontIndexAsInt()).getXSSFColor();
-            //arr contains 4 byte --> first one is for index (please ignore)
-            byte[] rgb = color.getARGB();
-            byte[] blue_1 = {-1, 0, 0, -1};
-            byte[] blue_2 = {-1, 0, 0, -52};
-            if (Arrays.equals(rgb, blue_1) || Arrays.equals(rgb, blue_2)) return true;
-            //調整顏色用
-//            for (byte b:rgb){
-//                System.out.print(b+",");
-//            }System.out.println("");
+                return "color format in HSSFWorkbook";
+            }
+            //For xlsx (XSSFWorkbook) rgb="FF0000CC"/> AND index =0
+            //or index =12
+            if (excel.getWorkbook() instanceof XSSFWorkbook) {
+                XSSFColor color = ((XSSFWorkbook) excel.getWorkbook()).getFontAt(c.getFontIndexAsInt()).getXSSFColor();
+                //arr contains 4 byte --> first one is for index (please ignore)
+               if (!(color==null)){
+                byte[] rgb = color.getARGB();
+                int[] RGB = new int[3];
+                //j 給rgb 四格用 i給RGB
+                for (int i = 0, j = 1; j < rgb.length; i++, j++) {
+                    RGB[i] =  Math.abs(rgb[j]);
 
+                }
+
+                for (int b : RGB) {
+                    System.out.print(b + ",");
+                }
+                System.out.println("");
+                int index = NumberProcessor.getIndexOfLargest(RGB);
+                switch (index) {
+                    case (0):
+                        System.out.println(excel.getR1C1Idx(cell) +":"+"red");
+                        return "red";
+                    case (1):
+                        System.out.println(excel.getR1C1Idx(cell) +":"+"green");
+                        return "green";
+
+                    case (2):
+                        System.out.println(excel.getR1C1Idx(cell) +":"+"blue");
+                        return "blue";
+                }
+            }}
         }
-        return false;
+       return "";
     }
 
-    public static List<Cell> findAllBlueFormulaCall(Excel excel) {
-        List<Cell> FormulaCells = new ArrayList<Cell>();
 
-        for (int rowIdx = 0; rowIdx < excel.getLastRowNum(); ++rowIdx) {
+
+
+    public static mySheet collectCellByFontColor(Excel excel, mySheet mysheet) {
+        List<Cell> FormulaCells = new ArrayList<Cell>();
+        System.out.println( "excel.getLastRowNum() :"+excel.getLastRowNum());
+        int sheetSize = excel.getNumberOfSheets();
+
+        for (int a = 0; a < sheetSize; a++) {
+            excel.assignSheet(a);
+
+            int rowSize = excel.getLastRowNum();
+        for (int rowIdx = 0; rowIdx < rowSize; ++rowIdx) {
             excel.assignRow(rowIdx);
 
-            for (int cellIndx = 0; cellIndx < excel.getLastCellNum(); ++cellIndx) {
+            int cellsize = excel.getLastCellNum();
+            for (int cellIndx = 0; cellIndx < cellsize; ++cellIndx) {
+//                System.out.println( "cellIndx"+cellIndx);
                 excel.assignCell(cellIndx);
-
-                if (excel.getCurCell().getCellType().equals(CellType.FORMULA)) {
-                    if (checkBlue(excel, excel.getCurCell())) {
-                        FormulaCells.add(excel.getCurCell());
-                    }
+                if (!excel.getCellValue().toString().isEmpty()) {
+                String color = checkFontColor(excel, excel.getCurCell());
+                switch(color){
+                    case("red"):mysheet.G1.add(excel.getCurCell());break;
+                    case( "green"):mysheet.G2.add(excel.getCurCell());break;
+                    case("blue"):mysheet.G3.add(excel.getCurCell() );break;
+                    default:;
                 }
-            }
+//                if (excel.getCurCell().getCellType().equals(CellType.FORMULA)) {
+//                    if (checkBlue(excel, excel.getCurCell())) {
+//                        FormulaCells.add(excel.getCurCell());
+//                    }
+//                }
+            }}}
         }
-        return FormulaCells;
+        return mysheet;
     }
 
-    public static  List<String>  findNonEmptyValueInMultipleParameter(String parameterSignature){
-        String paramters [] = parameterSignature.split(",");
+    public static List<String> findNonEmptyValueInMultipleParameter(String parameterSignature) {
+        String paramters[] = parameterSignature.split(",");
         List<String> results = new ArrayList<String>();
-        for(String parameter: paramters){
-            if (!parameter.replaceAll("\"","").trim().isBlank()){
+        for (String parameter : paramters) {
+            if (!parameter.replaceAll("\"", "").trim().isBlank()) {
                 results.add(parameter);
             }
         }
-        return  results;
+        return results;
     }
 
-    public static  List<String>  removeNonFormulaString (List<String> StringListToCheck){
+    public static List<String> removeNonFormulaString(List<String> StringListToCheck) {
         List<String> result = new ArrayList<>();
-        for(String StringToCheck: StringListToCheck){
-            if(!ifContainMethod(StringToCheck)) {
+        for (String StringToCheck : StringListToCheck) {
+            if (!ifContainMethod(StringToCheck)) {
                 result.add(StringToCheck);
             }
         }
         return result;
     }
 
-    public static String findFormulaForValidate(String originalFormula){
-        if(originalFormula.contains(",")){
-            int secondCommaIdx= originalFormula.replaceFirst(","," ").indexOf(",");
+    public static String findFormulaForValidate(String originalFormula) {
+        if (originalFormula.contains(",")) {
+            int secondCommaIdx = originalFormula.replaceFirst(",", " ").indexOf(",");
             return originalFormula.substring(
-                    secondCommaIdx+1
+                    secondCommaIdx + 1
                     , originalFormula.length());
-        }
-        else return originalFormula;
+        } else return originalFormula;
 
     }
 
