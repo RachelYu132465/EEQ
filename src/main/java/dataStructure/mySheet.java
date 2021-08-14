@@ -1,7 +1,6 @@
 package dataStructure;
 
 
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
 
 import java.util.ArrayList;
@@ -12,9 +11,9 @@ public class mySheet {
 	List<String> testitemList =new ArrayList<String>();
 	String sheetName;
 
-	public List<Cell> G1 = new ArrayList<>();
-	public List<Cell> G2 = new ArrayList<>();
-	public List<Cell> G3 = new ArrayList<>();
+	public List<myCell> G1 = new ArrayList<>();
+	public List<myCell> G2 = new ArrayList<>();
+	public List<myCell> G3 = new ArrayList<>();
 
 	public static boolean checkSheet (Sheet s){
 		if (s.getSheetName().toLowerCase().contains("item")){

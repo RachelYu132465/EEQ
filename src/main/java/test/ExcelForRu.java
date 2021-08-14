@@ -2,6 +2,7 @@ package test;
 
 import dataStructure.ValidGoal;
 import mainFlow.extract;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
 import javax.swing.filechooser.FileSystemView;
 import java.io.IOException;
@@ -15,13 +16,17 @@ import java.util.Map;
     1.找規格(=目標值)
     2.找輸入格
     3.找輸出格
+[Word]
+    3.1. 產生word檔案(general)
 [VBS]
     4.將目標值存入資料表
     5.產出vbs檔案
     6.執行vbs (會執行goal seek產出理想輸入格--->存成新資料表)
+        -目前: 一個sheet(多個spec)-->一個vbs
+        -方案: 一個目標-->一個vbs
 [Word]
-    7.從新資料表讀入資料表
-    8.產生word檔案
+    7.從新資料表讀入特定VBS產出的資料表(特定命名方式)
+    8.產生word檔案(test case)
  */
 
 /*
@@ -36,32 +41,34 @@ public class ExcelForRu {
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
+
         System.out.println(proj_path);
-//       Specification s =new Specification( ("The RSD is not more than 2.0%"));
-//        System.out.println(s.numberInSpec);
-        List<String> SpecificationList = null;
-        HashMap<String, ValidGoal> TobeProcessed = null;
 
 //        String fileName = "test1.xlsx";
-        String fileName ="R000012383-LAB Spreadsheet數字.xlsx";
-       extract.extractData(fileName);
-        Object result =extract.getExtractData();
+        String fileName = "R000012383-LAB Spreadsheet數字.xlsx";
+        XWPFDocument doc_general = null;
+        XWPFDocument doc_testCase = null;
 
-                SpecificationList = (List<String>) ((Object[]) result)[0];
+                //for(Sheet sheet:sheets)
+        List<String> SpecificationList = null;
+        HashMap<String, ValidGoal> TobeProcessed = null;
+        Object result = extract.extractData(fileName);
+
+        SpecificationList = (List<String>) ((Object[]) result)[0];
         TobeProcessed = (HashMap<String, ValidGoal>) ((Object[]) result)[1];
 
 //        for(String specification : SpecificationList){
 //            System.out.println(specification);
 //        }
 
-                for (Map.Entry<String, ValidGoal> e : TobeProcessed.entrySet()){
+        for (Map.Entry<String, ValidGoal> e : TobeProcessed.entrySet()) {
 //            HashSet<ExcelCell> allin = e.getValue().getAllInputs();
 //
 //            for(ExcelCell c:allin){
 //                System.out.print(Excel.getR1C1Idx(c.getCell())+",");
 //            }
 //                    e.getValue().getInput();
-            System.out.println("____"+e.getValue());
+            System.out.println("____" + e.getValue());
         }
 
 //        VBS.execVBSFile(VBS.produceVBSFile(fileName,TobeProcessed));
@@ -72,8 +79,8 @@ public class ExcelForRu {
 //        producedExcel.assignSheet(0);
 //        HashMap<String, ValidGoal> Validated = excelFormulaValidator.getValidatedValues(
 //                TobeProcessed,producedExcel);
-//
-//        ProduceWordFile.writeToWord(TobeProcessed,Validated);
+
+//        doc_general = ProduceWordFile.writeToWord(TobeProcessed,Validated);
         System.out.println("finish");
 
 

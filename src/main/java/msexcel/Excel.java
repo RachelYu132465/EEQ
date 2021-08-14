@@ -343,8 +343,11 @@ public class Excel {
             curCell = curRow.getCell(index,
                     toCreate ? MissingCellPolicy.CREATE_NULL_AS_BLANK : MissingCellPolicy.RETURN_NULL_AND_BLANK);
         }
-        if (curCell == null) {
-            curCell = curRow.createCell(index);
+        else {
+
+            if (curCell == null) {
+                curCell = curRow.createCell(index);
+            }
         }
         return this;
     }

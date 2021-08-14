@@ -5,13 +5,16 @@ import org.apache.poi.ss.usermodel.Cell;
 
 public class myCell {
 
+
+public Cell cell;
+	String lefttitle;
+	String uptittle;
+
+
 	int[] position = new int[2];
 	String ecxcelFormatName;
 	String value;
 	String Formula;
-public Cell cell;
-	String lefttitle;
-	String uptittle;
 
 	public myCell(){}
 	public myCell(String ecxcelFormatName, String value, String Formula,
@@ -25,4 +28,11 @@ public Cell cell;
 		this.uptittle = uptittle;
 	}
 
+	public Cell getCell() {
+		return cell;
+	}
+
+	public void setCell(Cell cell) {
+		this.cell = cell;
+	}
 }

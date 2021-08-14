@@ -2,21 +2,15 @@ package mainFlow;
 
 import dataStructure.ValidGoal;
 import msword.CustomTableStyle;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.xwpf.usermodel.*;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 
-import static msword.ManageTable.*;
-import static msword.ManageText.*;
+import static msword.ManageText.addNewLines;
 
 public class ProduceWordFile {
-    public static void writeToWord(HashMap<String, ValidGoal> goals, HashMap<String, ValidGoal> newGoals) throws IOException {
+    public static XWPFDocument writeToWord(HashMap<String, ValidGoal> goals, HashMap<String, ValidGoal> newGoals) throws IOException {
         XWPFDocument doc = new XWPFDocument();
         CustomTableStyle.getTable_Style1(doc,"","",goals);
         addNewLines(doc);
@@ -28,8 +22,6 @@ public class ProduceWordFile {
         addNewLines(doc);
 
         CustomTableStyle.getTable_Style4(doc,goals,newGoals);
-        FileOutputStream out = new FileOutputStream("final result.docx");
-        doc.write(out);
-        out.close();
+        return doc;
     }
 }
