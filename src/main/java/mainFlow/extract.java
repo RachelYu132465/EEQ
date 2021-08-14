@@ -20,47 +20,40 @@ import static validate.excelFormulaValidator.scanForSpecificationOption;
 
 public class extract {
 
-    public static Object extractData(String FileName) {
+    public static   HashMap<String, ValidGoal> extractData(Excel excel) {
 
-        List<String> SpecificationList = new ArrayList<String>();
         HashMap<String, ValidGoal> TobeProcessed = new HashMap<String, ValidGoal>();
-        Excel excel = Excel.loadExcel(proj_path + FileName);
-
-        int sheetSize = excel.getNumberOfSheets();
-        for (int a = 0; a < sheetSize; a++) {
-            excel.assignSheet(a);
 
             //檢查是次否為需要驗證的試算表
             //if (mySheet.checkSheet(excel.getSheet())) {
 
-            List<Cell> allFomulaCell = new ArrayList<>();
+            List<Cell> allFomulaCell = getBlueCells(excel.getWorkbook(),excel.getSheet(),"blue",CellType.FORMULA);
 
             //需求一
             for (Cell formulaCell : allFomulaCell) {
+                System.out.println("sheet: "+excel.getSheet().getSheetName());
                 System.out.println("Formula cell:" + formulaCell.getAddress().formatAsString());
-                String specificationR1C1 = scanForSpecificationOption();
-                String specification = "";
-                if (specificationR1C1.trim().isBlank()) {
-                    specification = findSpecification(excel, formulaCell.getRowIndex(), formulaCell.getColumnIndex());
-                } else {
-                    specification = excel.getCellValue(specificationR1C1).toString().replace(SPECIFICATION + ":", "");
-                }
+                String specification = findSpecification(excel, formulaCell.getRowIndex(), formulaCell.getColumnIndex());
+//                String specificationR1C1 = scanForSpecificationOption();
+//
+//                String specification = "";
+//                if (specificationR1C1.trim().isBlank()) {
+//                    specification = findSpecification(excel, formulaCell.getRowIndex(), formulaCell.getColumnIndex());
+//                } else {
+//                    specification = excel.getCellValue(specificationR1C1).toString().replace(SPECIFICATION + ":", "");
+//                }
                 HashSet<ExcelCell> inputCells = excelFormulaValidator.getInputCells(excel, formulaCell);
                 ExcelCell inputCell = null;
                 ValidGoal goal = new ValidGoal();
-                goal.setOutput(new ExcelCell(formulaCell));
+                goal.setOutput(new ExcelCell(excel,formulaCell));
+
 //            goal.setOutput(new ExcelCell(getR1C1Idx(formulaCell),
 //                    findFormulaForValidate(excel.getCellValue_OriginalFormula(formulaCell).toString()), formulaCell));
 
                 for (ExcelCell c : inputCells) {
-                    if (inputCell!=null && c.getCell().getCellType() != CellType.FORMULA) {
+                    if (inputCell==null && !c.getCell().getCellType().equals(CellType.FORMULA)) {
                         inputCell = c;
-                    }
-                    else{
-                        String description1 = findBlackTitleAtLeft(excel,c.getCell());
-                        String description2 = findBlackTitleAtTop(excel,c.getCell());
-                        //to-do: logic of appending description
-                        c.setNote(description1 +" "+description2);
+                        c.setNote(excel,c.getCell());
                     }
                 }
                 if (inputCell != null) {
@@ -68,14 +61,13 @@ public class extract {
                 }
                 goal.setMyComparision(specification);
                 goal.setAllInputs(inputCells);
-                SpecificationList.add(specification);
                 TobeProcessed.put(getR1C1Idx(formulaCell), goal);
             }
 
 
 //            }
 //        else break;
-        }
-        return new Object[]{SpecificationList, TobeProcessed};
+
+        return  TobeProcessed;
     }
 }

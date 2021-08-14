@@ -140,7 +140,7 @@ public class CustomTableStyle {
             addToTable(types.Content, table, table.getNumberOfRows() - 1,
                     goal.getValue().getOutput().getCell().getCellFormula(),
                     goal.getValue().getOutput().getR1c1(),
-                    goal.getValue().getOutput().getCell().getCellType().toString()
+                    goal.getValue().getOutput().getNote()
             );
         }
     }

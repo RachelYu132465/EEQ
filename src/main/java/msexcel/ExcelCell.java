@@ -3,6 +3,8 @@ package msexcel;
 import org.apache.poi.ss.usermodel.Cell;
 
 import static msexcel.Excel.getCellValue;
+import static validate.excelFormulaProcessor.findBlackTitleAtLeft;
+import static validate.excelFormulaProcessor.findBlackTitleAtTop;
 
 public class ExcelCell {
     String note;
@@ -17,6 +19,13 @@ public class ExcelCell {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public void setNote(Excel excel,Cell c) {
+        String description1 = findBlackTitleAtLeft(excel,c);
+        String description2 = findBlackTitleAtTop(excel,c);
+        //to-do: logic of appending description
+        this.setNote(description1 +" "+description2);
     }
 
     public String getR1c1() {
@@ -52,6 +61,16 @@ public class ExcelCell {
         }
     }
 
+    public ExcelCell( Excel excel,Cell cell) {
+        if(cell!=null){
+            this.r1c1 = Excel.getR1C1Idx(cell);
+            this.value = getCellValue(cell).toString();
+            this.cell = cell;
+            setNote(excel,cell);
+        }else{
+            return;
+        }
+    }
     public ExcelCell(String r1c1, String value, Cell cell) {
         this.r1c1 = r1c1;
         this.value = value;

@@ -1,7 +1,10 @@
 package test;
 
+import common.FileHandler;
 import dataStructure.ValidGoal;
+import mainFlow.VBS;
 import mainFlow.extract;
+import msexcel.Excel;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
 import javax.swing.filechooser.FileSystemView;
@@ -9,6 +12,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static mainFlow.ProduceWordFile.*;
 
 
 /*
@@ -23,7 +28,7 @@ import java.util.Map;
     5.產出vbs檔案
     6.執行vbs (會執行goal seek產出理想輸入格--->存成新資料表)
         -目前: 一個sheet(多個spec)-->一個vbs
-        -方案: 一個目標-->一個vbs
+        -方案: 一個目標-->一個vbs (特定命名方式= output的r1c1+目標的index)
 [Word]
     7.從新資料表讀入特定VBS產出的資料表(特定命名方式)
     8.產生word檔案(test case)
@@ -44,32 +49,32 @@ public class ExcelForRu {
 
         System.out.println(proj_path);
 
-//        String fileName = "test1.xlsx";
-        String fileName = "R000012383-LAB Spreadsheet數字.xlsx";
-        XWPFDocument doc_general = null;
-        XWPFDocument doc_testCase = null;
+        String fileName = "test1.xlsx";
+//        String fileName = "R000012383-LAB Spreadsheet數字.xlsx";
+        Excel excel = Excel.loadExcel(proj_path + fileName);
+        XWPFDocument doc_general = new XWPFDocument();
+        XWPFDocument doc_testCase = new XWPFDocument();
 
-                //for(Sheet sheet:sheets)
-        List<String> SpecificationList = null;
-        HashMap<String, ValidGoal> TobeProcessed = null;
-        Object result = extract.extractData(fileName);
+        int sheetSize = excel.getNumberOfSheets();
+        HashMap<String, ValidGoal> TobeProcessed =null;
 
-        SpecificationList = (List<String>) ((Object[]) result)[0];
-        TobeProcessed = (HashMap<String, ValidGoal>) ((Object[]) result)[1];
+        for (int a = 0; a < sheetSize; a++) {
+            excel.assignSheet(a);
+            if(!excel.getSheet().getSheetName().toLowerCase().equals("history of versions")){
+                TobeProcessed = extract.extractData(excel);
+                writeToWord_general(excel.getSheet().getSheetName(),doc_general,TobeProcessed);
+                VBS.produceNewExcels(fileName, excel.getSheet(),TobeProcessed);
+                excel.save();
+            }
+        }
 
-//        for(String specification : SpecificationList){
-//            System.out.println(specification);
+        FileHandler.save(doc_general,proj_path+"result.docx");
+
+//        for (Map.Entry<String, ValidGoal> e : TobeProcessed.entrySet()) {
+//            System.out.println("____" +  e.getValue());
 //        }
 
-        for (Map.Entry<String, ValidGoal> e : TobeProcessed.entrySet()) {
-//            HashSet<ExcelCell> allin = e.getValue().getAllInputs();
-//
-//            for(ExcelCell c:allin){
-//                System.out.print(Excel.getR1C1Idx(c.getCell())+",");
-//            }
-//                    e.getValue().getInput();
-            System.out.println("____" + e.getValue());
-        }
+
 
 //        VBS.execVBSFile(VBS.produceVBSFile(fileName,TobeProcessed));
 //        Thread.sleep(3000);
