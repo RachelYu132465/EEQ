@@ -21,20 +21,26 @@ public class MyComparision {
     public String accepatbleOperator;
     public String unAccepatbleOperator;
     public double numberInSpec;
+
 //    public double OOSNumber;
 //    public Operator myOperator;
     public double[] OOSNum;
 
     @Override
-    public String toString(){
-        return "hasMin:"+ tragetBig + ";hasMax:" + targetSmall + ";val:"+Arrays.toString(num) +";vals"+Arrays.toString(numS);
+    public String toString() {
+        return "hasMin:" + tragetBig + ";hasMax:" + targetSmall + ";val:" + Arrays.toString(num) + ";vals" + Arrays.toString(numS);
     }
-    public MyComparision(String specification) {
 
+
+
+
+    public MyComparision(String specification) {
+        this.targetSmall = false;
+        this.tragetBig = false;
         this.specification = specification;
         setOperator(specification);
         saveNum(specification);
-
+        setOOSNum();
 //        setNumberInSpec(specification);
     }
 
@@ -43,31 +49,30 @@ public class MyComparision {
         MyComparision m = new MyComparision(" Not more than 3.0% is retained on No.80 U.S. standard sieve.");
 
         System.out.println(m.getAccecptableRangeString());
-      m.setOOSNum();
-      for (double d :m.getOOSNum())
-        System.out.println(d);
+        m.setOOSNum();
+        for (double d : m.getOOSNum())
+            System.out.println(d);
 //        System.out.println(m.decimalPlace("3"));
 //        m.setSpecNum("Specification:  Recovery 90.0% ~ 110.0%");
     }
 
 
-
-
     //1. 將 spec的數字取出，只取字串前面數字
     public MyComparision saveNum(String spec) {
+
         if (targetSmall && tragetBig){
             saveFirstTwoNum(spec);
         }
         else if (targetSmall ^ tragetBig){
-            saveFirstNum(spec);
-        }
 
-        else {
+            saveFirstNum(spec);
+        } else {
             this.num = new double[2];
-            this.numS= new String[2];
+            this.numS = new String[2];
         }
         return this;
     }
+
     //case 1:in bwtween
     public MyComparision saveFirstTwoNum(String spec) {
         Pattern regex = Pattern.compile("(\\d+(?:\\.\\d+)?)");
@@ -80,14 +85,14 @@ public class MyComparision {
 //        List<Double> temp = new ArrayList<Double>();
         double[] arr = new double[2];
         String[] arrS = new String[2];
-        for (int i = 0; matcher.find()&&i < 2; i++) {
-            String s =matcher.group();
-                arrS[i] =s;
-                        arr[i] = Double.valueOf(s);
+        for (int i = 0; matcher.find() && i < 2; i++) {
+            String s = matcher.group();
+            arrS[i] = s;
+            arr[i] = Double.valueOf(s);
         }
         Arrays.sort(arr);
         this.numS = arrS;
-       this.num = arr;
+        this.num = arr;
         return this;
     }
 //case 2: max & min
@@ -99,10 +104,10 @@ public class MyComparision {
 //        String numS;
         double[] arr = new double[2];
         String[] arrS = new String[2];
-        for (int i = 0; matcher.find()&&i < 1; i++) {
-            String s =matcher.group();
+        for (int i = 0; matcher.find() && i < 1; i++) {
+            String s = matcher.group();
             arr[0] = Double.valueOf(s);
-            arrS[0] =s;
+            arrS[0] = s;
 
         }
 
@@ -117,15 +122,17 @@ public class MyComparision {
 //List<String> targetBig = new ArrayList<String>();
         String[] targetBig = {"not less than", "≧"};
         String[] targetSmall = {"not more than", "≦"};
-        String[] targetInBetween = {"within", "and", "~"};
+        String[] targetInBetween = {"within", "and", "~", "-"};
         if ((StringProcessor.ifContainStrings(specification, targetInBetween)
-        ||  (StringProcessor.ifContainStrings(specification, targetBig)&&
+                || (StringProcessor.ifContainStrings(specification, targetBig) &&
                 StringProcessor.ifContainStrings(specification, targetSmall)))
                 &&
+
                 !(StringProcessor.ifContain("Standard",specification)))
          {
             this.targetSmall = true;
             this.tragetBig = true;
+
 
         } else if (StringProcessor.ifContainStrings(specification, targetBig)) {
             this.targetSmall = false;
@@ -139,8 +146,10 @@ public class MyComparision {
         return this;
 
     }
+
     //2.傳出Acceptable Range 字串
     public String getAccecptableRangeString() {
+
 
         if (targetSmall && tragetBig){
             return ">=" +numS[0] +" & "+ "<="+numS[1];
@@ -157,10 +166,11 @@ public class MyComparision {
 
 
     public double dividByPowerOf10(int decimalPlace) {
+
         int size = Integer.valueOf(decimalPlace);
-        double one=(double)1;
+        double one = (double) 1;
         for (int i = 0; i < size; i++) {
-            one=one/10;
+            one = one / 10;
         }
         return one;
     }
@@ -170,6 +180,7 @@ public class MyComparision {
         if(countDecimalPlace(number) >0){
            return dividByPowerOf10(numberD);
         }
+
 
         else return 1;
     }
@@ -193,9 +204,11 @@ public class MyComparision {
             this.OOSNum[0] = this.num[0] +oneForMax;
         }
         else this.OOSNum[0] =-1;
+
         return this;
 
     }
+
 
     //設定excel 的conditional format
     public String getUnaccecptableOperator(MyComparision MyComparision) {
@@ -205,12 +218,13 @@ public class MyComparision {
        }
        else if (targetSmall ==true){
             return "<";
-        }
-       else return  "";
+        } else return "";
     }
+
 
     public String getSpecification() {
         return specification;
+
     }
 
     public void setSpecification(String specification) {
@@ -229,6 +243,7 @@ public class MyComparision {
         return numS;
     }
 
+
     public void setNumS(String[] numS) {
         this.numS = numS;
     }
@@ -236,6 +251,11 @@ public class MyComparision {
     public Boolean getTargetSmall() {
         return targetSmall;
     }
+
+//    public void setMyOperator(Operator myOperator) {
+//        this.myOperator = myOperator;
+//    }
+
 
     public void setTargetSmall(Boolean targetSmall) {
         this.targetSmall = targetSmall;
@@ -293,7 +313,6 @@ public class MyComparision {
     public String getAccepatbleOperator() {
         return accepatbleOperator;
     }
-
 
 
     public String getUnAccepatbleOperator() {

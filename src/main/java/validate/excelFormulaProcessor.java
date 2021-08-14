@@ -3,14 +3,14 @@ package validate;
 import common.NumberProcessor;
 import msexcel.Excel;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFColor;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import test.ExcelForRu;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +40,7 @@ public class excelFormulaProcessor {
             XSSFCellStyle cs = ((XSSFCellStyle) excel.getCurCell().getCellStyle());
             XSSFFont font = cs.getFont();
             XSSFColor color = font.getXSSFColor();
-            System.out.println("Font color : " + color.getARGBHex());
+//            System.out.println("Font color : " + color.getARGBHex());
             if ((excel.getCellValue().toString().isEmpty()))
                 return "";
 
@@ -103,7 +103,7 @@ public class excelFormulaProcessor {
         }
         //結束找詞彙
 
-        return "XXXX";
+        return "找不到規格";
     }
 
     public static String findSpecificationValue(Excel excel, int currentCellIdx) {
@@ -119,20 +119,19 @@ public class excelFormulaProcessor {
 
     }
 
-    public static String checkFontColor(Excel excel, Cell cell) {
-        System.out.println(excel.getCellValue());
+    public static String checkFontColor(Workbook wb, Cell cell) {
         CellStyle c = cell.getCellStyle();
         if (!(c == null)) {
             ////For xls (HSSFWorkbook)  or index =12
-            if (excel.getWorkbook() instanceof HSSFWorkbook) {
-                System.out.println("HSSF:" + ((HSSFWorkbook) excel.getWorkbook()).getInternalWorkbook().getFontRecordAt(c.getFontIndexAsInt()).getColorPaletteIndex());
+            if (wb instanceof HSSFWorkbook) {
+//                System.out.println("HSSF:" + ((HSSFWorkbook) excel.getWorkbook()).getInternalWorkbook().getFontRecordAt(c.getFontIndexAsInt()).getColorPaletteIndex());
 
                 return "color format in HSSFWorkbook";
             }
             //For xlsx (XSSFWorkbook) rgb="FF0000CC"/> AND index =0
             //or index =12
-            if (excel.getWorkbook() instanceof XSSFWorkbook) {
-                XSSFColor color = ((XSSFWorkbook) excel.getWorkbook()).getFontAt(c.getFontIndexAsInt()).getXSSFColor();
+            if (wb instanceof XSSFWorkbook) {
+                XSSFColor color = ((XSSFWorkbook) wb).getFontAt(c.getFontIndexAsInt()).getXSSFColor();
                 //arr contains 4 byte --> first one is for index (please ignore)
                 if (!(color == null)) {
                     byte[] rgb = color.getARGB();
@@ -140,7 +139,6 @@ public class excelFormulaProcessor {
                     //j 給rgb 四格用 i給RGB
                     for (int i = 0, j = 1; j < rgb.length; i++, j++) {
                         RGB[i] = Math.abs(rgb[j]);
-
                     }
 
                     for (int b : RGB) {
@@ -150,14 +148,14 @@ public class excelFormulaProcessor {
                     int index = NumberProcessor.getIndexOfLargest(RGB);
                     switch (index) {
                         case (0):
-                            System.out.println(excel.getR1C1Idx(cell) + ":" + "red");
+//                            System.out.println(excel.getR1C1Idx(cell) + ":" + "red");
                             return "red";
                         case (1):
-                            System.out.println(excel.getR1C1Idx(cell) + ":" + "green");
+//                            System.out.println(excel.getR1C1Idx(cell) + ":" + "green");
                             return "green";
 
                         case (2):
-                            System.out.println(excel.getR1C1Idx(cell) + ":" + "blue");
+//                            System.out.println(excel.getR1C1Idx(cell) + ":" + "blue");
                             return "blue";
                     }
                 }
@@ -166,6 +164,24 @@ public class excelFormulaProcessor {
         return "";
     }
 
+    public static List<Cell> getBlueCells(Workbook wb,Sheet sheet, String color, CellType cellType) {
+        List<Cell> result = new ArrayList<>();
+        int rowSize = sheet.getLastRowNum();
+        for (int rowIdx = 0; rowIdx < rowSize; ++rowIdx) {
+            Row row = sheet.getRow(rowIdx);
+            int cellsize = row.getLastCellNum();
+            for (int cellIndx = 0; cellIndx < cellsize; ++cellIndx) {
+                Cell cell = row.getCell(cellIndx);
+                if (cell != null && checkFontColor( wb, cell).equals(color)) {
+                    if (cell.getCellType().equals(cellType)) {
+                        result.add(cell);
+                    }
+                }
+            }
+        }
+//        }
+        return result;
+    }
 
 //    public static mySheet collectCellByFontColor(Excel excel, mySheet mysheet) {
 //        List<Cell> FormulaCells = new ArrayList<Cell>();

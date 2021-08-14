@@ -32,6 +32,7 @@ public class Excel {
     Sheet curSheet;
     Row curRow;
     Cell curCell;
+    String fileName;
 
     public File getFile() {
         return file;
@@ -79,6 +80,7 @@ public class Excel {
 
     public Excel(String fileName) throws IOException {
         this(new FileInputStream(new File(fileName)), fileName);
+        this.fileName=fileName;
     }
 
     private Excel(InputStream in, String fileName) {
@@ -145,6 +147,7 @@ public class Excel {
 //            return new Excel(new FileInputStream(file), file.getName());
             Excel excel = new Excel(new FileInputStream(file), file.getName());
             excel.setFile(file);
+            excel.setFileName(file.getName());
             return excel;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -189,11 +192,11 @@ public class Excel {
     }
 
     public Excel assignSheet(int index) {
-        if (curSheet == null) {
-            curSheet = curWb.createSheet();
-        }
-        curSheet = curWb.getSheetAt(index);
 
+        curSheet = curWb.getSheetAt(index);
+//        if (curSheet == null) {
+//            curSheet = curWb.createSheet();
+//        }
         return this;
     }
 
@@ -344,10 +347,10 @@ public class Excel {
                     toCreate ? MissingCellPolicy.CREATE_NULL_AS_BLANK : MissingCellPolicy.RETURN_NULL_AND_BLANK);
         }
         else {
-
-            if (curCell == null) {
-                curCell = curRow.createCell(index);
-            }
+            this.assignRow(this.getLastRowNum());
+        }
+        if (curCell == null) {
+            curCell = curRow.createCell(index);
         }
         return this;
     }
@@ -763,8 +766,11 @@ public class Excel {
     public Cell getCell(String r1c1) {
         CellReference cellReference = new CellReference(r1c1);
         Row row = this.curSheet.getRow(cellReference.getRow());
-        Cell cell = row.getCell(cellReference.getCol());
-        return cell;
+        if(row!=null){
+            return  row.getCell(cellReference.getCol());
+        }
+
+        return null;
     }
 
     public Object getCellValue(String r1c1) {
@@ -785,6 +791,27 @@ public class Excel {
                     cell.getRowIndex() + "," + cell.getColumnIndex() + value.toString());
         }
     }
+    public Excel save() {
+        try (FileOutputStream outputStream = new FileOutputStream(this.file.getPath())) {
+            this.getWorkbook().write(outputStream);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return this;
+    }
+
+    public Excel saveToFile(String pathName) {
+        try (FileOutputStream outputStream = new FileOutputStream(pathName)) {
+            this.getWorkbook().write(outputStream);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return loadExcel(pathName);
+    }
 
     //this method use api from third party
     //if range passed in is D11:D13 --> return ["D11","D12","D13"]
@@ -795,6 +822,7 @@ public class Excel {
         SpreadsheetInfo.addFreeLimitReachedListener(eventArguments -> eventArguments.setFreeLimitReachedAction(FreeLimitReachedAction.CONTINUE_AS_TRIAL));
         ExcelFile workbook;
         if (this.getFile() != null) {
+//            saveToFile(this.getFile().getAbsolutePath());
             workbook = ExcelFile.load(new FileInputStream(this.getFile()));
             if (workbook.getWorksheet(this.curSheet.getSheetName()) != null) {
                 ExcelWorksheet worksheet = workbook.getWorksheet(this.curSheet.getSheetName());
@@ -899,23 +927,15 @@ public class Excel {
             XSSFFormulaEvaluator.evaluateAllFormulaCells(this.getWorkbook());
     }
 
-    public Excel saveToFile() {
-        Date now = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy_MM_dd");
-        return saveToFile("test" + simpleDateFormat.format(now));
+
+
+
+
+    public String getFileName() {
+        return fileName;
     }
 
-    public Excel saveToFile(String fileName) {
-
-        String fullPath = FileSystemView.getFileSystemView().getHomeDirectory().getPath() + "/"
-                + fileName;
-        try (FileOutputStream outputStream = new FileOutputStream(fullPath)) {
-            this.getWorkbook().write(outputStream);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return loadExcel(fullPath);
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 }// end of class
