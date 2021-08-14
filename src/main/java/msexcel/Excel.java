@@ -816,7 +816,9 @@ public class Excel {
     public static String getR1C1Idx(Cell cell) {
         return cell.getAddress().formatAsString();
     }
-
+    public  String getR1C1Idx() {
+        return getCurCell().getAddress().formatAsString();
+    }
 
     public void setCellValue(String r1c1, Object value) {
         CellReference cellReference = new CellReference(r1c1);

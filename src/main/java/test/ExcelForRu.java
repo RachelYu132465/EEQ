@@ -1,14 +1,10 @@
 package test;
 
-import dataStructure.ValidGoal;
-import mainFlow.extract;
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import msexcel.Excel;
+import org.apache.poi.ss.usermodel.Cell;
 
 import javax.swing.filechooser.FileSystemView;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 
 /*
@@ -41,47 +37,49 @@ public class ExcelForRu {
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
-
-        System.out.println(proj_path);
-
+        Excel test = Excel.loadExcel(ExcelForRu.proj_path + "/testR.xlsx");
+        Cell c =test.assignSheet(0).assignRow(0).assignCell(2).getCurCell();
+        System.out.println(test.getCellValue() + c.getCellType().name() );
+//GeneralSTRING
 //        String fileName = "test1.xlsx";
-        String fileName = "R000012383-LAB Spreadsheet數字.xlsx";
-        XWPFDocument doc_general = null;
-        XWPFDocument doc_testCase = null;
 
-                //for(Sheet sheet:sheets)
-        List<String> SpecificationList = null;
-        HashMap<String, ValidGoal> TobeProcessed = null;
-        Object result = extract.extractData(fileName);
 
-        SpecificationList = (List<String>) ((Object[]) result)[0];
-        TobeProcessed = (HashMap<String, ValidGoal>) ((Object[]) result)[1];
-
-//        for(String specification : SpecificationList){
-//            System.out.println(specification);
+//        XWPFDocument doc_general = null;
+//        XWPFDocument doc_testCase = null;
+//
+//                //for(Sheet sheet:sheets)
+//        List<String> SpecificationList = null;
+//        HashMap<String, ValidGoal> TobeProcessed = null;
+//        Object result = extract.extractData(fileName);
+//
+//        SpecificationList = (List<String>) ((Object[]) result)[0];
+//        TobeProcessed = (HashMap<String, ValidGoal>) ((Object[]) result)[1];
+//
+////        for(String specification : SpecificationList){
+////            System.out.println(specification);
+////        }
+//
+//        for (Map.Entry<String, ValidGoal> e : TobeProcessed.entrySet()) {
+////            HashSet<ExcelCell> allin = e.getValue().getAllInputs();
+////
+////            for(ExcelCell c:allin){
+////                System.out.print(Excel.getR1C1Idx(c.getCell())+",");
+////            }
+////                    e.getValue().getInput();
+//            System.out.println("____" + e.getValue());
 //        }
-
-        for (Map.Entry<String, ValidGoal> e : TobeProcessed.entrySet()) {
-//            HashSet<ExcelCell> allin = e.getValue().getAllInputs();
 //
-//            for(ExcelCell c:allin){
-//                System.out.print(Excel.getR1C1Idx(c.getCell())+",");
-//            }
-//                    e.getValue().getInput();
-            System.out.println("____" + e.getValue());
-        }
-
-//        VBS.execVBSFile(VBS.produceVBSFile(fileName,TobeProcessed));
-//        Thread.sleep(3000);
+////        VBS.execVBSFile(VBS.produceVBSFile(fileName,TobeProcessed));
+////        Thread.sleep(3000);
+////
+////        String produced_vbsFileName =fileName.split("\\.")[0] + VBS.vbsExcelName + "." + fileName.split("\\.")[1];
+////        Excel producedExcel =Excel.loadExcel(proj_path + produced_vbsFileName);
+////        producedExcel.assignSheet(0);
+////        HashMap<String, ValidGoal> Validated = excelFormulaValidator.getValidatedValues(
+////                TobeProcessed,producedExcel);
 //
-//        String produced_vbsFileName =fileName.split("\\.")[0] + VBS.vbsExcelName + "." + fileName.split("\\.")[1];
-//        Excel producedExcel =Excel.loadExcel(proj_path + produced_vbsFileName);
-//        producedExcel.assignSheet(0);
-//        HashMap<String, ValidGoal> Validated = excelFormulaValidator.getValidatedValues(
-//                TobeProcessed,producedExcel);
-
 //        doc_general = ProduceWordFile.writeToWord(TobeProcessed,Validated);
-        System.out.println("finish");
+//        System.out.println("finish");
 
 
     }

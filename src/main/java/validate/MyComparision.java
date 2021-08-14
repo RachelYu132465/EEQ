@@ -2,37 +2,39 @@ package validate;
 
 import common.StringProcessor;
 
-import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static common.NumberProcessor.countDecimalPlace;
+
 
 public class MyComparision {
 
-    private final String specification;
+    public String specification;
 //    public double max;
 //    public double min;
     public double[] num;
     public String[] numS;
-    Boolean hasMax;
-    Boolean hasMin;
+    Boolean targetSmall;
+    Boolean tragetBig;
     public String accepatbleOperator;
     public String unAccepatbleOperator;
     public double numberInSpec;
-    public double OOSNumber;
+//    public double OOSNumber;
 //    public Operator myOperator;
     public double[] OOSNum;
 
     @Override
     public String toString(){
-        return "hasMin:"+ hasMin + ";hasMax:" +hasMax + ";val:"+Arrays.toString(num) +";vals"+Arrays.toString(numS);
+        return "hasMin:"+ tragetBig + ";hasMax:" + targetSmall + ";val:"+Arrays.toString(num) +";vals"+Arrays.toString(numS);
     }
     public MyComparision(String specification) {
 
         this.specification = specification;
         setOperator(specification);
         saveNum(specification);
+
 //        setNumberInSpec(specification);
     }
 
@@ -53,10 +55,10 @@ public class MyComparision {
 
     //1. 將 spec的數字取出，只取字串前面數字
     public MyComparision saveNum(String spec) {
-        if (hasMax&&hasMin){
+        if (targetSmall && tragetBig){
             saveFirstTwoNum(spec);
         }
-        else if (hasMax ^ hasMin){
+        else if (targetSmall ^ tragetBig){
             saveFirstNum(spec);
         }
 
@@ -122,15 +124,16 @@ public class MyComparision {
                 &&
                 !(StringProcessor.ifContain("Standard",specification)))
          {
-            this.hasMax = true;
-            this.hasMin = true;
+            this.targetSmall = true;
+            this.tragetBig = true;
+
         } else if (StringProcessor.ifContainStrings(specification, targetBig)) {
-            this.hasMax = false;
-            this.hasMin = true;
+            this.targetSmall = false;
+            this.tragetBig = true;
 
         } else if (StringProcessor.ifContainStrings(specification, targetSmall)) {
-            this.hasMax = true;
-            this.hasMin = false;
+            this.targetSmall = true;
+            this.tragetBig = false;
 
         } else System.out.println("in class SpecificationProcessor, operator not set correctly");
         return this;
@@ -139,23 +142,21 @@ public class MyComparision {
     //2.傳出Acceptable Range 字串
     public String getAccecptableRangeString() {
 
-        if (hasMax&&hasMin){
+        if (targetSmall && tragetBig){
             return ">=" +numS[0] +" & "+ "<="+numS[1];
         }
-        else if (!hasMax && hasMin){
+        else if (!targetSmall && tragetBig){
             return ">="+numS[0];
         }
-        else if (hasMax && !hasMin){
+        else if (targetSmall && !tragetBig){
             return "<="+numS[0];
         }
         else return  "";
     }
-//3.存入OOS數字
-    public int decimalPlace (String Number){
-        BigDecimal a = new BigDecimal(Number);
-        return a.scale();
-    }
-    public double oneInDecimalPlace (int decimalPlace) {
+
+
+
+    public double dividByPowerOf10(int decimalPlace) {
         int size = Integer.valueOf(decimalPlace);
         double one=(double)1;
         for (int i = 0; i < size; i++) {
@@ -163,51 +164,89 @@ public class MyComparision {
         }
         return one;
     }
+    //傳入10 => 回傳 1。傳入1 => 回傳 1。傳入數字位數 0.3 =>回傳0.1。傳入數字位數 0.03 =>回傳0.01。
+    public double OneInLastDigitPoint(String number) {
+       int numberD = Integer.valueOf(number);
+        if(countDecimalPlace(number) >0){
+           return dividByPowerOf10(numberD);
+        }
 
+        else return 1;
+    }
+    //3.存入OOS數字
     public MyComparision setOOSNum () {
         OOSNum = new double[2];
-        if (hasMax&&hasMin){
-            double oneForMin = oneInDecimalPlace(decimalPlace(this.numS[0]));
+        // 有上下限
+        if (targetSmall && tragetBig){
+            double oneForMin = OneInLastDigitPoint(this.numS[0]);
             this.OOSNum[0] = this.num[0] -oneForMin;
-            double oneForMax = oneInDecimalPlace(decimalPlace(this.numS[1]));
+            double oneForMax = OneInLastDigitPoint(this.numS[1]);
             this.OOSNum[1] = this.num[1] +oneForMax;
         }
-        else if (!hasMax && hasMin){
-            double oneForMin = oneInDecimalPlace(decimalPlace(this.numS[0]));
+
+        else if (!targetSmall && tragetBig){
+            double oneForMin = OneInLastDigitPoint(this.numS[0]);
             this.OOSNum[0] = this.num[0] -oneForMin;
         }
-        else if (hasMax && !hasMin){
-            double oneForMax = oneInDecimalPlace(decimalPlace(this.numS[0]));
+        else if (targetSmall && !tragetBig){
+            double oneForMax = OneInLastDigitPoint(this.numS[0]);
             this.OOSNum[0] = this.num[0] +oneForMax;
         }
         else this.OOSNum[0] =-1;
         return this;
 
     }
+
+    //設定excel 的conditional format
     public String getUnaccecptableOperator(MyComparision MyComparision) {
 
-       if (hasMax==true){
+       if (targetSmall ==true){
            return ">";
        }
-       else if (hasMax==true){
+       else if (targetSmall ==true){
             return "<";
         }
        else return  "";
     }
-    public Boolean getHasMax() {
-        return hasMax;
+
+    public String getSpecification() {
+        return specification;
     }
 
-    public void setHasMax(Boolean hasMax) {
-        this.hasMax = hasMax;
+    public void setSpecification(String specification) {
+        this.specification = specification;
     }
 
-    public Boolean getHasMin() {
-        return hasMin;
+    public double[] getNum() {
+        return num;
     }
 
-    public void setHasMin(Boolean hasMin) {
-        this.hasMin = hasMin;
+    public void setNum(double[] num) {
+        this.num = num;
+    }
+
+    public String[] getNumS() {
+        return numS;
+    }
+
+    public void setNumS(String[] numS) {
+        this.numS = numS;
+    }
+
+    public Boolean getTargetSmall() {
+        return targetSmall;
+    }
+
+    public void setTargetSmall(Boolean targetSmall) {
+        this.targetSmall = targetSmall;
+    }
+
+    public Boolean getTragetBig() {
+        return tragetBig;
+    }
+
+    public void setTragetBig(Boolean tragetBig) {
+        this.tragetBig = tragetBig;
     }
 
 
@@ -216,14 +255,14 @@ public class MyComparision {
 //        this.myOperator = myOperator;
 //    }
 
-    public double getOOSNumber() {
-        return OOSNumber;
-
-    }
-
-    public void setOOSNumber(double OOSNumber) {
-        this.OOSNumber = OOSNumber;
-    }
+//    public double getOOSNumber() {
+//        return OOSNumber;
+//
+//    }
+//
+//    public void setOOSNumber(double OOSNumber) {
+//        this.OOSNumber = OOSNumber;
+//    }
 
     public double[] getOOSNum() {
         return OOSNum;
