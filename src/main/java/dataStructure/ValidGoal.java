@@ -28,12 +28,12 @@ public class ValidGoal {
     }
 
     public ValidGoal(Cell input, Cell output, MyComparision targetOutput, HashSet<ExcelCell> allInputs) {
-
+        this(new ExcelCell(input), new ExcelCell(output), allInputs);
         this.myComparision = targetOutput;
     }
 
     public ValidGoal(Cell input, Cell output, String specification, HashSet<ExcelCell> allInputs) {
-        new ValidGoal(input, output, new MyComparision(specification), allInputs);
+        this(input, output, new MyComparision(specification), allInputs);
     }
 
     public HashSet<ExcelCell> getAllInputs() {

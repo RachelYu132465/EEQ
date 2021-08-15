@@ -3,6 +3,7 @@ package test;
 
 import common.FileHandler;
 import dataStructure.ValidGoal;
+import mainFlow.ProduceWordFile;
 import mainFlow.VBS;
 import mainFlow.extract;
 import msexcel.Excel;
@@ -13,6 +14,8 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import static mainFlow.ProduceWordFile.writeToWord_general;
+import static mainFlow.ProduceWordFile.writeToWord_testCase;
+import static validate.excelFormulaValidator.getValidatedValues;
 
 
 /*
@@ -56,31 +59,32 @@ public class ExcelForRu {
         XWPFDocument doc_testCase = new XWPFDocument();
 
         int sheetSize = excel.getNumberOfSheets();
-        HashMap<String, ValidGoal> TobeProcessed =null;
 
         for (int a = 0; a < sheetSize; a++) {
             excel.assignSheet(a);
             if(!excel.getSheet().getSheetName().toLowerCase().equals("history of versions")){
-                TobeProcessed = extract.extractData(excel);
-                writeToWord_general(excel.getSheet().getSheetName(),doc_general,TobeProcessed);
-                VBS.produceNewExcels(fileName, excel.getSheet(),TobeProcessed);
-                excel.save();
+                HashMap<String, ValidGoal> TobeProcessed = extract.extractData(excel);
+//                writeToWord_general(excel.getSheet().getSheetName(),doc_general,TobeProcessed);
+//                VBS.produceNewExcels(fileName, excel.getSheet(),TobeProcessed);
+//                excel.save();
+                //get new Excel everytime vbs file produce new file
+                HashMap<String, ValidGoal> newData= getValidatedValues(TobeProcessed,excel);
+                writeToWord_testCase(doc_testCase,TobeProcessed,newData);
             }
         }
 
         FileHandler.save(doc_general,proj_path+"result.docx");
-
+        FileHandler.save(doc_testCase,proj_path+"test case.docx");
 //        for (Map.Entry<String, ValidGoal> e : TobeProcessed.entrySet()) {
 //            System.out.println("____" +  e.getValue());
 //        }
 
 
-
 //        VBS.execVBSFile(VBS.produceVBSFile(fileName,TobeProcessed));
 //        Thread.sleep(3000);
-//
-//        doc_general = ProduceWordFile.writeToWord(TobeProcessed,Validated);
-//        System.out.println("finish");
+
+
+        System.out.println("finish");
 
 
     }

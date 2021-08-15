@@ -112,22 +112,23 @@ public class excelFormulaValidator {
         return result;
     }
 
-    public static HashMap<String, ValidGoal> getValidatedValues(HashMap<String, ValidGoal> prevInfo, Excel expectedExcel) {
+    public static HashMap<String, ValidGoal> getValidatedValues(HashMap<String, ValidGoal> prevInfo, Excel newExcel) {
         HashMap<String, ValidGoal> result = new HashMap();
         for (Map.Entry<String, ValidGoal> goal : prevInfo.entrySet()) {
             String outputR1C1 = goal.getKey();
             ValidGoal prev = goal.getValue();
             HashSet<ExcelCell> newInputCells = new HashSet<>();
 
-            Cell outputCell = expectedExcel.getCell(outputR1C1);
+            Cell outputCell = newExcel.getCell(outputR1C1);
             Cell inputCell = null;
             if (prev.getInput().getR1c1() != null)
-                inputCell = expectedExcel.getCell(prev.getInput().getR1c1());
+                inputCell = newExcel.getCell(prev.getInput().getR1c1());
             for (ExcelCell c : prev.getAllInputs()) {
-                newInputCells.add(new ExcelCell(expectedExcel.getCell(Excel.getR1C1Idx(c.getCell()))));
+                newInputCells.add(new ExcelCell(newExcel.getCell(Excel.getR1C1Idx(c.getCell()))).copyNote(c));
             }
 
             ValidGoal newv = new ValidGoal(inputCell, outputCell, prev.getMyComparision(), newInputCells);
+            newv.getOutput().copyNote(prev.getOutput());
             result.put(outputR1C1, newv);
         }
         return result;

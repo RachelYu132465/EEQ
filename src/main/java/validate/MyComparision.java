@@ -165,9 +165,9 @@ public class MyComparision {
 
 
 
-    public double dividByPowerOf10(int decimalPlace) {
+    public double dividByPowerOf10(double decimalPlace) {
 
-        int size = Integer.valueOf(decimalPlace);
+        double size = Double.valueOf(decimalPlace);
         double one = (double) 1;
         for (int i = 0; i < size; i++) {
             one = one / 10;
@@ -176,7 +176,7 @@ public class MyComparision {
     }
     //傳入10 => 回傳 1。傳入1 => 回傳 1。傳入數字位數 0.3 =>回傳0.1。傳入數字位數 0.03 =>回傳0.01。
     public double OneInLastDigitPoint(String number) {
-       int numberD = Integer.valueOf(number);
+       double numberD = Double.valueOf(number);
         if(countDecimalPlace(number) >0){
            return dividByPowerOf10(numberD);
         }

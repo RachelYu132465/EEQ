@@ -4,6 +4,7 @@ import dataStructure.ValidGoal;
 import msexcel.Excel;
 import msexcel.ExcelCell;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.xwpf.usermodel.*;
 
 import java.lang.reflect.InvocationTargetException;
@@ -60,16 +61,41 @@ public class CustomTableStyle {
 
     }
 
-    public static void addToTable(types type, XWPFTable table, int rowIdx, String... values) {
+    //return real cell number (after merging table)
+    static int addToTableByForce(XWPFTable table, int rowIdx, int cellIdx) {
+        if (table.getRow(rowIdx) == null) {
+            if (rowIdx > table.getNumberOfRows() - 1) {
+                int numOfRowsToCreate = rowIdx + 1 - table.getNumberOfRows();
+                for (int createdRow = 0; createdRow < numOfRowsToCreate; ++createdRow) {
+                    table.createRow();
+                }
+            }
+        }
+        XWPFTableRow row = table.getRow(rowIdx);
         int numOfcells = 0;
-        for (int realNumOfCell = 0; realNumOfCell < table.getRow(rowIdx).getTableCells().size(); realNumOfCell++) {
+        for (int realNumOfCell = 0; realNumOfCell < row.getTableCells().size(); realNumOfCell++) {
             if (table.getRow(rowIdx).getCell(realNumOfCell) != null) ++numOfcells;
         }
-        if (numOfcells != values.length) {
-            System.out.println("String arg size cannot match current table cells");
+        if (row.getCell(cellIdx) == null) {
+            if (cellIdx > numOfcells - 1) {
+                int numOfCellsToCreate = cellIdx + 1 - numOfcells;
+                for (int createdCells = 0; createdCells < numOfCellsToCreate; ++createdCells) {
+                    row.createCell();
+                }
+            }
+        }
+        return numOfcells;
+    }
+
+    public static void addToTable(types type, XWPFTable table, int rowIdx, String... values) {
+        //因為資料表格要事後補充值，若已經超過該列數量，另建列
+        int numOfcells = addToTableByForce(table, rowIdx, values.length - 1);
+
+        if (numOfcells < values.length) {
+            System.out.println("Length of string arg more than num of current table cells");
             return;
         }
-        for (int cellIdx = 0; cellIdx < numOfcells; ++cellIdx) {
+        for (int cellIdx = 0; cellIdx < values.length; ++cellIdx) {
             try {
                 XWPFTableCell cell = table.getRow(rowIdx).getCell(cellIdx);
                 XWPFParagraph paragraph = getParagraph(cell);
@@ -165,7 +191,7 @@ public class CustomTableStyle {
             row.createCell();
             addToTable(types.Content, table, table.getNumberOfRows() - 1,
                     goal.getValue().getOutput().getR1c1(),
-                    "operator:" +""
+                    "operator:" + ""
             );
         }
     }
@@ -185,27 +211,62 @@ public class CustomTableStyle {
         endTable(table);
     }
 
-    public static void appendToTable4(XWPFTable table, ValidGoal goal,  ValidGoal newGoal) {
+    public static void appendToTable4_1(XWPFTable table, ValidGoal goal) {
         for (ExcelCell input_c : goal.getAllInputs()) {
-            Cell input = input_c.getCell();
-            XWPFTableRow row = table.createRow();
-            row.createCell();
-            row.createCell();
-            row.createCell();
-            row.createCell();
-            addToTable(types.Content, table, table.getNumberOfRows() - 1,
-                    Excel.getR1C1Idx(input)
-                    ,input_c.getValue()
-                    , goal.getOutput().getR1c1()
-                    , goal.getOutput().getValue()
-                    ,"","",""
+            Cell nonFormulaCells = input_c.getCell();
+            if (!nonFormulaCells.getCellType().equals(CellType.FORMULA)) {
+//                XWPFTableRow row = table.createRow();
+//                row.createCell();
+//                row.createCell();
+//                row.createCell();
+//                row.createCell();
+                addToTable(types.Content, table, table.getNumberOfRows(),
+                        input_c.getR1c1()
+                        , input_c.getValue()
+                        , ""
+                        , ""
+                        , "", "", ""
 
-            );
+                );
+            }
         }
     }
 
-    public static void getTable_Style4(XWPFDocument doc, HashMap<String, ValidGoal> goals, HashMap<String, ValidGoal> newGoals) {
-        XWPFTable table = getCustomTable(doc, 5, 7);
+    //印output
+    public static void appendToTable4_2(XWPFTable table, HashMap<String, ValidGoal> goals) {
+        int rowIdx = 0;
+        for (Map.Entry<String, ValidGoal> entry : goals.entrySet()) {
+            ValidGoal goal = entry.getValue();
+            rowIdx = appendToTable4_2(table, goal, rowIdx);
+            ExcelCell output = goal.getOutput();
+            addToTable(types.Content, table, ++rowIdx,
+                    ""
+                    , ""
+                    , output.getR1c1()
+                    , ""
+                    , "", output.getValue(), "");
+        }
+    }
+
+    //印output
+    public static int appendToTable4_2(XWPFTable table, ValidGoal goal, int rowIdx) {
+        for (ExcelCell input_c : goal.getAllInputs()) {
+            Cell formula_cells = input_c.getCell();
+            if (formula_cells.getCellType().equals(CellType.FORMULA)) {
+                addToTable(types.Content, table, ++rowIdx,
+                        ""
+                        , ""
+                        , input_c.getR1c1()
+                        , ""
+                        , "", input_c.getValue(), ""
+
+                );
+            }
+        }
+        return rowIdx;
+    }
+
+    public static void getHeadStyle_tbl4(XWPFTable table) {
         table.getRow(0).setHeight(700);
         table.getRow(3).setHeight(600);
         table.getRow(2).setHeight(700);
@@ -215,16 +276,48 @@ public class CustomTableStyle {
         mergeCellHorizontally(table, 1, 0, 6);
         mergeCellHorizontally(table, 2, 0, 6);
         mergeCellHorizontally(table, 3, 0, 6);
+    }
 
-        addToTable(types.Content, table, 0, "Case", "", "Test Case No.:");
-        addToTable(types.Content, table, 1, instruction_txt);
-        addToTable(types.Content, table, 2, accep_criteria_txt);
-        addToTable(types.Content, table, 3, "in spec");
-        addToTable(types.Content, table, 4, INPUT_CELL, "Input value",
+    public static void appendToTable4_3(XWPFTable table, ValidGoal goal) {
+        table.createRow();
+        int newRowIdx = table.getNumberOfRows() - 1;
+        if (table.getRow(newRowIdx).getTableCells().size() > 6)
+            mergeCellHorizontally(table, newRowIdx, 0, 6);
+        table.getRow(newRowIdx).getCell(0).setText("Range Validation: " + goal.getOutput().getNote());
+        appendToTable4_1(table, goal);
+        newRowIdx = appendToTable4_2(table, goal, newRowIdx);
+
+        addToTable(types.Content, table, newRowIdx + 1,
+                "", "", goal.getOutput().getR1c1(), "", "", goal.getOutput().getValue());
+
+
+    }
+
+    public static void getTable_Style4(XWPFDocument doc, HashMap<String, ValidGoal> goals, HashMap<String, ValidGoal> newGoals) {
+        XWPFTable headTable = getCustomTable(doc, 4, 7);
+        getHeadStyle_tbl4(headTable);
+
+        addToTable(types.Content, headTable, 0, "Case", "", "Test Case No.:");
+        addToTable(types.Content, headTable, 1, instruction_txt);
+        addToTable(types.Content, headTable, 2, accep_criteria_txt);
+        addToTable(types.Content, headTable, 3, "in spec");
+        endTable(headTable);
+        XWPFTable table = getCustomTable(doc, 1, 7);
+        addToTable(types.Content, table, 0, INPUT_CELL, "Input value",
                 OUTPUT_CELL, "Output " + RESULT, "Calculated " + RESULT, "Expected " + RESULT, "Test " + RESULT);
         for (Map.Entry<String, ValidGoal> goal : goals.entrySet()) {
-            appendToTable4(table, goal.getValue(),newGoals.get(goal.getKey()));
+            //加所有非公式的儲存格
+            appendToTable4_1(table, goal.getValue());
         }
+        //加所有公式的儲存格
+        appendToTable4_2(table, goals);
+
+        //test validation的table
+        for (Map.Entry<String, ValidGoal> goal : newGoals.entrySet()) {
+            //加所有公式的、非公式的儲存格
+            appendToTable4_3(table, goal.getValue());
+        }
+
         endTable(table);
     }
 

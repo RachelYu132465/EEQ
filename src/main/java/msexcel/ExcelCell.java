@@ -28,6 +28,11 @@ public class ExcelCell {
         this.setNote(description1 +" "+description2);
     }
 
+    public ExcelCell copyNote(ExcelCell c) {
+        this.setNote(c.getNote());
+        return this;
+    }
+
     public String getR1c1() {
         return r1c1;
     }
