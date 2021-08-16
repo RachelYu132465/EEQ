@@ -1,11 +1,13 @@
 package validate;
 
+import common.FileHandler;
 import dataStructure.ValidGoal;
 import msexcel.Excel;
 import msexcel.ExcelCell;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.regex.Pattern;
@@ -23,15 +25,15 @@ public class excelFormulaValidator {
 
     public static String scanForSpecificationCellAddr() {
         Scanner sc = new Scanner(System.in);
-        String CellC1R1="";
-            System.out.println("請輸入R1C1:");
-            while (sc.hasNext()) {
-                CellC1R1 = sc.next();
-                if(CellC1R1.matches(Excel.CellAddrR1C1Rex)){
-                    break;
-                }
-                System.out.println("格式錯誤，請輸入R1C1");
+        String CellC1R1 = "";
+        System.out.println("請輸入R1C1:");
+        while (sc.hasNext()) {
+            CellC1R1 = sc.next();
+            if (CellC1R1.matches(Excel.CellAddrR1C1Rex)) {
+                break;
             }
+            System.out.println("格式錯誤，請輸入R1C1");
+        }
         System.out.println("輸入儲存格:" + CellC1R1);
         System.out.println("======================");
         return CellC1R1;
@@ -46,7 +48,7 @@ public class excelFormulaValidator {
         if (userInput.isBlank()) {
             System.out.println("使用預設方式找規格");
             return "";
-        }else{
+        } else {
             while (!userInput.matches("[yY]")) {
                 System.out.println("是請輸入:y;否請按enter");
                 sc.next();
@@ -112,24 +114,42 @@ public class excelFormulaValidator {
         return result;
     }
 
-    public static HashMap<String, ValidGoal> getValidatedValues(HashMap<String, ValidGoal> prevInfo, Excel newExcel) {
+    public static List<Excel> getNewExcels(String dir, String outputR1C1) {
+        List<File> files = FileHandler.getFilesByKeywords(dir, outputR1C1);
+        List<Excel> excels = new ArrayList<>();
+        for (File file : files) {
+            if (file.getName().toLowerCase().endsWith("xls") || file.getName().toLowerCase().endsWith("xlsx"))
+                excels.add(Excel.loadExcel(file));
+        }
+        return excels;
+    }
+
+    public static HashMap<String, ValidGoal> getValidatedValues(String sheetName, HashMap<String, ValidGoal> prevInfo, String newPath) {
         HashMap<String, ValidGoal> result = new HashMap();
         for (Map.Entry<String, ValidGoal> goal : prevInfo.entrySet()) {
             String outputR1C1 = goal.getKey();
             ValidGoal prev = goal.getValue();
             HashSet<ExcelCell> newInputCells = new HashSet<>();
-
-            Cell outputCell = newExcel.getCell(outputR1C1);
-            Cell inputCell = null;
-            if (prev.getInput().getR1c1() != null)
-                inputCell = newExcel.getCell(prev.getInput().getR1c1());
-            for (ExcelCell c : prev.getAllInputs()) {
-                newInputCells.add(new ExcelCell(newExcel.getCell(Excel.getR1C1Idx(c.getCell()))).copyNote(c));
+            if(outputR1C1.equals("C28")){
+                System.out.println("!!! ");
             }
+            List<Excel> newExcels = getNewExcels(newPath, outputR1C1);
+            int tgt_idx =0;
 
-            ValidGoal newv = new ValidGoal(inputCell, outputCell, prev.getMyComparision(), newInputCells);
-            newv.getOutput().copyNote(prev.getOutput());
-            result.put(outputR1C1, newv);
+            for (Excel newExcel : newExcels) {
+                newExcel.assignSheet(sheetName);
+                String outputR1C1withIdx = outputR1C1 +"_"+ tgt_idx++;
+                Cell outputCell = newExcel.getCell(outputR1C1);
+                Cell inputCell = null;
+                if (prev.getInput().getR1c1() != null)
+                    inputCell = newExcel.getCell(prev.getInput().getR1c1());
+                for (ExcelCell c : prev.getAllInputs()) {
+                    newInputCells.add(new ExcelCell(newExcel.getCell(Excel.getR1C1Idx(c.getCell()))).copyNote(c));
+                }
+                ValidGoal newv = new ValidGoal(inputCell, outputCell, prev.getMyComparision(), newInputCells);
+                newv.getOutput().copyNote(prev.getOutput());
+                result.put(outputR1C1withIdx, newv);
+            }
         }
         return result;
     }

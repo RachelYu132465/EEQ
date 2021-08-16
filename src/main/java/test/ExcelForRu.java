@@ -3,7 +3,6 @@ package test;
 
 import common.FileHandler;
 import dataStructure.ValidGoal;
-import mainFlow.ProduceWordFile;
 import mainFlow.VBS;
 import mainFlow.extract;
 import msexcel.Excel;
@@ -15,6 +14,7 @@ import java.util.HashMap;
 
 import static mainFlow.ProduceWordFile.writeToWord_general;
 import static mainFlow.ProduceWordFile.writeToWord_testCase;
+import static mainFlow.VBS.execAllVBSFiles;
 import static validate.excelFormulaValidator.getValidatedValues;
 
 
@@ -32,25 +32,15 @@ import static validate.excelFormulaValidator.getValidatedValues;
         -目前: 一個sheet(多個spec)-->一個vbs
         -方案: 一個目標-->一個vbs (特定命名方式= output的r1c1+目標的index)
 [Word]
-    7.從新資料表讀入特定VBS產出的資料表(特定命名方式)
+    7.從新資料表讀入特定VBS產出的資料表(特定命名方式) **只留下該sheet
     8.產生word檔案(test case)
  */
 
-/*
-重複?
-more or less尚未寫
-description產生器
-最後的word調整
-*/
 
 public class ExcelForRu {
     public static final String proj_path = FileSystemView.getFileSystemView().getHomeDirectory().getPath() + "/";
 
     public static void main(String[] args) throws IOException, InterruptedException {
-
-
-//        Excel test = Excel.loadExcel(ExcelForRu.proj_path + "/testR.xlsx");
-//        Cell c =test.assignSheet(0).assignRow(0).assignCell(2).getCurCell();
 
         String fileName = "test1.xlsx";
 //        String fileName = "R000012383-LAB Spreadsheet數字.xlsx";
@@ -62,26 +52,23 @@ public class ExcelForRu {
 
         for (int a = 0; a < sheetSize; a++) {
             excel.assignSheet(a);
-            if(!excel.getSheet().getSheetName().toLowerCase().equals("history of versions")){
+            String sheetName = excel.getSheet().getSheetName();
+            String vbs_newData_path = proj_path + FileHandler.getFileNameWoExt(fileName) + "/" + sheetName + "/";
+            if (!sheetName.toLowerCase().equals("history of versions")) {
                 HashMap<String, ValidGoal> TobeProcessed = extract.extractData(excel);
-//                writeToWord_general(excel.getSheet().getSheetName(),doc_general,TobeProcessed);
-//                VBS.produceNewExcels(fileName, excel.getSheet(),TobeProcessed);
-//                excel.save();
+                writeToWord_general(sheetName,doc_general,TobeProcessed);
+                VBS.produceVBSFiles(fileName, excel.getSheet(),vbs_newData_path,TobeProcessed);
+                excel.save();
+                execAllVBSFiles(vbs_newData_path);
                 //get new Excel everytime vbs file produce new file
-                HashMap<String, ValidGoal> newData= getValidatedValues(TobeProcessed,excel);
+                HashMap<String, ValidGoal> newData= getValidatedValues(sheetName,TobeProcessed,vbs_newData_path);
+
+                //要把hashmap裡面的Key改成OutputR1C1 + index -->因為有值會有上下標，需要有兩個新excel檔案!!
                 writeToWord_testCase(doc_testCase,TobeProcessed,newData);
+                FileHandler.save(doc_general,proj_path+sheetName+"_result.docx");
+                FileHandler.save(doc_testCase,proj_path+sheetName+"_test case.docx");
             }
         }
-
-        FileHandler.save(doc_general,proj_path+"result.docx");
-        FileHandler.save(doc_testCase,proj_path+"test case.docx");
-//        for (Map.Entry<String, ValidGoal> e : TobeProcessed.entrySet()) {
-//            System.out.println("____" +  e.getValue());
-//        }
-
-
-//        VBS.execVBSFile(VBS.produceVBSFile(fileName,TobeProcessed));
-//        Thread.sleep(3000);
 
 
         System.out.println("finish");

@@ -10,8 +10,7 @@ import validate.MyComparision;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static test.ExcelForRu.proj_path;
 
@@ -19,20 +18,28 @@ public class VBS {
     public final static String vbsFileName = "_vbsFile";
     public final static String vbsExcelName = "_result";
 
+    public static void main(String... arg) throws IOException {
+        execAllVBSFiles("C:\\Users\\tina.yu\\Desktop\\test1");
+        System.out.println("finish");
+    }
+
     public static void execVBSFile(String vbsfileNameWithPath) throws IOException {
         Runtime.getRuntime().exec("cscript " + vbsfileNameWithPath);
     }
 
-    public static void execAllVBSFiles(String dir) throws IOException {
-        File f = new File(dir);
-        File[] matchingFiles = f.listFiles(new FilenameFilter() {
-            public boolean accept(File dir, String name) {
-                return name.endsWith("vbs");
-            }
-        });
+    public static void execAllVBSFiles(String dir) {
+        List<File> matchingFiles = FileHandler.getFilesByKeywords(dir, "vbs");
+
         for (File vbsfiles : matchingFiles) {
             System.out.println("execute " + vbsfiles.getPath());
-            Runtime.getRuntime().exec("cscript " + vbsfiles.getPath());
+            try {
+                Runtime.getRuntime().exec("cscript " + vbsfiles.getPath());
+                Thread.sleep(2000);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
     }
@@ -79,19 +86,20 @@ public class VBS {
         return allTgt;
     }
 
-    public static void completeVBSContent(StringBuilder vbsFileContent, String FileName, String newFilePath) {
+    public static void completeVBSContent(StringBuilder vbsFileContent, String FileName, String sheetName, String newFilePath) {
         vbsFileContent.insert(0, "Dim objExcel" + System.getProperty("line.separator") +
                 "Dim xlSheet" + System.getProperty("line.separator") +
                 "Set objExcel = CreateObject(\"Excel.Application\")" + System.getProperty("line.separator") +
-                "Set objWorkbook = objExcel.Workbooks.Open(\"" + proj_path + FileName + "\")" + System.getProperty("line.separator")
-        );
+                "Set objWorkbook = objExcel.Workbooks.Open(\"" + proj_path + FileName + "\")" + System.getProperty("line.separator") +
+                "objExcel.Sheets(\"" + sheetName + "\").Select" + System.getProperty("line.separator"));
+
 
         vbsFileContent.append("objExcel.ActiveWorkbook.SaveAs \"" + newFilePath + "\"\n" +
                 "objExcel.ActiveWorkbook.Close\n" +
                 "objExcel.Application.Quit");
     }
 
-    public static void produceNewExcels(String FileName, Sheet sheet, HashMap<String, ValidGoal> TobeProcessed) {
+    public static void produceVBSFiles(String FileName, Sheet sheet, String newPath, HashMap<String, ValidGoal> TobeProcessed) {
         String sheetName = sheet.getSheetName();
 
         HashMap<String, ExcelCell> allTarget = storeTargetInFile(sheet, TobeProcessed);
@@ -103,18 +111,16 @@ public class VBS {
                 String index = outputR1C1_index[1];
                 String output = outputR1C1_index[0];
                 if (TobeProcessed.containsKey(output)) {
-                    String newPath = proj_path + FileHandler.getFileNameWoExt(FileName) +
-                            "/" + sheetName +
-                            "/";
-                    String newExcelPath = newPath + output + index + FileName.substring(FileName.indexOf("."), FileName.length());
-                    String newVBSPath = newPath + output + index + ".vbs";
+                    String newExcelPath = newPath + output + "_" + index + FileName.substring(FileName.indexOf("."), FileName.length());
+                    String newVBSPath = newPath + output + "_" + index + ".vbs";
                     ValidGoal data = TobeProcessed.get(output);
                     vbsFileContent.append(saveVBSFile(data.getInput().getR1c1(), data.getOutput().getR1c1(), target.getValue().getR1c1()));
-                    completeVBSContent(vbsFileContent, FileName, newExcelPath);
+                    completeVBSContent(vbsFileContent, FileName, sheetName, newExcelPath);
                     FileHandler.create_save(newVBSPath, vbsFileContent.toString());
                 }
             }
         }
+
     }
 
 //    public static String produceVBSFile(String FileName, HashMap<String, ValidGoal> TobeProcessed) {

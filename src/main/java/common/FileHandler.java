@@ -6,10 +6,28 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static test.ExcelForRu.proj_path;
 
 public class FileHandler {
+    public static List<File> getFilesByKeywords(String dir,String keyword){
+        File f = new File(dir);
+        List<File> matchingFiles = new ArrayList();
+        if(f.exists() && f.isDirectory()){
+            File arr[] = f.listFiles();
+            for(File filesInNestedDir:arr){
+                matchingFiles.addAll(getFilesByKeywords(filesInNestedDir.getAbsolutePath(),keyword));
+            }
+        }else{
+            if( f.getName().contains(keyword)){
+                matchingFiles.add(f);
+                return matchingFiles;
+            }
+        }
+        return matchingFiles;
+    }
     public static void save(XWPFDocument doc, String pathName){
         try {
             FileOutputStream out = new FileOutputStream(pathName);

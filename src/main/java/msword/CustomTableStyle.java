@@ -315,6 +315,8 @@ public class CustomTableStyle {
         //test validation的table
         for (Map.Entry<String, ValidGoal> goal : newGoals.entrySet()) {
             //加所有公式的、非公式的儲存格
+            if (goal.getKey() != null && goal.getValue() != null && goal.getKey().split("_").length > 1)
+                goal.getValue().getOutput().setNote(goal.getValue().getOutput().getNote() + " #" + goal.getKey().split("_")[1]);
             appendToTable4_3(table, goal.getValue());
         }
 
