@@ -2,7 +2,7 @@ package dataStructure;
 
 import msexcel.ExcelCell;
 import org.apache.poi.ss.usermodel.Cell;
-import validate.MyComparision;
+import validate.MyRange;
 
 import java.util.HashSet;
 
@@ -12,7 +12,7 @@ public class ValidGoal {
     String title;
 
     //    double targetOutput;
-    MyComparision myComparision;
+    MyRange myComparision;
     HashSet<ExcelCell> allInputs;
 
     public ValidGoal() {
@@ -27,13 +27,13 @@ public class ValidGoal {
         this.allInputs = allInputs;
     }
 
-    public ValidGoal(Cell input, Cell output, MyComparision targetOutput, HashSet<ExcelCell> allInputs) {
+    public ValidGoal(Cell input, Cell output, MyRange targetOutput, HashSet<ExcelCell> allInputs) {
         this(new ExcelCell(input), new ExcelCell(output), allInputs);
         this.myComparision = targetOutput;
     }
 
     public ValidGoal(Cell input, Cell output, String specification, HashSet<ExcelCell> allInputs) {
-        this(input, output, new MyComparision(specification), allInputs);
+        this(input, output, new MyRange(), allInputs);
     }
 
     public HashSet<ExcelCell> getAllInputs() {
@@ -52,12 +52,12 @@ public class ValidGoal {
         this.output = output;
     }
 
-    public MyComparision getMyComparision() {
+    public MyRange getMyRange() {
         return myComparision;
     }
 
-    public void setMyComparision(String specification) {
-        this.myComparision = new MyComparision(specification);
+    public void setMyRange( ) {
+
     }
 
     public String getTitle() {

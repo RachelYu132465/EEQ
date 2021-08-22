@@ -5,7 +5,7 @@ import dataStructure.ValidGoal;
 import msexcel.ExcelCell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
-import validate.MyComparision;
+
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -81,8 +81,8 @@ public class VBS {
             }
 
         }
-//        excel.save();
-//        excel.saveToFile(FileName);
+        excel.save();
+        excel.saveToFile(FileName);
         return allTgt;
     }
 

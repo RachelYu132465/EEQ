@@ -57,7 +57,7 @@ public class extract {
                 if (inputCell != null) {
                     goal.setInput(inputCell);
                 }
-                goal.setMyComparision(specification);
+                goal.setMyRange();
                 goal.setAllInputs(inputCells);
                 TobeProcessed.put(getR1C1Idx(formulaCell), goal);
             }

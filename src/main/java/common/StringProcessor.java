@@ -1,5 +1,5 @@
-package common;
 
+package common;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;
@@ -13,6 +13,23 @@ public class StringProcessor {
     final static String any_special_symbol = "`|!|@|#|$|%|^|&|*|(|)|_|+|'|:|\"|\\-|=|\\[|\\]|{|}|;|\\||,|.|<|>|/|?|~";
     final static String custom_special_symbol = "`|!|@|#|%|^|&|*|(|)|_|+|'|\"|\\-|=|\\[|\\]|{|}|;|\\||,|.|<|>|/|?|~";
     final static String contain_special_symbol = "[.*" + any_special_symbol + ".*]+";
+    public final static String extract_digit_rex = "(\\d+(?:\\.\\d+)?)";
+
+
+    public static List<String> extractStringByPattern(String string,String pattern) {
+
+        Pattern regex = Pattern.compile(pattern);
+        Matcher matcher = regex.matcher(string);
+
+        List<String> extractedStrings =new ArrayList<>();
+
+        for (int i = 0; matcher.find() ; i++) {
+            String s = matcher.group();
+            extractedStrings.add(s);
+
+        }
+        return extractedStrings;
+    }
 
     //IF(ISBLANK(C7),"",(C8-C9)*100/(C8-C7)) ---> ISBLANK(C7),"",(C8-C9)*100/(C8-C7)
     public static  String removeProrgrammingMethodFromMostOuter(String formula){
