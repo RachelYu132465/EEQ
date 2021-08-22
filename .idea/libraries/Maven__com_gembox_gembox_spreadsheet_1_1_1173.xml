@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.gembox:gembox-spreadsheet:1.1.1173">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/gembox/gembox-spreadsheet/1.1.1173/gembox-spreadsheet-1.1.1173.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/gembox/gembox-spreadsheet/1.1.1173/gembox-spreadsheet-1.1.1173-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/gembox/gembox-spreadsheet/1.1.1173/gembox-spreadsheet-1.1.1173-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

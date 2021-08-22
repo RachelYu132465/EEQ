@@ -16,12 +16,15 @@ public class customStringFormatter {
         String minRange = "";
         String maxRange = "";
         String andSign = " & ";
+
+        //若有 Not inverse
         if (myRange.hasMax()) {
-            maxRange = OperatorConvertor.getAcceptableSymbol(true, myRange.getMaxEqualTo());
+            maxRange = OperatorConvertor.getAcceptableSymbol(true, myRange.getMaxEqualTo()) + myRange.getMax();
         }
 
         if (myRange.hasMin()) {
-            minRange = myRange.minSymbol.getAcceptableSymbol(false, myRange.getMinEqualTo());
+
+            minRange = OperatorConvertor.getAcceptableSymbol(false, myRange.getMinEqualTo())+myRange.getMin();
         }
 
         if (!minRange.isEmpty() && !maxRange.isEmpty()) {
@@ -78,7 +81,7 @@ public class customStringFormatter {
             //若數字有等於符號，OOS數字: 上限需加1， 下限需減1
             if(range.getMinEqualTo()){
                 BigDecimal oneForMin = NumberProcessor.OneInLastDigitPoint(range.getMinDecimalPlace());
-                bd1=bd1.subtract(oneForMin);
+                bd1=bd1.add(oneForMin);
             }
             OOSNum.add(bd1.doubleValue());
         }
@@ -87,7 +90,7 @@ public class customStringFormatter {
             BigDecimal bd2 = range.getMax();
             if(range.getMaxEqualTo()){
                 BigDecimal oneForMax = NumberProcessor.OneInLastDigitPoint(range.getMaxDecimalPlace());
-                bd2=bd2.add(oneForMax);
+                bd2=bd2.subtract(oneForMax);
             }
             OOSNum.add(bd2.doubleValue());
 
@@ -99,16 +102,31 @@ public class customStringFormatter {
 
         return OOSNum;
     }
+
+    public static boolean isNumeric(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        try {
+            double d = Double.parseDouble(strNum);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
+    }
     public static MyRange MyRangeGenerator(String specification) {
 
         MyRange range = new MyRange();
         BigDecimal min;
         BigDecimal max;
+        Boolean minEqualTo;
+        Boolean maxEqualTo;
         List<String> extractdigitFromString = StringProcessor.extractStringByPattern(specification, StringProcessor.extract_digit_rex);
         List<BigDecimal> extractdigits = new ArrayList<>();
         for (String s : extractdigitFromString) {
-            if (StringUtils.isNumeric(s))
+            if (isNumeric(s)){
                 extractdigits.add(new BigDecimal(s));
+            }
         }
         List<String> subStrings = sperateStringByKeywords(specification, extractdigitFromString);
 
@@ -116,21 +134,36 @@ public class customStringFormatter {
         //有上下限，會傳入兩個數字
         if (extractdigitFromString.size() == 2) {
 
+int position_max;
+int position_min;
 
-            min = extractdigits.get(0);
-            max = extractdigits.get(1);
+            BigDecimal num0 = extractdigits.get(0);
+            BigDecimal num1 = extractdigits.get(1);
+            if(num0.compareTo(num1)==1){
+                //num0 is greater than num1
+                position_max =0;
+                position_min =1;
+            }else if (num0.compareTo(num1)==-1){
+                //num0 is greater than num1
+                position_max =1;
+                position_min =0;
+            }else{//==0
+                //error actually 兩數字不太可能相等
+                position_max =1;
+                position_min =0;
+            }
 
-            Boolean minEqualTo;
-            Boolean maxEqualTo;
+            max =extractdigits.get(position_max);
+            min = extractdigits.get(position_min);
 
-            minEqualTo = OperatorConvertor.isEqual(subStrings.get(0));
-            maxEqualTo = OperatorConvertor.isEqual(subStrings.get(1));
+            minEqualTo = OperatorConvertor.isEqual(subStrings.get(position_min));
+            maxEqualTo = OperatorConvertor.isEqual(subStrings.get(position_max));
 
             range.setMinRange(min, minEqualTo);
             range.setMaxRange(max, maxEqualTo);
 
-            int minDecimalplace = NumberProcessor.countDecimalPlace(extractdigitFromString.get(0));
-            int maxDecimalplace = NumberProcessor.countDecimalPlace(extractdigitFromString.get(1));
+            int minDecimalplace = NumberProcessor.countDecimalPlace(extractdigitFromString.get(position_min));
+            int maxDecimalplace = NumberProcessor.countDecimalPlace(extractdigitFromString.get(position_max));
 
 
             range.setMinDecimalPlace(minDecimalplace);
@@ -143,16 +176,19 @@ public class customStringFormatter {
             if (OperatorConvertor.isGreater(subStrings.get(0))) {
 
                 max = extractdigits.get(0);
-                Boolean maxEqualTo;
                 maxEqualTo = OperatorConvertor.isEqual(subStrings.get(0));
                 range.setMaxRange(max, maxEqualTo);
+                int maxDecimalplace = NumberProcessor.countDecimalPlace(extractdigitFromString.get(0));
+                range.setMaxDecimalPlace(maxDecimalplace);
 
             }
             else {
                 min = extractdigits.get(0);
-                Boolean minEqualTo;
                 minEqualTo = OperatorConvertor.isEqual(subStrings.get(0));
                 range.setMinRange(min, minEqualTo);
+                int minDecimalplace = NumberProcessor.countDecimalPlace(extractdigitFromString.get(0));
+                 range.setMinDecimalPlace(minDecimalplace);
+
             }
         }
 
@@ -162,8 +198,17 @@ public class customStringFormatter {
 
 
     public static void main(String[] args) {
-        MyRange myRange =MyRangeGenerator("not more than 5%");
-        System.out.println(myRange.toString());
+        MyRange myRange =MyRangeGenerator(" not more than 0.9 not less than 0.7  " );
+        System.out.println(customStringFormatter.getAccecptableRangeString(myRange));
+        try {
+            List<Double> result = setOOS(myRange);
+            for(Double d:result){
+                System.out.println(d);
+            }
+        } catch (RangeException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

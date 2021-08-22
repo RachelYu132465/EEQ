@@ -13,8 +13,7 @@ public class MyRange {
     int minDecimalPlace;
     int maxDecimalPlace;
 
-    OperatorConvertor maxSymbol;
-    OperatorConvertor minSymbol;
+
     //e.g. myRange.setRange(3).SetEqualTo(true)
     //e.g. new myRange(3,MyRange.max).setToLess().SetEqualTo(true) => <=3
 
@@ -33,8 +32,7 @@ public class MyRange {
         return "MyRange{" +
                 "maxEqualTo=" + maxEqualTo +
                 ", minEqualTo=" + minEqualTo +
-                ", maxSymbol=" + maxSymbol +
-                ", minSymbol=" + minSymbol +
+
                 ", min=" + min +
                 ", max=" + max +
                 '}';

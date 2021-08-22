@@ -9,5 +9,8 @@
         <module name="EEQ" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="EEQ" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -5,6 +5,7 @@ import dataStructure.ValidGoal;
 import msexcel.ExcelCell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import validate.MyRange;
 
 
 import java.io.File;
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.util.*;
 
 import static test.ExcelForRu.proj_path;
+import static validate.customStringFormatter.MyRangeGenerator;
 
 public class VBS {
     public final static String vbsFileName = "_vbsFile";
@@ -66,23 +68,26 @@ public class VBS {
             int tgtCellIdx = -1;
             ValidGoal data = e.getValue();
             if (data != null) {
-                MyComparision myTgts = data.getMyComparision();
-                if (myTgts.OOSNum != null && myTgts.OOSNum.length > 1) {
-                    if (myTgts.getTargetSmall() && myTgts.getTragetBig()) {
-                        for (double num : myTgts.OOSNum) {
-                            row.createCell(++tgtCellIdx).setCellValue(num);
-                            allTgt.put(e.getKey() + "_" + tgtCellIdx, new ExcelCell(row.getCell(tgtCellIdx)));
-                        }
-                    } else {
-                        row.createCell(++tgtCellIdx).setCellValue(myTgts.OOSNum[0]);
-                        allTgt.put(e.getKey() + "_" + tgtCellIdx, new ExcelCell(row.getCell(tgtCellIdx)));
-                    }
-                }
+                MyRange myTgts = data.getMyRange();
+                /*
+                要改!!
+                 */
+//                if (myTgts.OOSNum != null && myTgts.OOSNum.length > 1) {
+//                    if (myTgts.getTargetSmall() && myTgts.getTragetBig()) {
+//                        for (double num : myTgts.OOSNum) {
+//                            row.createCell(++tgtCellIdx).setCellValue(num);
+//                            allTgt.put(e.getKey() + "_" + tgtCellIdx, new ExcelCell(row.getCell(tgtCellIdx)));
+//                        }
+//                    } else {
+//                        row.createCell(++tgtCellIdx).setCellValue(myTgts.OOSNum[0]);
+//                        allTgt.put(e.getKey() + "_" + tgtCellIdx, new ExcelCell(row.getCell(tgtCellIdx)));
+//                    }
+//                }
             }
 
         }
-        excel.save();
-        excel.saveToFile(FileName);
+//        excel.save();
+//        excel.saveToFile(FileName);
         return allTgt;
     }
 
