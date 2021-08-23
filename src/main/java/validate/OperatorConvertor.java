@@ -10,7 +10,7 @@ public class OperatorConvertor {
 
 
     public static String getAcceptableSymbol(boolean lessOrGreater, boolean equalSign) {
-
+//        boolean lessOrGreater, boolean equalSig
         String symbol_1 = "";
         String symbol_2 = "";
         if (lessOrGreater) symbol_1 = greaterSymbol;
