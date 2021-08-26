@@ -115,19 +115,19 @@ public class MyRange {
     }
 
     public boolean hasMax() {
-
-        if (max.compareTo(default_max) == 0) {
-            return false;
+        if (max.compareTo(default_max) != 0) {
+            return true;
         }
-        return true;
+        return false;
     }
 
     public boolean hasMin() {
-
-        if (min.compareTo(default_min) == 0) {
-            return false;
+        if (min.compareTo(default_min) != 0) {
+            return true;
         }
-        return true;
+        return false;
+
+
     }
 
     //    public MyRange setMinRange (String number){

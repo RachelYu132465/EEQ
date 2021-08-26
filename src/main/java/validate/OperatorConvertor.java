@@ -2,8 +2,6 @@ package validate;
 
 import common.StringProcessor;
 
-import java.math.BigDecimal;
-
 public class OperatorConvertor {
 
 
@@ -54,23 +52,30 @@ public class OperatorConvertor {
     }
 
     public static boolean isEqual(String StringOperator) {
-        if (StringProcessor.ifContainStrings(StringOperator, inverseStrs)) return true;
+        if (StringProcessor.ifContainStrings(StringOperator, inverseStrs)||
+         (StringProcessor.ifContainStrings(StringOperator, equalStrs))) return true;
         else return false;
     }
 
     static String lessSymbol = "<";
     static String greaterSymbol = ">";
     static String equalSymbol = "=";
+    static String greater_and_equalSymbol ="≧";
+    static String less_and_equalSymbol ="≦";
 
     static String NOT = "not";
     static String NO = "no";
     static String EXCEED = "exceed";
     static String LESS = "less";
     static String MORE = "more";
-    static String WITHIN = "within";//尚未寫入邏輯，此為同時包含小於等於的一個字彙
     static String GREATER = "Greater";
 
+    static String NLT = "NLT";
+    static String NMT = "NMT";
+    static String WITHIN = "within";//尚未寫入邏輯，此為同時包含小於等於的一個字彙
+
     static String[] inverseStrs = {NOT, NO};
-    static String[] lessStrs = {LESS};
-    static String[] greaterStrs = {GREATER, MORE, EXCEED};
+    static String[] lessStrs = {LESS,lessSymbol,NMT,WITHIN,less_and_equalSymbol};
+    static String[] greaterStrs = {GREATER, MORE, EXCEED,greaterSymbol,NLT,greater_and_equalSymbol};
+    static String[] equalStrs = {equalSymbol,NMT,WITHIN,NLT,less_and_equalSymbol,greater_and_equalSymbol};
 }

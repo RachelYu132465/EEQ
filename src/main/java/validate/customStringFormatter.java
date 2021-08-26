@@ -2,11 +2,10 @@ package validate;
 
 import common.NumberProcessor;
 import common.StringProcessor;
-import org.apache.commons.lang.StringUtils;
-
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class customStringFormatter {
 
@@ -19,12 +18,12 @@ public class customStringFormatter {
 
         //若有 Not inverse
         if (myRange.hasMax()) {
-            maxRange = OperatorConvertor.getAcceptableSymbol(true, myRange.getMaxEqualTo()) + myRange.getMax();
+            maxRange = OperatorConvertor.getAcceptableSymbol(false, myRange.getMaxEqualTo()) + myRange.getMax();
         }
 
         if (myRange.hasMin()) {
 
-            minRange = OperatorConvertor.getAcceptableSymbol(false, myRange.getMinEqualTo())+myRange.getMin();
+            minRange = OperatorConvertor.getAcceptableSymbol(true, myRange.getMinEqualTo())+myRange.getMin();
         }
 
         if (!minRange.isEmpty() && !maxRange.isEmpty()) {
@@ -59,8 +58,10 @@ public class customStringFormatter {
 
             BigDecimal bd1 = range.getMin();
             //若數字有等於符號，OOS數字: 上限需加1， 下限需減1
+
             if(range.getMinEqualTo()){
                 BigDecimal oneForMin = NumberProcessor.OneInLastDigitPoint(range.getMinDecimalPlace());
+                //若為isGreater的operator，減一使數字(bd1)落在range外
                 bd1=bd1.subtract(oneForMin);
             }
             OOSNum.add(bd1.doubleValue());
@@ -78,21 +79,24 @@ public class customStringFormatter {
 //只有上限或下限
         else if (!range.hasMax()&&range.hasMin()){
             BigDecimal bd1 = range.getMin();
-            //若數字有等於符號，OOS數字: 上限需加1， 下限需減1
+
+            //若數字有等於符號，OOS數字
             if(range.getMinEqualTo()){
                 BigDecimal oneForMin = NumberProcessor.OneInLastDigitPoint(range.getMinDecimalPlace());
-                bd1=bd1.add(oneForMin);
+                //若為isGreater的operator，減一使數字(bd1)落在range外
+                bd1=bd1.subtract(oneForMin);
             }
             OOSNum.add(bd1.doubleValue());
+
         }
         else if (range.hasMax()&&!range.hasMin()){
-
             BigDecimal bd2 = range.getMax();
             if(range.getMaxEqualTo()){
                 BigDecimal oneForMax = NumberProcessor.OneInLastDigitPoint(range.getMaxDecimalPlace());
-                bd2=bd2.subtract(oneForMax);
+                bd2=bd2.add(oneForMax);
             }
             OOSNum.add(bd2.doubleValue());
+
 
 
         }
@@ -149,12 +153,12 @@ int position_min;
                 position_min =0;
             }else{//==0
                 //error actually 兩數字不太可能相等
-                position_max =1;
-                position_min =0;
+                position_max =0;
+                position_min =1;
             }
 
-            max =extractdigits.get(position_max);
-            min = extractdigits.get(position_min);
+            min =extractdigits.get(position_min);
+            max = extractdigits.get(position_max);
 
             minEqualTo = OperatorConvertor.isEqual(subStrings.get(position_min));
             maxEqualTo = OperatorConvertor.isEqual(subStrings.get(position_max));
@@ -174,21 +178,21 @@ int position_min;
 
             //判斷是大於或小於
             if (OperatorConvertor.isGreater(subStrings.get(0))) {
+                min = extractdigits.get(0);
+                minEqualTo = OperatorConvertor.isEqual(subStrings.get(0));
+                range.setMinRange(min, minEqualTo);
+                int minDecimalplace = NumberProcessor.countDecimalPlace(extractdigitFromString.get(0));
+                range.setMinDecimalPlace(minDecimalplace);
 
+
+
+            }
+            else {
                 max = extractdigits.get(0);
                 maxEqualTo = OperatorConvertor.isEqual(subStrings.get(0));
                 range.setMaxRange(max, maxEqualTo);
                 int maxDecimalplace = NumberProcessor.countDecimalPlace(extractdigitFromString.get(0));
                 range.setMaxDecimalPlace(maxDecimalplace);
-
-            }
-            else {
-                min = extractdigits.get(0);
-                minEqualTo = OperatorConvertor.isEqual(subStrings.get(0));
-                range.setMinRange(min, minEqualTo);
-                int minDecimalplace = NumberProcessor.countDecimalPlace(extractdigitFromString.get(0));
-                 range.setMinDecimalPlace(minDecimalplace);
-
             }
         }
 
@@ -198,7 +202,11 @@ int position_min;
 
 
     public static void main(String[] args) {
-        MyRange myRange =MyRangeGenerator(" not more than 0.9 not less than 0.7  " );
+//        MyRange myRange =MyRangeGenerator("  not less than 0.7 not more than 0.9 " );
+//        MyRange myRange =MyRangeGenerator("  not less than 0.7 " );
+//        MyRange myRange =MyRangeGenerator(" not more than 0.9" );
+        MyRange myRange =MyRangeGenerator("within 100" );
+        System.out.println(myRange.getMaxDecimalPlace());
         System.out.println(customStringFormatter.getAccecptableRangeString(myRange));
         try {
             List<Double> result = setOOS(myRange);
