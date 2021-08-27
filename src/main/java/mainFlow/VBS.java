@@ -6,15 +6,16 @@ import msexcel.ExcelCell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import validate.MyRange;
-
+import validate.RangeException;
+import validate.customStringFormatter;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static test.ExcelForRu.proj_path;
-import static validate.customStringFormatter.MyRangeGenerator;
 
 public class VBS {
     public final static String vbsFileName = "_vbsFile";
@@ -57,7 +58,7 @@ public class VBS {
     }
 
     //before vbs file is created, store target values in the original files
-    public static HashMap<String, ExcelCell> storeTargetInFile(Sheet sheet, HashMap<String, ValidGoal> TobeProcessed) {
+    public static HashMap<String, ExcelCell> storeTargetInFile(Sheet sheet, HashMap<String, ValidGoal> TobeProcessed) throws RangeException {
 
         int lastRowIdx = sheet.getLastRowNum();
 
@@ -69,20 +70,21 @@ public class VBS {
             ValidGoal data = e.getValue();
             if (data != null) {
                 MyRange myTgts = data.getMyRange();
+                List<Double> OOSNum = customStringFormatter.setOOS(myTgts);
                 /*
                 要改!!
                  */
-//                if (myTgts.OOSNum != null && myTgts.OOSNum.length > 1) {
-//                    if (myTgts.getTargetSmall() && myTgts.getTragetBig()) {
-//                        for (double num : myTgts.OOSNum) {
-//                            row.createCell(++tgtCellIdx).setCellValue(num);
-//                            allTgt.put(e.getKey() + "_" + tgtCellIdx, new ExcelCell(row.getCell(tgtCellIdx)));
-//                        }
-//                    } else {
-//                        row.createCell(++tgtCellIdx).setCellValue(myTgts.OOSNum[0]);
-//                        allTgt.put(e.getKey() + "_" + tgtCellIdx, new ExcelCell(row.getCell(tgtCellIdx)));
-//                    }
-//                }
+                if (OOSNum != null && OOSNum.size() > 1) {
+                    if (myTgts.hasMax() && myTgts.hasMin()) {
+                        for (double num :OOSNum) {
+                            row.createCell(++tgtCellIdx).setCellValue(num);
+                            allTgt.put(e.getKey() + "_" + tgtCellIdx, new ExcelCell(row.getCell(tgtCellIdx)));
+                        }
+                    } else {
+                        row.createCell(++tgtCellIdx).setCellValue(OOSNum.get(0));
+                        allTgt.put(e.getKey() + "_" + tgtCellIdx, new ExcelCell(row.getCell(tgtCellIdx)));
+                    }
+                }
             }
 
         }
@@ -104,7 +106,7 @@ public class VBS {
                 "objExcel.Application.Quit");
     }
 
-    public static void produceVBSFiles(String FileName, Sheet sheet, String newPath, HashMap<String, ValidGoal> TobeProcessed) {
+    public static void produceVBSFiles(String FileName, Sheet sheet, String newPath, HashMap<String, ValidGoal> TobeProcessed) throws RangeException {
         String sheetName = sheet.getSheetName();
 
         HashMap<String, ExcelCell> allTarget = storeTargetInFile(sheet, TobeProcessed);

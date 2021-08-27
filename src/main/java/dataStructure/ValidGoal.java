@@ -6,6 +6,8 @@ import validate.MyRange;
 
 import java.util.HashSet;
 
+import static validate.customStringFormatter.MyRangeGenerator;
+
 public class ValidGoal {
     ExcelCell input;
     ExcelCell output;
@@ -27,13 +29,13 @@ public class ValidGoal {
         this.allInputs = allInputs;
     }
 
-    public ValidGoal(Cell input, Cell output, MyRange targetOutput, HashSet<ExcelCell> allInputs) {
+    public ValidGoal(Cell input, Cell output,  HashSet<ExcelCell> allInputs) {
         this(new ExcelCell(input), new ExcelCell(output), allInputs);
-        this.myComparision = targetOutput;
+
     }
 
     public ValidGoal(Cell input, Cell output, String specification, HashSet<ExcelCell> allInputs) {
-        this(input, output, new MyRange(), allInputs);
+        this(input, output, allInputs);
     }
 
     public HashSet<ExcelCell> getAllInputs() {
@@ -56,10 +58,10 @@ public class ValidGoal {
         return myComparision;
     }
 
-    public void setMyRange( ) {
+    public void setMyRange(String specification ) {
+        this.myComparision =  MyRangeGenerator(specification);
 
     }
-
     public String getTitle() {
         return title;
     }

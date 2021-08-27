@@ -7,6 +7,7 @@ import mainFlow.VBS;
 import mainFlow.extract;
 import msexcel.Excel;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import validate.RangeException;
 
 import javax.swing.filechooser.FileSystemView;
 import java.io.IOException;
@@ -40,7 +41,7 @@ import static validate.excelFormulaValidator.getValidatedValues;
 public class ExcelForRu {
     public static final String proj_path = FileSystemView.getFileSystemView().getHomeDirectory().getPath() + "/";
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) throws IOException, InterruptedException, RangeException {
 
         String fileName = "test1.xlsx";
 //        String fileName = "R000012383-LAB Spreadsheet數字.xlsx";

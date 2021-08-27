@@ -127,6 +127,7 @@ public class CustomTableStyle {
 
     //Excel.getCellValue_OriginalFormula(input).toString()
     public static void appendToTable1(XWPFTable table, ValidGoal goal) {
+
         for (ExcelCell input_c : goal.getAllInputs()) {
             Cell input = input_c.getCell();
             XWPFTableRow row = table.createRow();
