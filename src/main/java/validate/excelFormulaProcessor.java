@@ -10,7 +10,6 @@ import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import test.ExcelForRu;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -167,14 +166,18 @@ public class excelFormulaProcessor {
     public static List<Cell> getBlueCells(Workbook wb,Sheet sheet, String color, CellType cellType) {
         List<Cell> result = new ArrayList<>();
         int rowSize = sheet.getLastRowNum();
+//        System.out.println(sheet.getSheetName()+"rowSize: "+rowSize);
         for (int rowIdx = 0; rowIdx < rowSize; ++rowIdx) {
             Row row = sheet.getRow(rowIdx);
-            int cellsize = row.getLastCellNum();
-            for (int cellIndx = 0; cellIndx < cellsize; ++cellIndx) {
-                Cell cell = row.getCell(cellIndx);
-                if (cell != null && checkFontColor( wb, cell).equals(color)) {
-                    if (cell.getCellType().equals(cellType)) {
-                        result.add(cell);
+//            System.out.println(rowIdx);
+            if (row != null) {
+                int cellsize = row.getLastCellNum();
+                for (int cellIndx = 0; cellIndx < cellsize; ++cellIndx) {
+                    Cell cell = row.getCell(cellIndx);
+                    if (cell != null && checkFontColor(wb, cell).equals(color)) {
+                        if (cell.getCellType().equals(cellType)) {
+                            result.add(cell);
+                        }
                     }
                 }
             }

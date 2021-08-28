@@ -143,7 +143,7 @@ public class excelFormulaValidator {
                 for (ExcelCell c : prev.getAllInputs()) {
                     newInputCells.add(new ExcelCell(newExcel.getCell(Excel.getR1C1Idx(c.getCell()))).copyNote(c));
                 }
-                ValidGoal newv = new ValidGoal(inputCell, outputCell, prev.getMyRange(), newInputCells);
+                ValidGoal newv = new ValidGoal(inputCell, outputCell, newInputCells);
                 newv.getOutput().copyNote(prev.getOutput());
                 result.put(outputR1C1withIdx, newv);
             }
