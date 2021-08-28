@@ -5,7 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d944a863-58b2-4338-9ba2-2df1015ae098" name="Changes" comment="modify OOS">
-      <change beforePath="$PROJECT_DIR$/src/main/java/validate/excelFormulaValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/validate/excelFormulaValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mainFlow/ProduceWordFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mainFlow/ProduceWordFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mainFlow/extract.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mainFlow/extract.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/msword/CustomTableStyle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/msword/CustomTableStyle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/msword/CustomWordStyle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/msword/CustomWordStyle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/msword/StrOnCustomWord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/msword/StrOnCustomWord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/test/ExcelForRu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/ExcelForRu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,7 +191,21 @@
       <option name="project" value="LOCAL" />
       <updated>1629691044074</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="modify OOS">
+      <created>1630116432000</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1630116432000</updated>
+    </task>
+    <task id="LOCAL-00009" summary="modify OOS">
+      <created>1630116462596</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1630116462596</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -212,13 +232,8 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/mainFlow/extract.java</url>
-          <line>36</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/mainFlow/VBS.java</url>
-          <line>32</line>
+          <line>33</line>
           <option name="timeStamp" value="37" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

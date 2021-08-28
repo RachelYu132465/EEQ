@@ -23,8 +23,8 @@ public class ProduceWordFile {
         return doc;
     }
 
-    public static XWPFDocument writeToWord_testCase(XWPFDocument doc, HashMap<String, ValidGoal> goals, HashMap<String, ValidGoal> newGoals) throws IOException {
-        CustomTableStyle.getTable_Style4(doc, goals, newGoals);
+    public static XWPFDocument writeToWord_testCase(XWPFDocument doc, HashMap<String, ValidGoal> goals, HashMap<String, ValidGoal> newGoals,int testCaseIdx) throws IOException {
+        CustomTableStyle.getTable_Style4(doc, goals, newGoals, testCaseIdx);
         addNewLines(doc);
         return doc;
     }

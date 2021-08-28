@@ -57,15 +57,16 @@ public class ExcelForRu {
             String vbs_newData_path = proj_path + FileHandler.getFileNameWoExt(fileName) + "/" + sheetName + "/";
             if (!sheetName.toLowerCase().equals("history of versions")) {
                 HashMap<String, ValidGoal> TobeProcessed = extract.extractData(excel);
+                int validGoalsNumberInSheet = TobeProcessed.size();
                 writeToWord_general(sheetName,doc_general,TobeProcessed);
                 VBS.produceVBSFiles(fileName, excel.getSheet(),vbs_newData_path,TobeProcessed);
                 excel.save();
                 execAllVBSFiles(vbs_newData_path);
                 //get new Excel everytime vbs file produce new file
                 HashMap<String, ValidGoal> newData= getValidatedValues(sheetName,TobeProcessed,vbs_newData_path);
-
+ int testCaseIdx=a+2;
                 //要把hashmap裡面的Key改成OutputR1C1 + index -->因為有值會有上下標，需要有兩個新excel檔案!!
-                writeToWord_testCase(doc_testCase,TobeProcessed,newData);
+                writeToWord_testCase(doc_testCase,TobeProcessed,newData,testCaseIdx);
                 FileHandler.save(doc_general,proj_path+sheetName+"_result.docx");
                 FileHandler.save(doc_testCase,proj_path+sheetName+"_test case.docx");
             }

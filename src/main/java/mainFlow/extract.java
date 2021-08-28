@@ -59,6 +59,7 @@ public class extract {
                 }
                 goal.setMyRange(specification);
                 goal.setAllInputs(inputCells);
+                goal.setTitle(excel.getSheet().getSheetName());
                 TobeProcessed.put(getR1C1Idx(formulaCell), goal);
             }
 
