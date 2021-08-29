@@ -4,28 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d944a863-58b2-4338-9ba2-2df1015ae098" name="Changes" comment="MODIFY WORD">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/common/FileHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/FileHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mainFlow/VBS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mainFlow/VBS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/msword/CustomTableStyle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/msword/CustomTableStyle.java" afterDir="false" />
+    <list default="true" id="d944a863-58b2-4338-9ba2-2df1015ae098" name="Changes" comment="modify word table1(input &amp; output cells add to table respectively)">
       <change beforePath="$PROJECT_DIR$/src/main/java/test/ExcelForRu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/ExcelForRu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/validate/excelFormulaProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/validate/excelFormulaProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/common/FileHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/common/FileHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/dataStructure/ValidGoal.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dataStructure/ValidGoal.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mainFlow/ProduceWordFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mainFlow/ProduceWordFile.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mainFlow/VBS.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mainFlow/VBS.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mainFlow/extract.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mainFlow/extract.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/msword/CustomTableStyle.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msword/CustomTableStyle.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/msword/CustomWordStyle$types.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msword/CustomWordStyle$types.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/msword/CustomWordStyle.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msword/CustomWordStyle.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/msword/StrOnCustomWord.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msword/StrOnCustomWord.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/test/ExcelForRu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/test/ExcelForRu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/validate/MyRange.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/validate/MyRange.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/validate/OperatorConvertor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/validate/OperatorConvertor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/validate/customStringFormatter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/validate/customStringFormatter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/validate/excelFormulaProcessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/validate/excelFormulaProcessor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/validate/excelFormulaValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/validate/excelFormulaValidator.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -226,7 +206,14 @@
       <option name="project" value="LOCAL" />
       <updated>1630127126489</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="modify word table1(input &amp; output cells add to table respectively)">
+      <created>1630227579880</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1630227579880</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -248,7 +235,8 @@
     <MESSAGE value="myrange/OOS/custom excel+word formatter" />
     <MESSAGE value="modify OOS" />
     <MESSAGE value="MODIFY WORD" />
-    <option name="LAST_COMMIT_MESSAGE" value="MODIFY WORD" />
+    <MESSAGE value="modify word table1(input &amp; output cells add to table respectively)" />
+    <option name="LAST_COMMIT_MESSAGE" value="modify word table1(input &amp; output cells add to table respectively)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
