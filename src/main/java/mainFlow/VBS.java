@@ -22,7 +22,9 @@ public class VBS {
     public final static String vbsExcelName = "_result";
 
     public static void main(String... arg) throws IOException {
-        execAllVBSFiles("C:\\Users\\tina.yu\\Desktop\\test1");
+//        execAllVBSFiles("C:\\Users\\tina.yu\\Desktop\\RT30397\\Item 2.3");
+        Runtime.getRuntime().exec("cscript C:\\Users\\tina.yu\\Desktop\\RT30397\\Item2.3\\C21_0.vbs");
+
         System.out.println("finish");
     }
 
@@ -65,8 +67,7 @@ public class VBS {
         //output r1c1 , temp target cell
         HashMap<String, ExcelCell> allTgt = new HashMap<String, ExcelCell>();
         for (Map.Entry<String, ValidGoal> e : TobeProcessed.entrySet()) {
-            Row row = sheet.createRow(++lastRowIdx);
-            int tgtCellIdx = -1;
+            System.out.println("last row:" + lastRowIdx);
             ValidGoal data = e.getValue();
             if (data != null) {
                 MyRange myTgts = data.getMyRange();
@@ -74,7 +75,10 @@ public class VBS {
                 /*
                 要改!!
                  */
-                if (OOSNum != null && OOSNum.size() > 1) {
+                if (OOSNum != null && OOSNum.size() > 0) {
+                    Row row = sheet.createRow(++lastRowIdx);
+                    System.out.println("create row:" + data.getOutput().getR1c1());
+                    int tgtCellIdx = -1;
                     if (myTgts.hasMax() && myTgts.hasMin()) {
                         for (double num :OOSNum) {
                             row.createCell(++tgtCellIdx).setCellValue(num);
@@ -106,10 +110,8 @@ public class VBS {
                 "objExcel.Application.Quit");
     }
 
-    public static void produceVBSFiles(String FileName, Sheet sheet, String newPath, HashMap<String, ValidGoal> TobeProcessed) throws RangeException {
+    public static void produceVBSFiles(String FileName, Sheet sheet, String newPath, HashMap<String, ExcelCell> allTarget, HashMap<String, ValidGoal> TobeProcessed) throws RangeException {
         String sheetName = sheet.getSheetName();
-
-        HashMap<String, ExcelCell> allTarget = storeTargetInFile(sheet, TobeProcessed);
 
         for (Map.Entry<String, ExcelCell> target : allTarget.entrySet()) {
             StringBuilder vbsFileContent = new StringBuilder();

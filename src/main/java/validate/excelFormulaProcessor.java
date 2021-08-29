@@ -35,7 +35,7 @@ public class excelFormulaProcessor {
         for (int k = colIdx - 1; k >= 0; k--) {
             excel.assignRow(rowIdx);
             excel.assignCell(k);
-            System.out.println("  rowidx:" + k);
+//            System.out.println("  rowidx:" + k);
             XSSFCellStyle cs = ((XSSFCellStyle) excel.getCurCell().getCellStyle());
             XSSFFont font = cs.getFont();
             XSSFColor color = font.getXSSFColor();
@@ -45,7 +45,7 @@ public class excelFormulaProcessor {
 
             else if (!(excel.getCellValue().toString().isEmpty())) {
                 if (excel.getfontColor().equals("NULL") || excel.getfontColor().equals("FF000000")) {
-                    System.out.println("if loop" + k);
+//                    System.out.println("if loop" + k);
                     return excel.getCellValue().toString();
 
                 }
@@ -62,7 +62,7 @@ public class excelFormulaProcessor {
             excel.assignRow(k);
             excel.assignCell(colIdx);
 
-            System.out.println("  rowidx:" + k);
+//            System.out.println("  rowidx:" + k);
             // XSSFCellStyle cs = ((XSSFCellStyle)
             // this.getCurCell().getCellStyle());
             // XSSFFont font = cs.getFont();

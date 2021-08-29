@@ -77,11 +77,12 @@ public class CustomTableStyle {
         for (int realNumOfCell = 0; realNumOfCell < row.getTableCells().size(); realNumOfCell++) {
             if (table.getRow(rowIdx).getCell(realNumOfCell) != null) ++numOfcells;
         }
+        //若實際上的cell(合併儲存格之後)，和傳進的值的數量相比，不足，則再新建cell
         if (row.getCell(cellIdx) == null) {
             if (cellIdx > numOfcells - 1) {
                 int numOfCellsToCreate = cellIdx + 1 - numOfcells;
                 for (int createdCells = 0; createdCells < numOfCellsToCreate; ++createdCells) {
-                    row.createCell();
+                    row.createCell();++numOfcells;
                 }
             }
         }
@@ -130,49 +131,53 @@ public class CustomTableStyle {
     public static void appendToTable1(XWPFTable table, HashMap<String, ValidGoal> goals) {
 
         //加所有非公式的input儲存格 到column 1 & 2
-  for (Map.Entry<String, ValidGoal> goal : goals.entrySet()) {
-      for (ExcelCell input_c : goal.getValue().getAllInputs()) {
-          Cell nonFormulaCells = input_c.getCell();
-          if (!nonFormulaCells.getCellType().equals(CellType.FORMULA)) {
+        for (Map.Entry<String, ValidGoal> goal : goals.entrySet()) {
+            for (ExcelCell input_c : goal.getValue().getAllInputs()) {
+                Cell nonFormulaCells = input_c.getCell();
+                if (!nonFormulaCells.getCellType().equals(CellType.FORMULA)) {
 
-              addToTable(types.Content, table, table.getNumberOfRows(),
-                      input_c.getR1c1()
-                      , GENERAL_FORMAT
-                      , ""
-                      , ""
-              );
-        }}}
-        int rowIdx = 0;
+                    addToTable(types.Content, table, table.getNumberOfRows(),
+                            input_c.getR1c1()
+                            , GENERAL_FORMAT
+                            , ""
+                            , ""
+                    );
+                }
+            }
+        }
+        int rowIdx = 2;
         for (Map.Entry<String, ValidGoal> goal : goals.entrySet()) {
 
-        //加所有公式的input儲存格 到column 3 & 4
-          for (ExcelCell input_c : goal.getValue().getAllInputs()) {
-              Cell formula_cells = input_c.getCell();
-              if (formula_cells.getCellType().equals(CellType.FORMULA)) {
-                  addToTable(types.Content, table, ++rowIdx,
-                          ""
-                          , ""
-                          , input_c.getR1c1()
-                          , GENERAL_FORMAT);
-              }}}
+            //加所有公式的input儲存格 到column 3 & 4
+            for (ExcelCell input_c : goal.getValue().getAllInputs()) {
+                Cell formula_cells = input_c.getCell();
+                if (formula_cells.getCellType().equals(CellType.FORMULA)) {
+                    addToTable(types.Content, table, ++rowIdx,
+                            ""
+                            , ""
+                            , input_c.getR1c1()
+                            , GENERAL_FORMAT);
+                }
+            }
+        }
         //加入output儲存格 到column 3 & 4
-            for (Map.Entry<String, ValidGoal> entry : goals.entrySet()) {
-                ValidGoal goal = entry.getValue();
-                ExcelCell output = goal.getOutput();
-                String format ="";
-                int MaxDecimalPlace= 0;
-                int MinDecimalPlace=0;
-                MyRange range =goal.getMyRange();
-               if (range.hasMax())MaxDecimalPlace= range.getMaxDecimalPlace();
-                if (range.hasMin()) MinDecimalPlace= range.getMinDecimalPlace();
-                if ( MaxDecimalPlace== 0 && MinDecimalPlace==0) format = INTEGER;
-                else if (MaxDecimalPlace!= 0)format = NUMERIC_DECIMAL+" "+range.getMaxDecimalPlace();
-                else if (MinDecimalPlace!=0)format = NUMERIC_DECIMAL+" "+range.getMinDecimalPlace();
-                addToTable(types.Content, table, ++rowIdx,
-                        ""
-                        , ""
-                        , output.getR1c1()
-                        ,format);
+        for (Map.Entry<String, ValidGoal> entry : goals.entrySet()) {
+            ValidGoal goal = entry.getValue();
+            ExcelCell output = goal.getOutput();
+            String format = "";
+            int MaxDecimalPlace = 0;
+            int MinDecimalPlace = 0;
+            MyRange range = goal.getMyRange();
+            if (range.hasMax()) MaxDecimalPlace = range.getMaxDecimalPlace();
+            if (range.hasMin()) MinDecimalPlace = range.getMinDecimalPlace();
+            if (MaxDecimalPlace == 0 && MinDecimalPlace == 0) format = INTEGER;
+            else if (MaxDecimalPlace != 0) format = NUMERIC_DECIMAL + " " + range.getMaxDecimalPlace();
+            else if (MinDecimalPlace != 0) format = NUMERIC_DECIMAL + " " + range.getMinDecimalPlace();
+            addToTable(types.Content, table, ++rowIdx,
+                    ""
+                    , ""
+                    , output.getR1c1()
+                    , format);
 
         }
 
@@ -202,7 +207,7 @@ public class CustomTableStyle {
         addToTable(types.Title, table, 1, ITEM_NAME + Colon + itemName);
         addToTable(types.Content, table, 2, INPUT_CELL, FORMAT_DESC, OUTPUT_CELL, FORMAT_DESC);
 
-         appendToTable1(table, goals);
+        appendToTable1(table, goals);
 
         endTable(table);
     }
@@ -342,18 +347,18 @@ public class CustomTableStyle {
 
     }
 
-    public static void getTable_Style4(XWPFDocument doc, HashMap<String, ValidGoal> goals, HashMap<String, ValidGoal> newGoals,int testCaseIdx) {
+    public static void getTable_Style4(XWPFDocument doc, HashMap<String, ValidGoal> goals, HashMap<String, ValidGoal> newGoals, int testCaseIdx) {
         XWPFTable headTable = getCustomTable(doc, 4, 7);
         getHeadStyle_tbl4(headTable);
 
-        addToTable(types.Content, headTable, 0, "Case "+ testCaseIdx, "To Test the   percentage", "Test Case No.: "+"#"+ testCaseIdx);
+        addToTable(types.Content, headTable, 0, "Case " + testCaseIdx, "To Test the   percentage", "Test Case No.: " + "#" + testCaseIdx);
         addToTable(types.Content, headTable, 1, instruction_txt);
         addToTable(types.Content, headTable, 2, accep_criteria_txt);
         addToTable(types.Content, headTable, 3, "in spec");
         endTable(headTable);
         XWPFTable table = getCustomTable(doc, 1, 7);
         addToTable(types.Content, table, 0, INPUT_CELL, "Input value",
-                OUTPUT_CELL, "Output " + RESULT, "Calculated " + RESULT, "Expected " + RESULT, "Test " + RESULT);
+                OUTPUT_CELL, "Output " + RESULT, "Calculated " + RESULT, "Expected " + RESULT, "Test " + RESULT + "(Pass/Fail)");
         for (Map.Entry<String, ValidGoal> goal : goals.entrySet()) {
             //加所有非公式的儲存格
             appendToTable4_1(table, goal.getValue());
