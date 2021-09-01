@@ -1,5 +1,6 @@
 package msword;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
@@ -18,14 +19,20 @@ public class CustomWordStyle {
         }
     }
     public static void addTitle_Style(XWPFParagraph paragraph, String text){
-        XWPFRun run = getRun(paragraph);
-        getTableTitleStyle(run);
-        run.setText(text);
+        if(StringUtils.isNotBlank(text)){
+            XWPFRun run = getRun(paragraph);
+            getTableTitleStyle(run);
+            run.setText(text);
+        }
+
     }
     public static void addContent_Style(XWPFParagraph paragraph, String text){
-        XWPFRun run = getRun(paragraph);
-        getTableContentStyle(run);
-        run.setText(text);
+        if(StringUtils.isNotBlank(text)){
+            XWPFRun run = getRun(paragraph);
+            getTableContentStyle(run);
+            run.setText(text);
+        }
+
     }
     public static void getTablePrefaceStyle(XWPFRun run, int size){
 

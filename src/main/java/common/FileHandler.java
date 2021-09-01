@@ -34,7 +34,7 @@ public class FileHandler {
             doc.write(out);
             //Close document
             out.close();
-            System.out.println("createdWord" + "_" + pathName + ".docx" + " written successfully");
+            System.out.println("created:" + "_" + pathName + " written successfully");
         } catch (IOException e) {
             e.printStackTrace();
         }

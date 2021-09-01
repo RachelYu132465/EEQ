@@ -130,9 +130,6 @@ public class excelFormulaValidator {
             String outputR1C1 = goal.getKey();
             ValidGoal prev = goal.getValue();
             HashSet<ExcelCell> newInputCells = new HashSet<>();
-            if(outputR1C1.equals("C28")){
-                System.out.println("!!! ");
-            }
             List<Excel> newExcels = getNewExcels(newPath, outputR1C1);
             int tgt_idx =0;
 
