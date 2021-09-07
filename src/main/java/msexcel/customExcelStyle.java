@@ -1,6 +1,7 @@
 package msexcel;
 
 import common.NumberProcessor;
+import dataStructure.ValidGoal;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 import test.ExcelForRu;
@@ -10,6 +11,8 @@ import validate.RangeException;
 
 
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 
 import static common.NumberProcessor.countDecimalPlace;
 
@@ -78,8 +81,11 @@ public class customExcelStyle {
         return ConditionalFormattingRule;
     }
 
-    public static void setMyConditionalFormatting(String cellAddress, Sheet sheet, String[] ConditionalFormattingRules) {
+    public static void setMyConditionalFormatting(HashMap<String, ExcelCell> validGoals,  Sheet sheet, String[] ConditionalFormattingRules) {
 //cellAddress for example:A1
+        for (Map.Entry<String, ExcelCell> goal : validGoals.entrySet()) {
+            ExcelCell cell =goal.getValue();
+            String cellAddress = cell.getR1c1();
         SheetConditionalFormatting sheetCF = sheet.getSheetConditionalFormatting();
 
         for (String ConditionalFormattingRule : ConditionalFormattingRules) {
@@ -98,5 +104,6 @@ public class customExcelStyle {
             sheetCF.addConditionalFormatting(regions, cfRules);
         }
 
+    }
     }
 }

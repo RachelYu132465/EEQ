@@ -44,7 +44,7 @@ public class ExcelForRu {
 
     public static void main(String[] args) throws IOException, InterruptedException, RangeException {
 
-        String fileName = "RT30397.xlsx";
+        String fileName = "RT30358-LAB Spreadsheet.xlsx";
 //        String fileName = "R000012383-LAB Spreadsheet數字.xlsx";
         Excel excel = Excel.loadExcel(proj_path + fileName);
         XWPFDocument doc_general = new XWPFDocument();
@@ -63,6 +63,7 @@ public class ExcelForRu {
                 int validGoalsNumberInSheet = TobeProcessed.size();
                 writeToWord_general(sheetName, doc_general, TobeProcessed);
                 //store target goal in existing excel, because vbs function--'goal seek' requires an object
+
                 HashMap<String, ExcelCell> allTarget = VBS.storeTargetInFile(excel.getSheet(), TobeProcessed);
                 excel.save();
                 VBS.produceVBSFiles(fileName, excel.getSheet(), vbs_newData_path, allTarget,TobeProcessed);

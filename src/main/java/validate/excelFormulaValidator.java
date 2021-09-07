@@ -4,6 +4,7 @@ import common.FileHandler;
 import dataStructure.ValidGoal;
 import msexcel.Excel;
 import msexcel.ExcelCell;
+import org.apache.commons.lang.StringUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 
@@ -18,7 +19,10 @@ import static validate.excelFormulaProcessor.findFormulaForValidate;
 public class excelFormulaValidator {
 
     public static void main(String[] args) {
-        scanForSpecificationOption();
+
+
+
+
     }
 
     public static final String Y = "y";

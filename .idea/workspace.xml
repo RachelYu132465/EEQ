@@ -5,7 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d944a863-58b2-4338-9ba2-2df1015ae098" name="Changes" comment="modify word table1(input &amp; output cells add to table respectively)">
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dataStructure/myCell.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dataStructure/mySheet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mainFlow/extract.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mainFlow/extract.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/msexcel/customExcelStyle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/msexcel/customExcelStyle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/test/ExcelForRu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/ExcelForRu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/validate/excelFormulaProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/validate/excelFormulaProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/validate/excelFormulaValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/validate/excelFormulaValidator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +39,7 @@
     </file-type-list>
   </component>
   <component name="ProjectId" id="1wOr6oi3y7GE3KVUMsBSamFIz3D" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -252,23 +261,18 @@
           <option name="timeStamp" value="50" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/validate/excelFormulaValidator.java</url>
-          <line>136</line>
-          <option name="timeStamp" value="59" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/msword/CustomTableStyle.java</url>
-          <line>133</line>
+          <line>141</line>
           <option name="timeStamp" value="60" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/msword/CustomTableStyle.java</url>
-          <line>93</line>
+          <line>95</line>
           <option name="timeStamp" value="64" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/msword/CustomTableStyle.java</url>
-          <line>66</line>
+          <line>67</line>
           <option name="timeStamp" value="67" />
         </line-breakpoint>
       </breakpoints>
