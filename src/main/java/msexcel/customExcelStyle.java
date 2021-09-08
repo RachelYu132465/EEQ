@@ -32,12 +32,12 @@ public class customExcelStyle {
         test.outputFile("C:\\Users\\YUY139\\Desktop\\result");
     }
 
-    public static String[] setConditionalFormattingRule(Excel excel, MyRange range) throws RangeException {
+    public static String[] setConditionalFormattingRule(String cellAddress, MyRange range) throws RangeException {
 
 
         String ConditionalFormattingRule[] = new String[2];
         String ROUND = "ROUND";
-        String cellAddress = excel.getR1C1Idx();
+        // String cellAddress = excel.getR1C1Idx();
         String maxDecimalPlace = "";
         String minDecimalPlace = "";
 
@@ -81,29 +81,41 @@ public class customExcelStyle {
         return ConditionalFormattingRule;
     }
 
-    public static void setMyConditionalFormatting(HashMap<String, ExcelCell> validGoals,  Sheet sheet, String[] ConditionalFormattingRules) {
+    public static Excel setMyConditionalFormatting(HashMap<String, ValidGoal> TobeProcessed, Excel excel) throws RangeException{
 //cellAddress for example:A1
-        for (Map.Entry<String, ExcelCell> goal : validGoals.entrySet()) {
-            ExcelCell cell =goal.getValue();
+        Sheet sheet = excel.getSheet();
+        for (Map.Entry<String, ValidGoal > goals : TobeProcessed.entrySet()) {
+
+            ExcelCell cell = goals.getValue().getOutput();
             String cellAddress = cell.getR1c1();
-        SheetConditionalFormatting sheetCF = sheet.getSheetConditionalFormatting();
 
-        for (String ConditionalFormattingRule : ConditionalFormattingRules) {
-            ConditionalFormattingRule rule = sheetCF.createConditionalFormattingRule(ConditionalFormattingRule);
-            PatternFormatting fill = rule.createPatternFormatting();
+            String ConditionalFormattingRules[] = new String[2];
+            ConditionalFormattingRules = setConditionalFormattingRule(cellAddress, goals.getValue().getMyRange() );
 
-            fill.setFillBackgroundColor(IndexedColors.RED1.index);
-            FontFormatting fontFmt = rule.createFontFormatting();
+            SheetConditionalFormatting sheetCF = sheet.getSheetConditionalFormatting();
 
-            fontFmt.setFontColorIndex(IndexedColors.WHITE.index);
+            for (String ConditionalFormattingRule : ConditionalFormattingRules) {
+                ConditionalFormattingRule rule = sheetCF.createConditionalFormattingRule(ConditionalFormattingRule);
+                PatternFormatting fill = rule.createPatternFormatting();
 
-            ConditionalFormattingRule[] cfRules = new ConditionalFormattingRule[]{rule};
+                fill.setFillBackgroundColor(IndexedColors.RED1.index);
+                FontFormatting fontFmt = rule.createFontFormatting();
 
-            CellRangeAddress[] regions = new CellRangeAddress[]{CellRangeAddress.valueOf(cellAddress)};
+                fontFmt.setFontColorIndex(IndexedColors.WHITE.index);
 
-            sheetCF.addConditionalFormatting(regions, cfRules);
+                ConditionalFormattingRule[] cfRules = new ConditionalFormattingRule[]{rule};
+
+                CellRangeAddress[] regions = new CellRangeAddress[]{CellRangeAddress.valueOf(cellAddress)};
+
+                sheetCF.addConditionalFormatting(regions, cfRules);
+            }
         }
+        return excel;
+    }
 
-    }
-    }
 }
+
+
+
+
+
