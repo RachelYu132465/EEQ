@@ -3,6 +3,7 @@ package mainFlow;
 import dataStructure.ValidGoal;
 import msexcel.Excel;
 import msexcel.ExcelCell;
+import org.apache.commons.lang.StringUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import validate.excelFormulaValidator;
@@ -14,6 +15,7 @@ import java.util.List;
 import static msexcel.Excel.getR1C1Idx;
 import static validate.excelFormulaProcessor.findSpecification;
 import static validate.excelFormulaProcessor.getBlueCells;
+import static validate.excelFormulaValidator.scanForSpecificationOption;
 
 
 public class extract {
@@ -30,8 +32,18 @@ public class extract {
             //需求一
             for (Cell formulaCell : allFomulaCell) {
                 System.out.println("sheet: "+excel.getSheet().getSheetName());
-                System.out.println("Formula cell:" + formulaCell.getAddress().formatAsString());
+
                 String specification = findSpecification(excel, formulaCell.getRowIndex(), formulaCell.getColumnIndex());
+                System.out.println("Formula cell:" + formulaCell.getAddress().formatAsString());
+                System.out.println("specification:" + specification);
+                String r1c1ForSpec =  scanForSpecificationOption();
+                if(!StringUtils.isBlank(r1c1ForSpec)){
+                    Cell cell = (Cell)excel.getCell(r1c1ForSpec);
+                    //newSpec
+                    specification = cell.getStringCellValue();
+                }
+
+
 //                String specificationR1C1 = scanForSpecificationOption();
 //
 //                String specification = "";

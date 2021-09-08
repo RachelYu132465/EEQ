@@ -186,51 +186,6 @@ public class excelFormulaProcessor {
         return result;
     }
 
-//    public static mySheet collectCellByFontColor(Excel excel, mySheet mysheet) {
-//        List<Cell> FormulaCells = new ArrayList<Cell>();
-//        System.out.println("excel.getLastRowNum() :" + excel.getLastRowNum());
-//        int sheetSize = excel.getNumberOfSheets();
-//
-//        for (int a = 0; a < sheetSize; a++) {
-//            excel.assignSheet(a);
-//
-//            int rowSize = excel.getLastRowNum();
-//            for (int rowIdx = 0; rowIdx < rowSize; ++rowIdx) {
-//                excel.assignRow(rowIdx);
-//
-//                int cellsize = excel.getLastCellNum();
-//                for (int cellIndx = 0; cellIndx < cellsize; ++cellIndx) {
-////                System.out.println( "cellIndx"+cellIndx);
-//                    excel.assignCell(cellIndx);
-//                    if (!excel.getCellValue().toString().isEmpty()) {
-//                        String color = checkFontColor(excel, excel.getCurCell());
-//                        myCell myCell = new myCell();
-//                        myCell.setCell(excel.getCurCell());
-//                        switch (color) {
-//                            case ("red"):
-//                                mysheet.G1.add(myCell);
-//                                break;
-//                            case ("green"):
-//                                mysheet.G2.add(myCell);
-//                                break;
-//                            case ("blue"):
-//                                mysheet.G3.add(myCell);
-//                                break;
-//                            default:
-//                                ;
-//                        }
-////                if (excel.getCurCell().getCellType().equals(CellType.FORMULA)) {
-////                    if (checkBlue(excel, excel.getCurCell())) {
-////                        FormulaCells.add(excel.getCurCell());
-////                    }
-////                }
-//                    }
-//                }
-//            }
-//        }
-//        return mysheet;
-//    }
-
     public static List<String> findNonEmptyValueInMultipleParameter(String parameterSignature) {
         String paramters[] = parameterSignature.split(",");
         List<String> results = new ArrayList<String>();

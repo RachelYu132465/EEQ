@@ -17,6 +17,7 @@ import java.util.HashMap;
 import static mainFlow.ProduceWordFile.writeToWord_general;
 import static mainFlow.ProduceWordFile.writeToWord_testCase;
 import static mainFlow.VBS.execAllVBSFiles;
+import static msexcel.customExcelStyle.setMyConditionalFormatting;
 import static validate.excelFormulaValidator.getValidatedValues;
 
 
@@ -27,6 +28,8 @@ import static validate.excelFormulaValidator.getValidatedValues;
     3.找輸出格
 [Word]
     3.1. 產生word檔案(general)
+ [excel formatting]
+  4.0 更改excel 輸出值
 [VBS]
     4.將目標值存入資料表
     5.產出vbs檔案
@@ -44,7 +47,7 @@ public class ExcelForRu {
 
     public static void main(String[] args) throws IOException, InterruptedException, RangeException {
 
-        String fileName = "RT30397.xlsx";
+        String fileName = "C- RT30358-LAB Spreadsheet-數字版 - 複製.xlsx";
 //        String fileName = "R000012383-LAB Spreadsheet數字.xlsx";
         Excel excel = Excel.loadExcel(proj_path + fileName);
         XWPFDocument doc_general = new XWPFDocument();
@@ -62,6 +65,10 @@ public class ExcelForRu {
                 HashMap<String, ValidGoal> TobeProcessed = extract.extractData(excel);
                 int validGoalsNumberInSheet = TobeProcessed.size();
                 writeToWord_general(sheetName, doc_general, TobeProcessed);
+
+                //set conditional formatting for all outpull cells in this sheet
+                excel = setMyConditionalFormatting(TobeProcessed,excel);
+
                 //store target goal in existing excel, because vbs function--'goal seek' requires an object
                 HashMap<String, ExcelCell> allTarget = VBS.storeTargetInFile(excel.getSheet(), TobeProcessed);
                 excel.save();

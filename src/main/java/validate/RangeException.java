@@ -1,5 +1,5 @@
 package validate;
-public class RangeException extends Exception{
+public class RangeException extends RuntimeException{
     public RangeException(String errorMessage) {
         super(errorMessage);
     }

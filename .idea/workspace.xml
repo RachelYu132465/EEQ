@@ -4,6 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+    <list default="true" id="d944a863-58b2-4338-9ba2-2df1015ae098" name="Changes" comment="modify manually enter spec function and modify excel" />
     <list default="true" id="d944a863-58b2-4338-9ba2-2df1015ae098" name="Changes" comment="remove comment">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
@@ -11,6 +12,11 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="directory" />
+    </option>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -213,14 +219,7 @@
       <option name="project" value="LOCAL" />
       <updated>1630227579880</updated>
     </task>
-    <task id="LOCAL-00012" summary="remove comment">
-      <created>1630227765487</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1630227765487</updated>
-    </task>
-    <option name="localTasksCounter" value="13" />
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -243,8 +242,7 @@
     <MESSAGE value="modify OOS" />
     <MESSAGE value="MODIFY WORD" />
     <MESSAGE value="modify word table1(input &amp; output cells add to table respectively)" />
-    <MESSAGE value="remove comment" />
-    <option name="LAST_COMMIT_MESSAGE" value="remove comment" />
+    <option name="LAST_COMMIT_MESSAGE" value="modify word table1(input &amp; output cells add to table respectively)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
