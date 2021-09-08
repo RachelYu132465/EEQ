@@ -4,9 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d944a863-58b2-4338-9ba2-2df1015ae098" name="Changes" comment="modify manually enter spec function and modify excel" />
-    <list default="true" id="d944a863-58b2-4338-9ba2-2df1015ae098" name="Changes" comment="remove comment">
+    <list default="true" id="d944a863-58b2-4338-9ba2-2df1015ae098" name="Changes" comment="no">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dataStructure/ValidGoal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dataStructure/ValidGoal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mainFlow/VBS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mainFlow/VBS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/msexcel/Excel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/msexcel/Excel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/msexcel/ExcelCell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/msexcel/ExcelCell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/msexcel/customExcelStyle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/msexcel/customExcelStyle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/test/ExcelForRu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/ExcelForRu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/validate/MyRange.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/validate/MyRange.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/validate/OperatorConvertor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/validate/OperatorConvertor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/validate/customStringFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/validate/customStringFormatter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/validate/excelFormulaValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/validate/excelFormulaValidator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,8 +135,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.ExcelForRu" />
-        <item itemvalue="Application.VBS" />
         <item itemvalue="Application.customStringFormatter" />
+        <item itemvalue="Application.VBS" />
         <item itemvalue="Application.MyRange" />
         <item itemvalue="Application.excelFormulaValidator" />
       </list>
@@ -247,21 +256,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/validate/customStringFormatter.java</url>
-          <line>204</line>
-          <option name="timeStamp" value="49" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/validate/customStringFormatter.java</url>
-          <line>209</line>
-          <option name="timeStamp" value="50" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/validate/excelFormulaValidator.java</url>
-          <line>136</line>
-          <option name="timeStamp" value="59" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/msword/CustomTableStyle.java</url>
           <line>133</line>

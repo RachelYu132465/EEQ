@@ -53,7 +53,7 @@ public class OperatorConvertor {
 
     public static boolean isEqual(String StringOperator) {
         if (StringProcessor.ifContainStrings(StringOperator, inverseStrs)||
-         (StringProcessor.ifContainStrings(StringOperator, equalStrs))) return true;
+         (StringProcessor.ifContainStrings(StringOperator, containEqualStrs))) return true;
         else return false;
     }
 
@@ -73,9 +73,13 @@ public class OperatorConvertor {
     static String NLT = "NLT";
     static String NMT = "NMT";
     static String WITHIN = "within";//尚未寫入邏輯，此為同時包含小於等於的一個字彙
+    static String PASSES_THROUGH = "passes through";
+    static String EQUAL = "equal";
 
     static String[] inverseStrs = {NOT, NO};
     static String[] lessStrs = {LESS,lessSymbol,NMT,WITHIN,less_and_equalSymbol};
     static String[] greaterStrs = {GREATER, MORE, EXCEED,greaterSymbol,NLT,greater_and_equalSymbol};
-    static String[] equalStrs = {equalSymbol,NMT,WITHIN,NLT,less_and_equalSymbol,greater_and_equalSymbol};
+    static String[] containEqualStrs = {equalSymbol,NMT,WITHIN,NLT,less_and_equalSymbol,greater_and_equalSymbol};
+    static String[] equalStrs = {PASSES_THROUGH,EQUAL};
+
 }

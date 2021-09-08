@@ -8,7 +8,6 @@ import mainFlow.extract;
 import msexcel.Excel;
 import msexcel.ExcelCell;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
-import validate.RangeException;
 
 import javax.swing.filechooser.FileSystemView;
 import java.io.IOException;
@@ -45,9 +44,11 @@ import static validate.excelFormulaValidator.getValidatedValues;
 public class ExcelForRu {
     public static final String proj_path = FileSystemView.getFileSystemView().getHomeDirectory().getPath() + "/";
 
-    public static void main(String[] args) throws IOException, InterruptedException, RangeException {
-
-        String fileName = "C- RT30358-LAB Spreadsheet-數字版 - 複製.xlsx";
+    public static void main(String[] args) throws IOException, InterruptedException
+//            ,RangeException
+    {
+        String fileName = "C- RT30358-LAB Spreadsheet-數字版.xlsx";
+//        String fileName = "C- RT30358-LAB Spreadsheet-數字版 - 複製.xlsx";
 //        String fileName = "R000012383-LAB Spreadsheet數字.xlsx";
         Excel excel = Excel.loadExcel(proj_path + fileName);
         XWPFDocument doc_general = new XWPFDocument();
@@ -64,24 +65,28 @@ public class ExcelForRu {
             if (!sheetName.toLowerCase().equals("history of versions")) {
                 HashMap<String, ValidGoal> TobeProcessed = extract.extractData(excel);
                 int validGoalsNumberInSheet = TobeProcessed.size();
-                writeToWord_general(sheetName, doc_general, TobeProcessed);
 
-                //set conditional formatting for all outpull cells in this sheet
                 excel = setMyConditionalFormatting(TobeProcessed,excel);
-
-                //store target goal in existing excel, because vbs function--'goal seek' requires an object
-                HashMap<String, ExcelCell> allTarget = VBS.storeTargetInFile(excel.getSheet(), TobeProcessed);
                 excel.save();
-                VBS.produceVBSFiles(fileName, excel.getSheet(), vbs_newData_path, allTarget,TobeProcessed);
-                execAllVBSFiles(vbs_newData_path);
-                //get new Excel everytime vbs file produce new file
-                HashMap<String, ValidGoal> newData = getValidatedValues(sheetName, TobeProcessed, vbs_newData_path);
 
-                int testCaseIdx = a + 2;
-                //要把hashmap裡面的Key改成OutputR1C1 + index -->因為有值會有上下標，需要有兩個新excel檔案!!
-                writeToWord_testCase(doc_testCase, TobeProcessed, newData, testCaseIdx);
-                FileHandler.save(doc_general, proj_path + sheetName + "_result.docx");
-                FileHandler.save(doc_testCase, proj_path + sheetName + "_test case.docx");
+//                writeToWord_general(sheetName, doc_general, TobeProcessed);
+//
+//                //set conditional formatting for all outpull cells in this sheet
+//                excel = setMyConditionalFormatting(TobeProcessed,excel);
+//
+//                //store target goal in existing excel, because vbs function--'goal seek' requires an object
+                HashMap<String, ExcelCell> allTarget = VBS.storeTargetInFile(excel, TobeProcessed);
+//                excel.save();
+//                VBS.produceVBSFiles(fileName, excel.getSheet(), vbs_newData_path, allTarget,TobeProcessed);
+//                execAllVBSFiles(vbs_newData_path);
+//                //get new Excel everytime vbs file produce new file
+                HashMap<String, ValidGoal> newData = getValidatedValues(excel,sheetName, TobeProcessed, vbs_newData_path);
+//
+//                int testCaseIdx = a + 2;
+//                //要把hashmap裡面的Key改成OutputR1C1 + index -->因為有值會有上下標，需要有兩個新excel檔案!!
+//                writeToWord_testCase(doc_testCase, TobeProcessed, newData, testCaseIdx);
+//                FileHandler.save(doc_general, proj_path + sheetName + "_result.docx");
+//                FileHandler.save(doc_testCase, proj_path + sheetName + "_test case.docx");
             }
         }
 

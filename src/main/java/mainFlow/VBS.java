@@ -2,11 +2,12 @@ package mainFlow;
 
 import common.FileHandler;
 import dataStructure.ValidGoal;
+import msexcel.Excel;
 import msexcel.ExcelCell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import validate.MyRange;
-import validate.RangeException;
+
 import validate.customStringFormatter;
 
 import java.io.File;
@@ -60,8 +61,10 @@ public class VBS {
     }
 
     //before vbs file is created, store target values in the original files
-    public static HashMap<String, ExcelCell> storeTargetInFile(Sheet sheet, HashMap<String, ValidGoal> TobeProcessed) throws RangeException {
-
+    public static HashMap<String, ExcelCell> storeTargetInFile(Excel excel, HashMap<String, ValidGoal> TobeProcessed)
+//            throws RangeException
+    {
+        Sheet sheet = excel.getSheet();
         int lastRowIdx = sheet.getLastRowNum();
 
         //output r1c1 , temp target cell
@@ -80,13 +83,13 @@ public class VBS {
                     System.out.println("create row:" + data.getOutput().getR1c1());
                     int tgtCellIdx = -1;
                     if (myTgts.hasMax() && myTgts.hasMin()) {
-                        for (double num :OOSNum) {
+                        for (double num : OOSNum) {
                             row.createCell(++tgtCellIdx).setCellValue(num);
-                            allTgt.put(e.getKey() + "_" + tgtCellIdx, new ExcelCell(row.getCell(tgtCellIdx)));
+                            allTgt.put(e.getKey() + "_" + tgtCellIdx, new ExcelCell(excel,row.getCell(tgtCellIdx)));
                         }
                     } else {
                         row.createCell(++tgtCellIdx).setCellValue(OOSNum.get(0));
-                        allTgt.put(e.getKey() + "_" + tgtCellIdx, new ExcelCell(row.getCell(tgtCellIdx)));
+                        allTgt.put(e.getKey() + "_" + tgtCellIdx, new ExcelCell(excel,row.getCell(tgtCellIdx)));
                     }
                 }
             }
@@ -110,7 +113,9 @@ public class VBS {
                 "objExcel.Application.Quit");
     }
 
-    public static void produceVBSFiles(String FileName, Sheet sheet, String newPath, HashMap<String, ExcelCell> allTarget, HashMap<String, ValidGoal> TobeProcessed) throws RangeException {
+    public static void produceVBSFiles(String FileName, Sheet sheet, String newPath, HashMap<String, ExcelCell> allTarget, HashMap<String, ValidGoal> TobeProcessed)
+//            throws RangeException
+    {
         String sheetName = sheet.getSheetName();
 
         for (Map.Entry<String, ExcelCell> target : allTarget.entrySet()) {

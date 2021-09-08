@@ -7,12 +7,16 @@ public class MyRange {
     private Boolean maxEqualTo;
     private Boolean minEqualTo; //  false for can't equal, true for can equal;
 
+
     BigDecimal min;
     BigDecimal max;
 
     int minDecimalPlace;
     int maxDecimalPlace;
 
+    private Boolean NoRange=false;//it shall be examined in the first place;
+    BigDecimal myNumber;
+    int myNumberDecimalPlace;
 
     //e.g. myRange.setRange(3).SetEqualTo(true)
     //e.g. new myRange(3,MyRange.max).setToLess().SetEqualTo(true) => <=3
@@ -36,6 +40,22 @@ public class MyRange {
                 ", min=" + min +
                 ", max=" + max +
                 '}';
+    }
+
+    public BigDecimal getMyNumber() {
+        return myNumber;
+    }
+
+    public void setMyNumber(BigDecimal myNumber) {
+        this.myNumber = myNumber;
+    }
+
+    public int getMyNumberDecimalPlace() {
+        return myNumberDecimalPlace;
+    }
+
+    public void setMyNumberDecimalPlace(int myNumberDecimalPlace) {
+        this.myNumberDecimalPlace = myNumberDecimalPlace;
     }
 
     public Boolean getMaxEqualTo() {
@@ -128,6 +148,14 @@ public class MyRange {
         return false;
 
 
+    }
+
+    public Boolean getNoRange() {
+        return NoRange;
+    }
+
+    public void setNoRange(Boolean noRange) {
+        NoRange = noRange;
     }
 
     //    public MyRange setMinRange (String number){

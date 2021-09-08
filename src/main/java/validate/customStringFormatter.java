@@ -7,6 +7,9 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import static validate.OperatorConvertor.containEqualStrs;
+import static validate.OperatorConvertor.equalStrs;
+
 public class customStringFormatter {
 
 
@@ -15,6 +18,10 @@ public class customStringFormatter {
         String minRange = "";
         String maxRange = "";
         String andSign = " & ";
+
+        if (myRange.getNoRange()==true) {
+           return "="+ myRange.getMyNumber();
+        }
 
         //若有 Not inverse
         if (myRange.hasMax()) {
@@ -48,10 +55,21 @@ public class customStringFormatter {
         return subStrings;
     }
 
-    public static List<Double> setOOS (MyRange range ) throws RangeException {
+    public static List<Double> setOOS (MyRange range )
+//            throws RangeException
+    {
         List<Double> OOSNum =new ArrayList<>();
 
+if (range.getNoRange()==true){
+    BigDecimal bd1 = range.getMyNumber();
+    BigDecimal oneForMin = NumberProcessor.OneInLastDigitPoint(range.getMyNumberDecimalPlace());
+    //若為isGreater的operator，減一使數字(bd1)落在range外
+    bd1=bd1.subtract(oneForMin);
+    OOSNum.add(bd1.doubleValue());
 
+    return OOSNum;
+
+}
         // 有上下限
         if (range.hasMax()&&range.hasMin()){
 
@@ -100,9 +118,9 @@ public class customStringFormatter {
 
 
         }
-        else {
-            throw new RangeException("neither max nor min");
-        }
+//        else {
+//            throw new RangeException("neither max nor min");
+//        }
 
         return OOSNum;
     }
@@ -125,6 +143,7 @@ public class customStringFormatter {
         BigDecimal max;
         Boolean minEqualTo;
         Boolean maxEqualTo;
+
         List<String> extractdigitFromString = StringProcessor.extractStringByPattern(specification, StringProcessor.extract_digit_rex);
         List<BigDecimal> extractdigits = new ArrayList<>();
         for (String s : extractdigitFromString) {
@@ -134,12 +153,17 @@ public class customStringFormatter {
         }
         List<String> subStrings = sperateStringByKeywords(specification, extractdigitFromString);
 
-
+        if ((StringProcessor.ifContainStrings(specification, equalStrs))){
+            range.setNoRange(true);
+           range.setMyNumber(extractdigits.get(0));
+            range.setMyNumberDecimalPlace(NumberProcessor.countDecimalPlace(extractdigitFromString.get(0)));
+            return range;
+        }
         //有上下限，會傳入兩個數字
         if (extractdigitFromString.size() == 2) {
 
-int position_max;
-int position_min;
+int position_max=0;
+int position_min=0;
 
             BigDecimal num0 = extractdigits.get(0);
             BigDecimal num1 = extractdigits.get(1);
@@ -151,11 +175,12 @@ int position_min;
                 //num0 is greater than num1
                 position_max =1;
                 position_min =0;
-            }else{//==0
-                //error actually 兩數字不太可能相等
-                position_max =0;
-                position_min =1;
             }
+//            else{//==0
+//                //error actually 兩數字不太可能相等
+//                position_max =0;
+//                position_min =1;
+//            }
 
             min =extractdigits.get(position_min);
             max = extractdigits.get(position_max);
@@ -187,13 +212,14 @@ int position_min;
 
 
             }
-            else {
+            else if (!OperatorConvertor.isGreater(subStrings.get(0)))  {
                 max = extractdigits.get(0);
                 maxEqualTo = OperatorConvertor.isEqual(subStrings.get(0));
                 range.setMaxRange(max, maxEqualTo);
                 int maxDecimalplace = NumberProcessor.countDecimalPlace(extractdigitFromString.get(0));
                 range.setMaxDecimalPlace(maxDecimalplace);
             }
+
         }
 
         return range;
@@ -205,17 +231,19 @@ int position_min;
 //        MyRange myRange =MyRangeGenerator("  not less than 0.7 not more than 0.9 " );
 //        MyRange myRange =MyRangeGenerator("  not less than 0.7 " );
 //        MyRange myRange =MyRangeGenerator(" not more than 0.9" );
-        MyRange myRange =MyRangeGenerator("within 100" );
-        System.out.println(myRange.getMaxDecimalPlace());
+        MyRange myRange =MyRangeGenerator("  passes through 100.0%" );
+        System.out.println(myRange.getMyNumber());
+//        MyRange myRange =MyRangeGenerator("within 100" );
+//        System.out.println(myRange.getMaxDecimalPlace());
         System.out.println(customStringFormatter.getAccecptableRangeString(myRange));
-        try {
+//        try {
             List<Double> result = setOOS(myRange);
             for(Double d:result){
                 System.out.println(d);
             }
-        } catch (RangeException e) {
-            e.printStackTrace();
-        }
+//        } catch (RangeException e) {
+//            e.printStackTrace();
+//        }
 
     }
 
