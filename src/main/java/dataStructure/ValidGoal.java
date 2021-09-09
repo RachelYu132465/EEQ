@@ -29,14 +29,14 @@ public class ValidGoal {
         this.allInputs = allInputs;
     }
 
-    public ValidGoal(Cell input, Cell output,  HashSet<ExcelCell> allInputs) {
-        this(new ExcelCell(input), new ExcelCell(output), allInputs);
+//    public ValidGoal(Cell input, Cell output,  HashSet<ExcelCell> allInputs) {
+//        this(new ExcelCell(input), new ExcelCell(output), allInputs);
+//
+//    }
 
-    }
-
-    public ValidGoal(Cell input, Cell output, String specification, HashSet<ExcelCell> allInputs) {
-        this(input, output, allInputs);
-    }
+//    public ValidGoal(Cell input, Cell output, String specification, HashSet<ExcelCell> allInputs) {
+//        this(input, output, allInputs);
+//    }
 
     public HashSet<ExcelCell> getAllInputs() {
         return allInputs;

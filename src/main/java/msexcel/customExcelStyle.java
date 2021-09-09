@@ -1,20 +1,19 @@
 package msexcel;
 
-import common.NumberProcessor;
+
 import dataStructure.ValidGoal;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 import test.ExcelForRu;
 import validate.MyRange;
 import validate.OperatorConvertor;
-import validate.RangeException;
 
 
-import java.math.BigDecimal;
+
+
 import java.util.HashMap;
 import java.util.Map;
 
-import static common.NumberProcessor.countDecimalPlace;
 
 public class customExcelStyle {
     public static void main(String[] args) {
@@ -32,7 +31,9 @@ public class customExcelStyle {
         test.outputFile("C:\\Users\\YUY139\\Desktop\\result");
     }
 
-    public static String[] setConditionalFormattingRule(String cellAddress, MyRange range) throws RangeException {
+    public static String[] setConditionalFormattingRule(String cellAddress, MyRange range)
+//            throws RangeException
+    {
 
 
         String ConditionalFormattingRule[] = new String[2];
@@ -49,20 +50,27 @@ public class customExcelStyle {
 
         String roundFuction_max = "";
         String roundFuction_min = "";
-        if ((!range.hasMax()) && (!range.hasMin()))
-            throw new RangeException("range has no max and min");
-
+//        if ((!range.hasMax()) && (!range.hasMin()))
+//            throw new RangeException("range has no max and min");
+if (range.getNoRange()==true){
+    String Operator = "<>";
+    String Number = String.valueOf(range.getMyNumber());
+    String DecimalPlace = String.valueOf(range.getMyNumberDecimalPlace());
+    String roundFuction = ROUND + "(" + cellAddress + "," + DecimalPlace + ")";
+    ConditionalFormattingRule[0] = roundFuction + Operator + Number;
+    return ConditionalFormattingRule;
+}
         if (range.hasMax()) {
             maxOperator = OperatorConvertor.getUnAcceptableSymbol(true, range.getMaxEqualTo());
             maxNumber = String.valueOf(range.getMax());
-            maxDecimalPlace = String.valueOf(maxDecimalPlace);
+            maxDecimalPlace = String.valueOf(range.getMaxDecimalPlace());
             roundFuction_max = ROUND + "(" + cellAddress + "," + maxDecimalPlace + ")";
 
         }
         if (range.hasMin()) {
             minOperator = OperatorConvertor.getUnAcceptableSymbol(false, range.getMinEqualTo());
             minNumber = String.valueOf(range.getMin());
-            minDecimalPlace = String.valueOf(minDecimalPlace);
+            minDecimalPlace = String.valueOf(range.getMinDecimalPlace());
             roundFuction_min = ROUND + "(" + cellAddress + "," + minDecimalPlace + ")";
 
         }
@@ -81,16 +89,23 @@ public class customExcelStyle {
         return ConditionalFormattingRule;
     }
 
-    public static Excel setMyConditionalFormatting(HashMap<String, ValidGoal> TobeProcessed, Excel excel) throws RangeException{
+    public static Excel setMyConditionalFormatting(HashMap<String, ValidGoal> TobeProcessed, Excel excel)
+//            throws RangeException
+    {
 //cellAddress for example:A1
         Sheet sheet = excel.getSheet();
-        for (Map.Entry<String, ValidGoal > goals : TobeProcessed.entrySet()) {
+        for (Map.Entry<String, ValidGoal> goals : TobeProcessed.entrySet()) {
 
             ExcelCell cell = goals.getValue().getOutput();
             String cellAddress = cell.getR1c1();
 
             String ConditionalFormattingRules[] = new String[2];
-            ConditionalFormattingRules = setConditionalFormattingRule(cellAddress, goals.getValue().getMyRange() );
+//            try {
+                ConditionalFormattingRules = setConditionalFormattingRule(cellAddress, goals.getValue().getMyRange());
+//            } catch (RangeException e) {
+//                e.printStackTrace();
+//            }
+
 
             SheetConditionalFormatting sheetCF = sheet.getSheetConditionalFormatting();
 
@@ -109,6 +124,7 @@ public class customExcelStyle {
 
                 sheetCF.addConditionalFormatting(regions, cfRules);
             }
+
         }
         return excel;
     }

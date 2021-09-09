@@ -772,7 +772,27 @@ public class Excel {
 
         return null;
     }
-
+    public String getCellValueAsString(Cell cell) {
+        if (cell == null) {
+            return null;
+        } else if (cell.getCellType().equals(CellType.STRING)) {
+//            logger.info("TEST: " + cell.toString());
+            return cell.toString();
+        } else if (cell.getCellType().equals(CellType.NUMERIC)) {
+            DataFormatter formatter = new DataFormatter();
+            String formattedValue = formatter.formatCellValue(cell);
+            return formattedValue;
+        } else if (cell.getCellType().equals(CellType.FORMULA)) {
+            FormulaEvaluator evaluator = this.curWb.getCreationHelper().createFormulaEvaluator();
+            DataFormatter formatter = new DataFormatter();
+            String formattedValue = formatter.formatCellValue(cell,evaluator);
+            return formattedValue;
+        } else {
+//            throw new InvalidCSVException(
+//                    "Value stored in cell is invalid! Valid types are Numbers or Strings.");
+            return "";
+        }
+    }
     public Object getCellValue(String r1c1) {
         return getCellValue(getCell(r1c1));
     }

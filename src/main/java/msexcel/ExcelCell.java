@@ -56,20 +56,21 @@ public class ExcelCell {
     public ExcelCell(){
 
     }
-    public ExcelCell(Cell cell) {
-        if(cell!=null){
-            this.r1c1 = Excel.getR1C1Idx(cell);
-            this.value = getCellValue(cell).toString();
-            this.cell = cell;
-        }else{
-            return;
-        }
-    }
+//    public ExcelCell(Cell cell) {
+//        if(cell!=null){
+//            this.r1c1 = Excel.getR1C1Idx(cell);
+//            this.value = getCellValue(cell).toString();
+//            this.cell = cell;
+//        }else{
+//            return;
+//        }
+//    }
 
     public ExcelCell( Excel excel,Cell cell) {
         if(cell!=null){
             this.r1c1 = Excel.getR1C1Idx(cell);
-            this.value = getCellValue(cell).toString();
+//            this.value = getCellValue(cell).toString();
+            this.value = excel.getCellValueAsString(cell);
             this.cell = cell;
             setNote(excel,cell);
         }else{
