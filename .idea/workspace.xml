@@ -4,7 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d944a863-58b2-4338-9ba2-2df1015ae098" name="Changes" comment="modify manually enter spec function and modify excel" />
+    <list default="true" id="d944a863-58b2-4338-9ba2-2df1015ae098" name="Changes" comment="modify manually enter spec function and modify excel">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/test/ExcelForRu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/ExcelForRu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/validate/excelFormulaValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/validate/excelFormulaValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dataStructure/ValidGoal.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dataStructure/ValidGoal.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/msexcel/Excel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msexcel/Excel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/msexcel/ExcelCell.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msexcel/ExcelCell.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/msexcel/customExcelStyle.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msexcel/customExcelStyle.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/test/ExcelForRu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/test/ExcelForRu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/validate/MyRange.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/validate/MyRange.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/validate/OperatorConvertor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/validate/OperatorConvertor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/validate/RangeException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/validate/RangeException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/validate/customStringFormatter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/validate/customStringFormatter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/validate/excelFormulaValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/validate/excelFormulaValidator.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -269,12 +283,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/validate/customStringFormatter.java</url>
-          <line>204</line>
+          <line>230</line>
           <option name="timeStamp" value="49" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/validate/customStringFormatter.java</url>
-          <line>209</line>
+          <line>237</line>
           <option name="timeStamp" value="50" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

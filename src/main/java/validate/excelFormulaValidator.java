@@ -55,7 +55,13 @@ public class excelFormulaValidator {
         } else {
             while (!userInput.matches("[yY]")) {
                 System.out.println("是請輸入:y;否請按enter");
-                sc.next();
+                userInput = sc.nextLine();
+
+                if (userInput.matches("[yY]")){
+                    return scanForSpecificationCellAddr();
+
+                }
+
             }
             System.out.println("請輸入規格的儲存格位置(R1C1)");
             return scanForSpecificationCellAddr();
