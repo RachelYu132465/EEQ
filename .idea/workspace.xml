@@ -5,19 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d944a863-58b2-4338-9ba2-2df1015ae098" name="Changes" comment="modify manually enter spec function and modify excel">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/test/ExcelForRu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/ExcelForRu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/validate/excelFormulaValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/validate/excelFormulaValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/dataStructure/ValidGoal.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dataStructure/ValidGoal.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/msexcel/Excel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msexcel/Excel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/msexcel/ExcelCell.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msexcel/ExcelCell.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/msexcel/customExcelStyle.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msexcel/customExcelStyle.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/test/ExcelForRu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/test/ExcelForRu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/validate/MyRange.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/validate/MyRange.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/validate/OperatorConvertor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/validate/OperatorConvertor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/validate/RangeException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/validate/RangeException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/validate/customStringFormatter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/validate/customStringFormatter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/validate/excelFormulaValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/validate/excelFormulaValidator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mainFlow/VBS.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mainFlow/VBS.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -252,7 +240,14 @@
       <option name="project" value="LOCAL" />
       <updated>1631088196657</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="modify manually enter spec function and modify excel">
+      <created>1631176266976</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1631176266976</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
