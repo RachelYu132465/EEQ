@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import static msexcel.customExcelStyle.setConditionalFormattingRule;
 import static validate.OperatorConvertor.containEqualStrs;
 import static validate.OperatorConvertor.equalStrs;
 
@@ -228,14 +229,18 @@ int position_min=0;
 
 
     public static void main(String[] args) {
-//        MyRange myRange =MyRangeGenerator("  not less than 0.7 not more than 0.9 " );
+        MyRange myRange =MyRangeGenerator("  not less than 0.7 not more than 0.9 " );
 //        MyRange myRange =MyRangeGenerator("  not less than 0.7 " );
 //        MyRange myRange =MyRangeGenerator(" not more than 0.9" );
-        MyRange myRange =MyRangeGenerator("  passes through 100.0%" );
+//        MyRange myRange =MyRangeGenerator("  passes through 100.0%" );
         System.out.println(myRange.getMyNumber());
 //        MyRange myRange =MyRangeGenerator("within 100" );
 //        System.out.println(myRange.getMaxDecimalPlace());
         System.out.println(customStringFormatter.getAccecptableRangeString(myRange));
+
+        String s[] = setConditionalFormattingRule ("C21",myRange);
+        System.out.println(s[0]);
+        System.out.println(s[1]);
 //        try {
             List<Double> result = setOOS(myRange);
             for(Double d:result){

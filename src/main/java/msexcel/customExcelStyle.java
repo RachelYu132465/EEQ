@@ -61,14 +61,14 @@ if (range.getNoRange()==true){
     return ConditionalFormattingRule;
 }
         if (range.hasMax()) {
-            maxOperator = OperatorConvertor.getUnAcceptableSymbol(true, range.getMaxEqualTo());
+            maxOperator = OperatorConvertor.getUnAcceptableSymbol(false, range.getMaxEqualTo());
             maxNumber = String.valueOf(range.getMax());
             maxDecimalPlace = String.valueOf(range.getMaxDecimalPlace());
             roundFuction_max = ROUND + "(" + cellAddress + "," + maxDecimalPlace + ")";
 
         }
         if (range.hasMin()) {
-            minOperator = OperatorConvertor.getUnAcceptableSymbol(false, range.getMinEqualTo());
+            minOperator = OperatorConvertor.getUnAcceptableSymbol(true, range.getMinEqualTo());
             minNumber = String.valueOf(range.getMin());
             minDecimalPlace = String.valueOf(range.getMinDecimalPlace());
             roundFuction_min = ROUND + "(" + cellAddress + "," + minDecimalPlace + ")";
