@@ -6,14 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="d944a863-58b2-4338-9ba2-2df1015ae098" name="Changes" comment="modify manually enter spec function and modify excel">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/msexcel/customExcelStyle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/msexcel/customExcelStyle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mainFlow/extract.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mainFlow/extract.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/test/ExcelForRu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/ExcelForRu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/validate/customStringFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/validate/customStringFormatter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/validate/excelFormulaValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/validate/excelFormulaValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/msexcel/customExcelStyle.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msexcel/customExcelStyle.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/test/ExcelForRu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/test/ExcelForRu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/validate/customStringFormatter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/validate/customStringFormatter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/validate/excelFormulaValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/validate/excelFormulaValidator.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
