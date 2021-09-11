@@ -52,22 +52,26 @@ public class excelFormulaValidator {
         if (userInput.isBlank()) {
             System.out.println("使用預設方式找規格");
             return "";
+        }else {
+
+            while (!userInput.matches("[yY]")) {
+                System.out.println("是請輸入:y;否請按enter");
+                userInput = sc.nextLine();
+            }
+return scanForSpecificationCellAddr();
         }
 
-//            while (!userInput.matches("[yY]")) {
-//                System.out.println("是請輸入:y;否請按enter");
-//                userInput = sc.nextLine();
-//            }
-                while (sc.hasNext() && (sc.nextLine().equalsIgnoreCase("y"))) {//change here
-                    System.out.println("請輸入規格的儲存格位置(R1C1)");
-                    return scanForSpecificationCellAddr();
-                    }
+//                while (sc.hasNext() && (sc.nextLine().equalsIgnoreCase("y"))) {//change here
+//                    System.out.println("請輸入規格的儲存格位置(R1C1)");
+//                    return scanForSpecificationCellAddr();
+//                    }
+
 //                if (userInput.matches("[yY]")){
 //                    return scanForSpecificationCellAddr();
 ////
 ////                }
 
-        return "";
+//        return "";
 
         }
 

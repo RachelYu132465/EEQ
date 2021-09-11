@@ -60,33 +60,32 @@ public class ExcelForRu {
             excel.assignSheet(a);
             String sheetName = excel.getSheet().getSheetName();
 
-            String sheetName_forNewFiles = excel.getSheet().getSheetName().replaceAll(" ","");
+            String sheetName_forNewFiles = excel.getSheet().getSheetName().replaceAll(" ", "");
             String vbs_newData_path = proj_path + FileHandler.getFileNameWoExt(fileName) + "/" + sheetName_forNewFiles + "/";
             if (!sheetName.toLowerCase().equals("history of versions")) {
                 HashMap<String, ValidGoal> TobeProcessed = extract.extractData(excel);
                 int validGoalsNumberInSheet = TobeProcessed.size();
 
-                excel = setMyConditionalFormatting(TobeProcessed,excel);
+//set conditional formatting for all outpull cells in this sheet
+                excel = setMyConditionalFormatting(TobeProcessed, excel);
                 excel.save();
 
-//                writeToWord_general(sheetName, doc_general, TobeProcessed);
-//
-//                //set conditional formatting for all outpull cells in this sheet
-//                excel = setMyConditionalFormatting(TobeProcessed,excel);
-//
-//                //store target goal in existing excel, because vbs function--'goal seek' requires an object
+                writeToWord_general(sheetName, doc_general, TobeProcessed);
+
+
+                //store target goal in existing excel, because vbs function--'goal seek' requires an object
                 HashMap<String, ExcelCell> allTarget = VBS.storeTargetInFile(excel, TobeProcessed);
-//                excel.save();
-//                VBS.produceVBSFiles(fileName, excel.getSheet(), vbs_newData_path, allTarget,TobeProcessed);
-//                execAllVBSFiles(vbs_newData_path);
+                excel.save();
+                VBS.produceVBSFiles(fileName, excel.getSheet(), vbs_newData_path, allTarget, TobeProcessed);
+                execAllVBSFiles(vbs_newData_path);
 //                //get new Excel everytime vbs file produce new file
-                HashMap<String, ValidGoal> newData = getValidatedValues(excel,sheetName, TobeProcessed, vbs_newData_path);
-//
-//                int testCaseIdx = a + 2;
-//                //要把hashmap裡面的Key改成OutputR1C1 + index -->因為有值會有上下標，需要有兩個新excel檔案!!
-//                writeToWord_testCase(doc_testCase, TobeProcessed, newData, testCaseIdx);
-//                FileHandler.save(doc_general, proj_path + sheetName + "_result.docx");
-//                FileHandler.save(doc_testCase, proj_path + sheetName + "_test case.docx");
+                HashMap<String, ValidGoal> newData = getValidatedValues(excel, sheetName, TobeProcessed, vbs_newData_path);
+
+                int testCaseIdx = a + 2;
+                //要把hashmap裡面的Key改成OutputR1C1 + index -->因為有值會有上下標，需要有兩個新excel檔案!!
+                writeToWord_testCase(doc_testCase, TobeProcessed, newData, testCaseIdx);
+                FileHandler.save(doc_general, proj_path + sheetName + "_result.docx");
+                FileHandler.save(doc_testCase, proj_path + sheetName + "_test case.docx");
             }
         }
 

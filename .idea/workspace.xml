@@ -4,8 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d944a863-58b2-4338-9ba2-2df1015ae098" name="Changes" comment="round excel by evaluator &amp; add equal (noRange)">
+    <list default="true" id="d944a863-58b2-4338-9ba2-2df1015ae098" name="Changes" comment="modify manually enter spec function and modify excel">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/msexcel/customExcelStyle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/msexcel/customExcelStyle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/test/ExcelForRu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/ExcelForRu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/validate/customStringFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/validate/customStringFormatter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/validate/excelFormulaValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/validate/excelFormulaValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/msexcel/customExcelStyle.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msexcel/customExcelStyle.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/test/ExcelForRu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/test/ExcelForRu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/validate/customStringFormatter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/validate/customStringFormatter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/validate/excelFormulaValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/validate/excelFormulaValidator.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +44,7 @@
     </file-type-list>
   </component>
   <component name="ProjectId" id="1wOr6oi3y7GE3KVUMsBSamFIz3D" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -56,7 +65,7 @@
       <recent name="C:\Users\tina.yu\EEQ\src\main\java\msexcel" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.excelFormulaValidator">
+  <component name="RunManager" selected="Application.ExcelForRu">
     <configuration name="ExcelForRu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="test.ExcelForRu" />
       <module name="EEQ" />
@@ -124,11 +133,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.excelFormulaValidator" />
         <item itemvalue="Application.ExcelForRu" />
         <item itemvalue="Application.customStringFormatter" />
         <item itemvalue="Application.VBS" />
         <item itemvalue="Application.MyRange" />
+        <item itemvalue="Application.excelFormulaValidator" />
       </list>
     </recent_temporary>
   </component>
@@ -218,14 +227,28 @@
       <option name="project" value="LOCAL" />
       <updated>1630227579880</updated>
     </task>
-    <task id="LOCAL-00012" summary="round excel by evaluator &amp; add equal (noRange)">
-      <created>1631188468127</created>
+    <task id="LOCAL-00012" summary="modify manually enter spec function and modify excel">
+      <created>1631003098815</created>
       <option name="number" value="00012" />
       <option name="presentableId" value="LOCAL-00012" />
       <option name="project" value="LOCAL" />
-      <updated>1631188468127</updated>
+      <updated>1631003098815</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="modify manually enter spec function and modify excel">
+      <created>1631003531133</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1631003531133</updated>
+    </task>
+    <task id="LOCAL-00014" summary="modify manually enter spec function and modify excel">
+      <created>1631088196657</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1631088196657</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -248,25 +271,25 @@
     <MESSAGE value="modify OOS" />
     <MESSAGE value="MODIFY WORD" />
     <MESSAGE value="modify word table1(input &amp; output cells add to table respectively)" />
-    <MESSAGE value="round excel by evaluator &amp; add equal (noRange)" />
-    <option name="LAST_COMMIT_MESSAGE" value="round excel by evaluator &amp; add equal (noRange)" />
+    <MESSAGE value="modify manually enter spec function and modify excel" />
+    <option name="LAST_COMMIT_MESSAGE" value="modify manually enter spec function and modify excel" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/msword/CustomTableStyle.java</url>
-          <line>133</line>
+          <line>141</line>
           <option name="timeStamp" value="60" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/msword/CustomTableStyle.java</url>
-          <line>93</line>
+          <line>95</line>
           <option name="timeStamp" value="64" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/msword/CustomTableStyle.java</url>
-          <line>66</line>
+          <line>67</line>
           <option name="timeStamp" value="67" />
         </line-breakpoint>
       </breakpoints>
