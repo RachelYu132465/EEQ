@@ -19,10 +19,7 @@ import javax.swing.filechooser.FileSystemView;
 import java.io.*;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class Excel {
 
@@ -51,6 +48,7 @@ public class Excel {
     public Sheet getSheet() {
         return curSheet;
     }
+
 
     public Row getCurRow() {
         return curRow;
@@ -223,6 +221,34 @@ public class Excel {
         return sheetList;
     }
 
+    public List<String> getAllSheetsNames() {
+        int sheetcount = curWb.getNumberOfSheets();
+        List<String> sheetName=new ArrayList<>();
+        for(int i=0; i<sheetcount;i++)
+        {
+            String s = curWb.getSheetName(i);
+            sheetName.add(s);
+        }
+
+return sheetName;
+    }
+    public static  List<String> getSheetsBykeywordsIgnoreCase (Excel excel,String ...keywords){
+        List<Sheet> sheets = excel.getSheets();
+        List<String> containKeywordsheets = new ArrayList<>();
+        List<String> SheetsNames  =excel.getAllSheetsNames();
+        for (String s : SheetsNames) {
+            for (String keyword:keywords){
+//                System.out.println(s.getSheetName());
+                if (s.toLowerCase().contains(keyword.toLowerCase(Locale.ROOT))) {
+                    containKeywordsheets.add(s);
+//                    System.out.println(s.getSheetName());
+
+                }
+            }
+
+        }
+        return containKeywordsheets;
+    }
     public int getSheetSize() {
         return this.getSheets().size();
     }
