@@ -920,7 +920,66 @@ return sheetName;
 
 
     }
-    public String findBlackTitleAtLeft(int rowIdx, int colIdx) {
+    public  String findFirstWordInWb (String searchword){
+
+        int sheetSize= this.getSheetSize();
+        for (int i=0; i< sheetSize;i++){
+            this.assignSheet(i);
+            int rowSize =this.getLastRowNum();
+            for (int j=0; j< rowSize;j++){
+                this.assignRow(j);
+                int colSize =this.getLastCellNum();
+                for (int k=0; k< colSize;k++){
+                    this.assignCell(k);
+                    String cellString =this.getAbsoluteStringCellValue();
+                    if(StringUtils.containsIgnoreCase(cellString,searchword.trim())){
+                        String s =getR1C1Idx(curCell);
+                        return  s;
+                    }
+                }
+            }
+        }
+        return "";
+    }
+    public String findfirstWordAtRight(int rowIdx, int colIdx) {
+        int size = this.getLastCellNum();
+
+        for (int k = colIdx + 1; k <size; k++) {
+            this.assignRow(rowIdx);
+            this.assignCell(k);
+if (StringUtils.isNotBlank(this.getAbsoluteStringCellValue()))
+                    return this.getCellValue().toString();
+
+
+
+
+    }
+        return "";
+    }
+    public String findfirstBlackWordAtRight(int rowIdx, int colIdx) {
+    int size = this.getLastCellNum();
+        for (int k = colIdx + 1; k < size; k++) {
+            this.assignRow(rowIdx);
+            this.assignCell(k);
+            System.out.println("  rowidx:" + k);
+            XSSFCellStyle cs = ((XSSFCellStyle) this.getCurCell().getCellStyle());
+            XSSFFont font = cs.getFont();
+            XSSFColor color = font.getXSSFColor();
+            System.out.println("Font color : " + color.getARGBHex());
+            if ((this.getCellValue().toString().isEmpty()))
+                return "";
+
+            else if (!(this.getCellValue().toString().isEmpty())) {
+                if (this.getfontColor().equals("NULL") || this.getfontColor().equals("FF000000")) {
+                    System.out.println("if loop" + k);
+                    return this.getCellValue().toString();
+
+                }
+            }
+        }
+        return "";
+    }
+    public String findfirstBlackWordAtLeft(int rowIdx, int colIdx) {
         for (int k = colIdx - 1; k >= 0; k--) {
             this.assignRow(rowIdx);
             this.assignCell(k);
@@ -943,7 +1002,7 @@ return sheetName;
         return "";
     }
 
-    public String findBlackTitleAtTop(int rowIdx, int colIdx) {
+    public String findFirstBlackWordAtTop(int rowIdx, int colIdx) {
         for (int k = rowIdx - 1; k >= 0; k--) {
             this.assignRow(k);
             this.assignCell(colIdx);

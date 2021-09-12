@@ -4,18 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d944a863-58b2-4338-9ba2-2df1015ae098" name="Changes" comment="very important note">
+    <list default="true" id="d944a863-58b2-4338-9ba2-2df1015ae098" name="Changes" comment="getSheetsBykeywordsIgnoreCase">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EEQ.iml" beforeDir="false" afterPath="$PROJECT_DIR$/EEQ.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/common/FileHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/FileHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/StringProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/StringProcessor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/msexcel/Excel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/msexcel/Excel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/common/FileHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/common/FileHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mainFlow/extract.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mainFlow/extract.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/msexcel/Excel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msexcel/Excel$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/msexcel/Excel$ExcelType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msexcel/Excel$ExcelType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/msexcel/Excel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msexcel/Excel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/test/ExcelForRu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/test/ExcelForRu.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +47,6 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/validate" />
   </component>
   <component name="RecentsManager">
@@ -94,12 +86,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MyRange" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="validate.MyRange" />
+    <configuration name="StringProcessor" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="common.StringProcessor" />
       <module name="EEQ" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="validate.*" />
+          <option name="PATTERN" value="common.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -136,10 +128,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.FileHandler" />
+        <item itemvalue="Application.StringProcessor" />
         <item itemvalue="Application.ExcelForRu" />
         <item itemvalue="Application.customStringFormatter" />
         <item itemvalue="Application.VBS" />
-        <item itemvalue="Application.MyRange" />
       </list>
     </recent_temporary>
   </component>
@@ -257,7 +249,14 @@
       <option name="project" value="LOCAL" />
       <updated>1631338529174</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="getSheetsBykeywordsIgnoreCase">
+      <created>1631357428990</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1631357428990</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -282,7 +281,8 @@
     <MESSAGE value="modify word table1(input &amp; output cells add to table respectively)" />
     <MESSAGE value="modify manually enter spec function and modify excel" />
     <MESSAGE value="very important note" />
-    <option name="LAST_COMMIT_MESSAGE" value="very important note" />
+    <MESSAGE value="getSheetsBykeywordsIgnoreCase" />
+    <option name="LAST_COMMIT_MESSAGE" value="getSheetsBykeywordsIgnoreCase" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -304,13 +304,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/common/FileHandler.java</url>
-          <line>23</line>
-          <option name="timeStamp" value="68" />
+          <line>70</line>
+          <option name="timeStamp" value="72" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/common/FileHandler.java</url>
-          <line>34</line>
-          <option name="timeStamp" value="69" />
+          <line>57</line>
+          <option name="timeStamp" value="73" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
