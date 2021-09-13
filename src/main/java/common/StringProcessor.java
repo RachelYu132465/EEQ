@@ -100,14 +100,41 @@ public static List<Integer> IndexOfMatches(String StrToCheck, String regularExp)
     }
     return result;
 }
+//    public final static String micro_biotin_rex = "^([a-zA-Z])(\bbiotin\\b)$";
+    public final static String micro_biotin_rex_pre = "([0-9.-]*[\\s]*[a-zA-Z0-9]+([\\s]+))+(biotin)";
+    public final static String micro_biotin_rex_suf = "(biotin)(([\\s]+)[a-zA-Z0-9]+[0-9.-]*)+";
+    public final static String micro_biotin_rex_ = "([a-zA-Z0-9.-]+([\\s]+))*(biotin)(([\\s]*)[a-zA-Z0-9.-]*)*";
+    public final static String micro_biotin_rex_p = "(biotin)(([\\s]*)[^\\s]*)*";
+    public final static String micro_biotin_rex_s = "([^\\s]+([\\s]*))+(biotin)";
+    public static boolean isMatch (String input, String... rexs){
+        input = input.trim();
+//        List<String>  regularExp = new ArrayList<>();
+        for (String rex  :rexs) {
+            Pattern mypattern = Pattern.compile(rex, Pattern.CASE_INSENSITIVE);
+            Matcher mymatcher= mypattern.matcher(input);
+            if (mymatcher.matches()) return true;
+        }
+    return false;
+    }
 
     public static void main(String... arg) {
 //        System.out.println(replaceSpecialSymbol("C15"," "));
 //        System.out.println(Pattern.matches(".*[A-Z]+.*","0.154"));
-        System.out.println(Pattern.matches("[A-Z][0-9]+[:][A-Z][0-9]+", "A10$:A105"));
-        System.out.println(replaceCustomSymbol("^RSQ(D15:D19,B15:B19)"," "));
+        String input =" Biotin  AVFF RF5G";
+//        Pattern mypattern = Pattern.compile(micro_biotin_rex_pre, Pattern.CASE_INSENSITIVE);
+//        Pattern mypattern2 = Pattern.compile(micro_biotin_rex_suf, Pattern.CASE_INSENSITIVE);
+//        Matcher mymatcher= mypattern.matcher(input);
+//        Matcher mymatcher2= mypattern2.matcher(input);
+        System.out.println( isMatch(input,micro_biotin_rex_pre,micro_biotin_rex_suf));
+//        System.out.println( isMatch(input,micro_biotin_rex_pre,micro_biotin_rex_suf,micro_biotin_rex_));
+//        System.out.println( isMatch(input,micro_biotin_rex_p,micro_biotin_rex_s));
+
+//        System.out.println(Pattern.matches(micro_biotin_rex_pre,input )|| Pattern.matches(micro_biotin_rex_suf, input));
+//        System.out.println(replaceCustomSymbol("^RSQ(D15:D19,B15:B19)"," "));
 //        System.out.println(CapitalCharToLowerCaseWithDelimitor("ActKind"," "));
 //        System.out.println(ifContainMethod("C3*17+O2"));//false
 //        System.out.println(ifContainMethod("ifBlank(C3)"));//true
+
+
     }
 }

@@ -21,6 +21,7 @@ import static validate.excelFormulaValidator.getValidatedValues;
 
 
 /*
+執行前要: 1.檔案要存在桌面 2.檔案名稱不能有空格 (CMD無法執行，VBS會無法產新excel)
 [Extract]
     1.找規格(=目標值)
     2.找輸入格
