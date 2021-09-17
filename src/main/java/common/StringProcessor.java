@@ -58,6 +58,33 @@ public class StringProcessor {
              return false;
 
     }
+    public static boolean ifNotContainStrings(String CellValue ,String[] notContain) {
+        for  (String s: notContain ) {
+            if (StringUtils.isNotBlank(CellValue) && !CellValue.toLowerCase().contains(s.toLowerCase())) {
+
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+    //check if the row =the selected cells contain keyword A[], and/or not contain keyword B[]
+    public static boolean ifContainA_AND_NotContainB(String CellValue ,String[] A,String[] B) {
+
+           if(ifContainStrings(CellValue,A) && ifNotContainStrings(CellValue,B))
+                return true;
+
+        return false;
+    }
+    public static boolean ifContainA_OR_NotContainB(String CellValue ,String[] A,String[] B) {
+
+        if(ifContainStrings(CellValue,A) || ifNotContainStrings(CellValue,B))
+            return true;
+
+        return false;
+    }
+
     public static boolean ifEqual(String toBeCompared, String CellValue) {
         if (StringUtils.isNotBlank(CellValue) && replaceSpecialSymbol(CellValue.toLowerCase(), "").equals(toBeCompared))
             return true;

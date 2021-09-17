@@ -4,11 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d944a863-58b2-4338-9ba2-2df1015ae098" name="Changes" comment="getSheetsBykeywordsIgnoreCase">
+    <list default="true" id="d944a863-58b2-4338-9ba2-2df1015ae098" name="Changes" comment="filehandle">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/common/FileHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/FileHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/common/StringProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/StringProcessor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/msexcel/Excel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/msexcel/Excel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/common/FileHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/common/FileHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/common/StringProcessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/common/StringProcessor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mainFlow/VBS.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mainFlow/VBS.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/msexcel/Excel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msexcel/Excel$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/msexcel/Excel$ExcelType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msexcel/Excel$ExcelType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/msexcel/Excel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msexcel/Excel.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +65,7 @@
       <recent name="C:\Users\tina.yu\EEQ\src\main\java\msexcel" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.FileHandler">
+  <component name="RunManager" selected="Application.customExcelMicro">
     <configuration name="ExcelForRu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="test.ExcelForRu" />
       <module name="EEQ" />
@@ -99,12 +105,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="VBS" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="mainFlow.VBS" />
+    <configuration name="customExcelMicro" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="validate.customExcelMicro" />
       <module name="EEQ" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="mainFlow.*" />
+          <option name="PATTERN" value="validate.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -127,11 +133,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.customExcelMicro" />
         <item itemvalue="Application.FileHandler" />
         <item itemvalue="Application.StringProcessor" />
         <item itemvalue="Application.ExcelForRu" />
         <item itemvalue="Application.customStringFormatter" />
-        <item itemvalue="Application.VBS" />
       </list>
     </recent_temporary>
   </component>
@@ -256,7 +262,14 @@
       <option name="project" value="LOCAL" />
       <updated>1631357428990</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="filehandle">
+      <created>1631468093818</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1631468093818</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -282,7 +295,8 @@
     <MESSAGE value="modify manually enter spec function and modify excel" />
     <MESSAGE value="very important note" />
     <MESSAGE value="getSheetsBykeywordsIgnoreCase" />
-    <option name="LAST_COMMIT_MESSAGE" value="getSheetsBykeywordsIgnoreCase" />
+    <MESSAGE value="filehandle" />
+    <option name="LAST_COMMIT_MESSAGE" value="filehandle" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

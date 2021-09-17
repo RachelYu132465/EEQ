@@ -417,6 +417,10 @@ return sheetName;
         this.curCell.setCellValue(str);
         return this;
     }
+    public Excel setCellValue(String r1c1,String str) {
+        this.getCell(r1c1).setCellValue(str);
+        return this;
+    }
 
     public Excel setCellValue(Date date) {
         this.curCell.setCellValue(date);
@@ -751,7 +755,49 @@ return sheetName;
             }
         }
     }
+//    public static String  getMergedRegions(Sheet sheet, int row)
+    public static CellRangeAddress   getMergedRegions (Cell c)
+    {
 
+        Sheet s = c.getRow().getSheet();
+        for (CellRangeAddress mergedRegion : s.getMergedRegions()) {
+            if (mergedRegion.isInRange(c.getRowIndex(), c.getColumnIndex())) {
+                // This region contains the cell in question
+
+                System.out.println( mergedRegion.getFirstColumn());
+                        System.out.println( mergedRegion.getLastColumn());
+                return mergedRegion;
+            }
+        }
+        // Not in any
+        return null;
+//        for(int i = 0; i < sheet.getNumMergedRegions(); ++i)
+//        {
+//            CellRangeAddress range = sheet.getMergedRegion(i);
+//          int F=  range.getFirstRow();
+//            int L=  range.getLastRow();
+//
+//            return F+" "+L;
+//        }
+//        return "";
+    }
+    public static int getNbOfMergedRegions(Sheet sheet, int row)
+    {
+        int count = 0;
+        for(int i = 0; i < sheet.getNumMergedRegions(); ++i)
+        {
+            CellRangeAddress range = sheet.getMergedRegion(i);
+            if (range.getFirstRow() <= row && range.getLastRow() >= row)
+                ++count;
+        }
+        return count;
+    }
+
+    public Excel turnToNoMergedCellExcel(Excel excel,int rowFrom,int  rowTo,int colFrom,int colTo) {
+        CellRangeAddress region =  new CellRangeAddress(1,1,1,4);
+        curSheet.addMergedRegion(region);
+        return excel;
+    }
     @SuppressWarnings("unchecked")
     public Excel turnToNoMergedCellExcel(Excel excel) {
 
@@ -920,18 +966,18 @@ return sheetName;
 
 
     }
-    public  String findFirstWordInWb (String searchword){
+    public  String findFirstWordInWb (String searchword,Excel excel){
 
-        int sheetSize= this.getSheetSize();
+        int sheetSize= excel.getSheetSize();
         for (int i=0; i< sheetSize;i++){
             this.assignSheet(i);
-            int rowSize =this.getLastRowNum();
+            int rowSize =excel.getLastRowNum();
             for (int j=0; j< rowSize;j++){
                 this.assignRow(j);
-                int colSize =this.getLastCellNum();
+                int colSize =excel.getLastCellNum();
                 for (int k=0; k< colSize;k++){
                     this.assignCell(k);
-                    String cellString =this.getAbsoluteStringCellValue();
+                    String cellString =excel.getAbsoluteStringCellValue();
                     if(StringUtils.containsIgnoreCase(cellString,searchword.trim())){
                         String s =getR1C1Idx(curCell);
                         return  s;

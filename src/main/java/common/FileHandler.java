@@ -61,7 +61,7 @@ public class FileHandler {
             if (extension.equalsIgnoreCase("xlsx") ||
                     extension.equalsIgnoreCase("xls")) {
                 Excel excel = Excel.loadExcel(ff);
-                String cellAddr = excel.findFirstWordInWb("test item");
+                String cellAddr = excel.findFirstWordInWb("test item",excel);
                 Cell test_item = excel.getCell(cellAddr);
                 String test_item_name = excel.findfirstWordAtRight(test_item.getRowIndex(), test_item.getColumnIndex());
            if (isMatch(test_item_name,micro_biotin_rex_pre,micro_biotin_rex_suf))
