@@ -4,18 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d944a863-58b2-4338-9ba2-2df1015ae098" name="Changes" comment="modify">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_2_6.xml" afterDir="false" />
+    <list default="true" id="d944a863-58b2-4338-9ba2-2df1015ae098" name="Changes" comment="filehandle">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/common/FileHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/FileHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mainFlow/extract.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mainFlow/extract.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/StringProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/StringProcessor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/msexcel/Excel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/msexcel/Excel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/msexcel/ExcelCell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/msexcel/ExcelCell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/test/ExcelForRu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/ExcelForRu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/validate/excelFormulaValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/validate/excelFormulaValidator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/common/FileHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/common/FileHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/test/ExcelForRu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/test/ExcelForRu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/validate/excelFormulaValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/validate/excelFormulaValidator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/common/StringProcessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/common/StringProcessor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mainFlow/VBS.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mainFlow/VBS.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/msexcel/Excel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msexcel/Excel$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/msexcel/Excel$ExcelType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msexcel/Excel$ExcelType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/msexcel/Excel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msexcel/Excel.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +53,6 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/validate" />
   </component>
   <component name="RecentsManager">
@@ -67,7 +65,7 @@
       <recent name="C:\Users\tina.yu\EEQ\src\main\java\msexcel" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ExcelForRu">
+  <component name="RunManager" selected="Application.customExcelMicro">
     <configuration name="ExcelForRu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="test.ExcelForRu" />
       <module name="EEQ" />
@@ -94,12 +92,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MyRange" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="validate.MyRange" />
+    <configuration name="StringProcessor" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="common.StringProcessor" />
       <module name="EEQ" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="validate.*" />
+          <option name="PATTERN" value="common.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -107,12 +105,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="VBS" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="mainFlow.VBS" />
+    <configuration name="customExcelMicro" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="validate.customExcelMicro" />
       <module name="EEQ" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="mainFlow.*" />
+          <option name="PATTERN" value="validate.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -135,11 +133,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ExcelForRu" />
+        <item itemvalue="Application.customExcelMicro" />
         <item itemvalue="Application.FileHandler" />
+        <item itemvalue="Application.StringProcessor" />
+        <item itemvalue="Application.ExcelForRu" />
         <item itemvalue="Application.customStringFormatter" />
-        <item itemvalue="Application.VBS" />
-        <item itemvalue="Application.MyRange" />
       </list>
     </recent_temporary>
   </component>
@@ -250,14 +248,28 @@
       <option name="project" value="LOCAL" />
       <updated>1631088196657</updated>
     </task>
-    <task id="LOCAL-00015" summary="modify">
-      <created>1631493260428</created>
+    <task id="LOCAL-00015" summary="very important note">
+      <created>1631338529174</created>
       <option name="number" value="00015" />
       <option name="presentableId" value="LOCAL-00015" />
       <option name="project" value="LOCAL" />
-      <updated>1631493260428</updated>
+      <updated>1631338529174</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="getSheetsBykeywordsIgnoreCase">
+      <created>1631357428990</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1631357428990</updated>
+    </task>
+    <task id="LOCAL-00017" summary="filehandle">
+      <created>1631468093818</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1631468093818</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -281,8 +293,10 @@
     <MESSAGE value="MODIFY WORD" />
     <MESSAGE value="modify word table1(input &amp; output cells add to table respectively)" />
     <MESSAGE value="modify manually enter spec function and modify excel" />
-    <MESSAGE value="modify" />
-    <option name="LAST_COMMIT_MESSAGE" value="modify" />
+    <MESSAGE value="very important note" />
+    <MESSAGE value="getSheetsBykeywordsIgnoreCase" />
+    <MESSAGE value="filehandle" />
+    <option name="LAST_COMMIT_MESSAGE" value="filehandle" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -293,43 +307,26 @@
           <option name="timeStamp" value="60" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/test/ExcelForRu.java</url>
-          <line>92</line>
+          <url>file://$PROJECT_DIR$/src/main/java/msword/CustomTableStyle.java</url>
+          <line>95</line>
+          <option name="timeStamp" value="64" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/msword/CustomTableStyle.java</url>
+          <line>67</line>
+          <option name="timeStamp" value="67" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/common/FileHandler.java</url>
+          <line>70</line>
           <option name="timeStamp" value="72" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/common/FileHandler.java</url>
-          <line>61</line>
-          <option name="timeStamp" value="77" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/common/FileHandler.java</url>
-          <line>95</line>
-          <option name="timeStamp" value="78" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/validate/excelFormulaValidator.java</url>
-          <line>171</line>
-          <option name="timeStamp" value="80" />
-        </line-breakpoint>
-        <breakpoint enabled="true" type="java-exception">
-          <properties class="java.lang.RuntimeException" package="java.lang" />
-          <option name="timeStamp" value="75" />
-        </breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/validate/excelFormulaValidator.java</url>
-          <line>144</line>
-          <properties class="validate.excelFormulaValidator" method="getValidatedValues">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="81" />
+          <line>57</line>
+          <option name="timeStamp" value="73" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
-  </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/EEQ$FileHandler.ic" NAME="FileHandler Coverage Results" MODIFIED="1631511495001" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>common.*</FILTER>
-    </SUITE>
   </component>
 </project>
