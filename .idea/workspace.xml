@@ -6,15 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d944a863-58b2-4338-9ba2-2df1015ae098" name="Changes" comment="filehandle">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/common/FileHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/FileHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/common/StringProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/StringProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/msexcel/Excel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/msexcel/Excel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/common/FileHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/common/FileHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/common/StringProcessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/common/StringProcessor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mainFlow/VBS.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mainFlow/VBS.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/msexcel/Excel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msexcel/Excel$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/msexcel/Excel$ExcelType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msexcel/Excel$ExcelType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/msexcel/Excel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msexcel/Excel.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -318,15 +309,20 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/common/FileHandler.java</url>
-          <line>70</line>
+          <line>61</line>
           <option name="timeStamp" value="72" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/common/FileHandler.java</url>
-          <line>57</line>
+          <line>53</line>
           <option name="timeStamp" value="73" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/EEQ$FileHandler.ic" NAME="FileHandler Coverage Results" MODIFIED="1631511495001" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>common.*</FILTER>
+    </SUITE>
   </component>
 </project>
