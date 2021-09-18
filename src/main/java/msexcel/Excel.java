@@ -14,6 +14,7 @@ import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.usermodel.Row.MissingCellPolicy;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.*;
+import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 
 import javax.swing.filechooser.FileSystemView;
 import java.io.*;
@@ -920,7 +921,18 @@ return sheetName;
 
 
     }
-    public  String findFirstWordInWb (String searchword){
+    public void writeToOneRow (int sheetSize, int startrowIdx, int colIdx, List<Object> data) {
+
+        this.assignSheet(sheetSize);
+        this.assignRow(startrowIdx);
+        int colSize = data.size();
+        for (int k= 0; k< colSize;k++) {
+            assignCell(k);
+            this.getCell(k).setCellValue(data.toString());
+        }
+        }
+
+        public  String findFirstWordInWb (String searchword){
 
         int sheetSize= this.getSheetSize();
         for (int i=0; i< sheetSize;i++){

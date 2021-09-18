@@ -70,6 +70,7 @@ public class ExcelCell {
         if(cell!=null){
             this.r1c1 = Excel.getR1C1Idx(cell);
 //            this.value = getCellValue(cell).toString();
+            System.out.println("in ExcelCell" +excel.getSheet().getSheetName());
             this.value = excel.getCellValueAsString(cell);
             this.cell = cell;
             setNote(excel,cell);

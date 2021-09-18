@@ -159,11 +159,11 @@ return scanForSpecificationCellAddr();
                 if (prev.getInput().getR1c1() != null)
                     inputCell = newExcel.getCell(prev.getInput().getR1c1());
                 for (ExcelCell c : prev.getAllInputs()) {
-                    newInputCells.add(new ExcelCell(excel,newExcel.getCell(Excel.getR1C1Idx(c.getCell()))).copyNote(c));
+                    newInputCells.add(new ExcelCell(newExcel,newExcel.getCell(Excel.getR1C1Idx(c.getCell()))).copyNote(c));
                 }
                 ValidGoal newv = new ValidGoal(
-                        new ExcelCell(excel,inputCell),
-                        new ExcelCell(excel,outputCell) ,
+                        new ExcelCell(newExcel,inputCell),
+                        new ExcelCell(newExcel,outputCell) ,
                         newInputCells);
                 newv.getOutput().copyNote(prev.getOutput());
                 result.put(outputR1C1withIdx, newv);

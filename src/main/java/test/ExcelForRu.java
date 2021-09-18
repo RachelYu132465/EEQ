@@ -48,8 +48,10 @@ public class ExcelForRu {
     public static void main(String[] args) throws IOException, InterruptedException
 //            ,RangeException
     {
+//        String fileName =  "格式_RT30397_LABSpreadsheet數字(1).xlsx";
 //        String fileName = "C- RT30358-LAB Spreadsheet-數字版.xlsx";
-        String fileName = "C- RT30358-LAB Spreadsheet-數字版 - 複製.xlsx";
+//        String fileName = "final_RT30358_LAB_Spreadsheet複製.xlsx";
+        String fileName =  "final_RT30358_LAB_Spreadsheet_2.xlsx";
 //        String fileName = "R000012383-LAB Spreadsheet數字.xlsx";
         Excel excel = Excel.loadExcel(proj_path + fileName);
         XWPFDocument doc_general = new XWPFDocument();
