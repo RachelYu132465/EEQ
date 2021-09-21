@@ -14,6 +14,7 @@ import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.usermodel.Row.MissingCellPolicy;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.*;
+import org.bouncycastle.util.Strings;
 
 import javax.swing.filechooser.FileSystemView;
 import java.io.*;
@@ -23,7 +24,7 @@ import java.util.*;
 
 public class Excel {
 
-    public static final String CellAddrR1C1Rex ="^[A-Z][0-9]+";
+    public static final String CellAddrR1C1Rex = "^[A-Z][0-9]+";
     File file;
     Workbook curWb;
     Sheet curSheet;
@@ -78,7 +79,7 @@ public class Excel {
 
     public Excel(String fileName) throws IOException {
         this(new FileInputStream(new File(fileName)), fileName);
-        this.fileName=fileName;
+        this.fileName = fileName;
     }
 
     private Excel(InputStream in, String fileName) {
@@ -207,6 +208,21 @@ public class Excel {
         return this;
     }
 
+    //excel represent new line in this way
+    public static boolean ifContainNewLine(String s) {
+        char LF = (char) 0x0A;
+        if (s.contains(String.valueOf(LF))) {
+
+            return true;
+        }
+        return false;
+    }
+
+    public Sheet copySheet(int sheetidx) {
+        Sheet s = curWb.cloneSheet(sheetidx);
+        return s;
+    }
+
     public String getSheetName(int index) {
         return curWb.getSheetName(index);
     }
@@ -223,21 +239,21 @@ public class Excel {
 
     public List<String> getAllSheetsNames() {
         int sheetcount = curWb.getNumberOfSheets();
-        List<String> sheetName=new ArrayList<>();
-        for(int i=0; i<sheetcount;i++)
-        {
+        List<String> sheetName = new ArrayList<>();
+        for (int i = 0; i < sheetcount; i++) {
             String s = curWb.getSheetName(i);
             sheetName.add(s);
         }
 
-return sheetName;
+        return sheetName;
     }
-    public static  List<String> getSheetsBykeywordsIgnoreCase (Excel excel,String ...keywords){
+
+    public static List<String> getSheetsNameBykeywordsIgnoreCase(Excel excel, String... keywords) {
         List<Sheet> sheets = excel.getSheets();
         List<String> containKeywordsheets = new ArrayList<>();
-        List<String> SheetsNames  =excel.getAllSheetsNames();
+        List<String> SheetsNames = excel.getAllSheetsNames();
         for (String s : SheetsNames) {
-            for (String keyword:keywords){
+            for (String keyword : keywords) {
 //                System.out.println(s.getSheetName());
                 if (s.toLowerCase().contains(keyword.toLowerCase(Locale.ROOT))) {
                     containKeywordsheets.add(s);
@@ -249,6 +265,25 @@ return sheetName;
         }
         return containKeywordsheets;
     }
+
+    public static List<Sheet> getSheetsBykeywordsIgnoreCase(Excel excel, String... keywords) {
+        List<Sheet> sheets = excel.getSheets();
+
+        List<Sheet> Sheets = new ArrayList<>();
+        for (Sheet s : sheets) {
+            for (String keyword : keywords) {
+                if (s.getSheetName().toLowerCase().contains(keyword.toLowerCase(Locale.ROOT))) {
+
+                    Sheets.add(s);
+
+                }
+            }
+        }
+
+
+        return Sheets;
+    }
+
     public int getSheetSize() {
         return this.getSheets().size();
     }
@@ -371,8 +406,7 @@ return sheetName;
         if (curRow != null) {
             curCell = curRow.getCell(index,
                     toCreate ? MissingCellPolicy.CREATE_NULL_AS_BLANK : MissingCellPolicy.RETURN_NULL_AND_BLANK);
-        }
-        else {
+        } else {
             this.assignRow(this.getLastRowNum());
         }
         if (curCell == null) {
@@ -417,7 +451,8 @@ return sheetName;
         this.curCell.setCellValue(str);
         return this;
     }
-    public Excel setCellValue(String r1c1,String str) {
+
+    public Excel setCellValue(String r1c1, String str) {
         this.getCell(r1c1).setCellValue(str);
         return this;
     }
@@ -431,7 +466,24 @@ return sheetName;
         return getCellValue(this.curCell);
     }
 
+    public List<String> getCellsStringValue(int startRow, int endRow, int startcol, int endcol) {
+        List<String> stringList = new ArrayList<>();
+        for (int j = startRow; j < endRow + 1; j++) {
+            this.assignRow(j);
 
+            for (int k = startcol; k < endcol + 1; k++) {
+                this.assignCell(k);
+                String cellString = this.getAbsoluteStringCellValue();
+                if (!cellString.isBlank()) {
+//                    System.out.print ("R"+j+"C"+k+cellString);
+
+                    stringList.add(cellString);
+
+                }
+            }
+        }
+        return stringList;
+    }
 
     public static Object getCellValue_OriginalFormula(Cell cell) {
         switch (cell.getCellType()) {
@@ -597,6 +649,7 @@ return sheetName;
             String excelFileName = String.format("%s%s", fileName, getExtName());
             FileOutputStream fileOut = new FileOutputStream(excelFileName);
             curWb.write(fileOut);
+            curWb.close();
             fileOut.flush();
             fileOut.close();
         } catch (IOException e) {
@@ -628,164 +681,10 @@ return sheetName;
         }
     }
 
-    /**
-     * 根據源Sheet樣式copy新Sheet
-     *
-     * @param fromsheetname
-     * @param newsheetname
-     * @param targetFile
-     */
-    private void copySheet(String fromsheetname, String newsheetname, String targetFile) {
-        Workbook anothWb = null;
-        try {
-            FileInputStream fis = new FileInputStream(targetFile);
-            anothWb = new HSSFWorkbook(fis);
-            Sheet fromsheet = anothWb.getSheet(fromsheetname);
-            if (fromsheet != null && anothWb.getSheet(newsheetname) == null) {
-                Sheet newsheet = anothWb.createSheet(newsheetname);
-                // 設定列印引數
-//                newsheet.setMargin(HSSFSheet.TopMargin,fromsheet.getMargin(HSSFSheet.TopMargin));// 頁邊距（上）
-//                newsheet.setMargin(HSSFSheet.BottomMargin,fromsheet.getMargin(HSSFSheet.BottomMargin));// 頁邊距（下）
-//                newsheet.setMargin(HSSFSheet.LeftMargin,fromsheet.getMargin(HSSFSheet.LeftMargin) );// 頁邊距（左）
-//                newsheet.setMargin(HSSFSheet.RightMargin,fromsheet.getMargin(HSSFSheet.RightMargin));// 頁邊距（右
 
-//                HSSFPrintSetup ps = newsheet.getPrintSetup();
-//                ps.setLandscape(false); // 列印方向，true：橫向，false：縱向(預設)
-//                ps.setVResolution((short)600);
-//                ps.setPaperSize(HSSFPrintSetup.A4_PAPERSIZE); //紙張型別
-
-                File file = new File(targetFile);
-                if (file.exists() && (file.renameTo(file))) {
-                    copyRows(anothWb, fromsheet, newsheet, fromsheet.getFirstRowNum(), fromsheet.getLastRowNum());
-                    FileOutputStream fileOut = new FileOutputStream(targetFile);
-                    anothWb.write(fileOut);
-                    fileOut.flush();
-                    fileOut.close();
-                } else {
-                    System.out.println("檔案不存在或者正在使用,請確認...");
-                }
-            }
-            fis.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * 拷貝Excel行
-     *
-     * @param wb
-     * @param fromsheet
-     * @param newsheet
-     * @param firstrow
-     * @param lastrow
-     */
-    private void copyRows(Workbook wb, Sheet fromsheet, Sheet newsheet, int firstrow, int lastrow) {
-        if ((firstrow == -1) || (lastrow == -1) || lastrow < firstrow) {
-            return;
-        }
-        // 拷貝合併的單元格
-//        Region region = null;
-//        for (int i = 0; i < fromsheet.getNumMergedRegions(); i++) {
-//            region = fromsheet.getMergedRegionAt(i);
-//            if ((region.getRowFrom() >= firstrow) && (region.getRowTo() <= lastrow)) {
-//                newsheet.addMergedRegion(region);
-//            }
-//        }
-
-        Row fromRow = null;
-        Row newRow = null;
-        Cell newCell = null;
-        Cell fromCell = null;
-        // 設定列寬
-        for (int i = firstrow; i <= lastrow; i++) {
-            fromRow = fromsheet.getRow(i);
-            if (fromRow != null) {
-                for (int j = fromRow.getLastCellNum(); j >= fromRow.getFirstCellNum(); j--) {
-                    int colnum = fromsheet.getColumnWidth((short) j);
-                    if (colnum > 100) {
-                        newsheet.setColumnWidth((short) j, (short) colnum);
-                    }
-                    if (colnum == 0) {
-                        newsheet.setColumnHidden((short) j, true);
-                    } else {
-                        newsheet.setColumnHidden((short) j, false);
-                    }
-                }
-                break;
-            }
-        }
-        // 拷貝行並填充資料
-        for (int i = 0; i <= lastrow; i++) {
-            fromRow = fromsheet.getRow(i);
-            if (fromRow == null) {
-                continue;
-            }
-            newRow = newsheet.createRow(i - firstrow);
-            newRow.setHeight(fromRow.getHeight());
-            for (int j = fromRow.getFirstCellNum(); j < fromRow.getPhysicalNumberOfCells(); j++) {
-                fromCell = fromRow.getCell((short) j);
-                if (fromCell == null) {
-                    continue;
-                }
-                newCell = newRow.createCell((short) j);
-                newCell.setCellStyle(fromCell.getCellStyle());
-                CellType cType = fromCell.getCellTypeEnum();
-                newCell.setCellType(cType);
-                switch (cType) {
-                    case STRING:
-                        newCell.setCellValue(fromCell.getRichStringCellValue());
-                        break;
-                    case NUMERIC:
-                        newCell.setCellValue(fromCell.getNumericCellValue());
-                        break;
-                    case FORMULA:
-                        newCell.setCellFormula(fromCell.getCellFormula());
-                        break;
-                    case BOOLEAN:
-                        newCell.setCellValue(fromCell.getBooleanCellValue());
-                        break;
-                    case ERROR:
-                        newCell.setCellValue(fromCell.getErrorCellValue());
-                        break;
-                    default:
-                        newCell.setCellValue(fromCell.getRichStringCellValue());
-                        break;
-                }
-            }
-        }
-    }
-//    public static String  getMergedRegions(Sheet sheet, int row)
-    public static CellRangeAddress   getMergedRegions (Cell c)
-    {
-
-        Sheet s = c.getRow().getSheet();
-        for (CellRangeAddress mergedRegion : s.getMergedRegions()) {
-            if (mergedRegion.isInRange(c.getRowIndex(), c.getColumnIndex())) {
-                // This region contains the cell in question
-
-                System.out.println( mergedRegion.getFirstColumn());
-                        System.out.println( mergedRegion.getLastColumn());
-                return mergedRegion;
-            }
-        }
-        // Not in any
-        return null;
-//        for(int i = 0; i < sheet.getNumMergedRegions(); ++i)
-//        {
-//            CellRangeAddress range = sheet.getMergedRegion(i);
-//          int F=  range.getFirstRow();
-//            int L=  range.getLastRow();
-//
-//            return F+" "+L;
-//        }
-//        return "";
-    }
-    public static int getNbOfMergedRegions(Sheet sheet, int row)
-    {
+    public static int getNbOfMergedRegions(Sheet sheet, int row) {
         int count = 0;
-        for(int i = 0; i < sheet.getNumMergedRegions(); ++i)
-        {
+        for (int i = 0; i < sheet.getNumMergedRegions(); ++i) {
             CellRangeAddress range = sheet.getMergedRegion(i);
             if (range.getFirstRow() <= row && range.getLastRow() >= row)
                 ++count;
@@ -793,11 +692,12 @@ return sheetName;
         return count;
     }
 
-    public Excel turnToNoMergedCellExcel(Excel excel,int rowFrom,int  rowTo,int colFrom,int colTo) {
-        CellRangeAddress region =  new CellRangeAddress(1,1,1,4);
+    public Excel turnToNoMergedCellExcel(Excel excel, int rowFrom, int rowTo, int colFrom, int colTo) {
+        CellRangeAddress region = new CellRangeAddress(1, 1, 1, 4);
         curSheet.addMergedRegion(region);
         return excel;
     }
+
     @SuppressWarnings("unchecked")
     public Excel turnToNoMergedCellExcel(Excel excel) {
 
@@ -831,6 +731,54 @@ return sheetName;
         return excel;
     }
 
+    public void removeLastBlankRow(Sheet sheet){
+        int lastRowIdx = sheet.getLastRowNum();
+        Check1:
+        for(int idx=lastRowIdx; idx>0;idx--){
+            Row row=sheet.getRow(idx);
+            for(int cellIdx =0; cellIdx<row.getLastCellNum(); cellIdx++){
+                if(row.getCell(cellIdx)!=null && StringUtils.isNotBlank(getCellValueAsString(row.getCell(cellIdx)))){
+                    break Check1;
+                }
+            }
+            sheet.removeRow(row);
+        }
+    }
+
+    public static boolean removeMergedArea(Sheet sheet, int rowStartIdxOfMerged, int rowEndIdxOfMerged) {
+        boolean result = false;
+        for (int i = 0; i < sheet.getNumMergedRegions(); i++) {
+            CellRangeAddress region = sheet.getMergedRegion(i); // Region of merged cells
+            int colIndex = region.getFirstColumn(); // number of columns merged
+            int rowNum = region.getFirstRow(); // number of rows merged
+//                if(rowIdxOfMerged == rowNum && colIndex==colIndex){
+            if (rowStartIdxOfMerged <= rowNum && rowEndIdxOfMerged >= rowNum) {
+                Cell firstCellInMergedArea = sheet.getRow(rowNum).getCell(colIndex);
+                Object cellValue = getCellValue(firstCellInMergedArea);
+
+                for (Row row : sheet) {
+                    for (Cell cell : row) {
+                        if (region.isInRange(cell)) {
+                            if (cellValue instanceof Date)
+                                cell.setCellValue((Date) cellValue);
+                            else if (cellValue instanceof Boolean)
+                                cell.setCellValue((Boolean) cellValue);
+                            else if (cellValue instanceof Double)
+                                cell.setCellValue((Double) cellValue);
+                            else
+                                cell.setCellValue(cellValue.toString());
+                        }
+                    }
+                }
+                sheet.removeMergedRegion(i);
+                result = true;
+            }
+
+        }
+
+        return result;
+    }
+
     public static String getCellIndex(Cell cell) {
         return cell.getRowIndex() + "," + cell.getColumnIndex();
     }
@@ -838,12 +786,13 @@ return sheetName;
     public Cell getCell(String r1c1) {
         CellReference cellReference = new CellReference(r1c1);
         Row row = this.curSheet.getRow(cellReference.getRow());
-        if(row!=null){
-            return  row.getCell(cellReference.getCol());
+        if (row != null) {
+            return row.getCell(cellReference.getCol());
         }
 
         return null;
     }
+
     public String getCellValueAsString(Cell cell) {
         if (cell == null) {
             return null;
@@ -857,7 +806,7 @@ return sheetName;
         } else if (cell.getCellType().equals(CellType.FORMULA)) {
             FormulaEvaluator evaluator = this.curWb.getCreationHelper().createFormulaEvaluator();
             DataFormatter formatter = new DataFormatter();
-            String formattedValue = formatter.formatCellValue(cell,evaluator);
+            String formattedValue = formatter.formatCellValue(cell, evaluator);
             return formattedValue;
         } else {
 //            throw new InvalidCSVException(
@@ -865,6 +814,7 @@ return sheetName;
             return "";
         }
     }
+
     public Object getCellValue(String r1c1) {
         return getCellValue(getCell(r1c1));
     }
@@ -883,6 +833,7 @@ return sheetName;
                     cell.getRowIndex() + "," + cell.getColumnIndex() + value.toString());
         }
     }
+
     public Excel save() {
         try (FileOutputStream outputStream = new FileOutputStream(this.file.getPath())) {
             this.getWorkbook().write(outputStream);
@@ -919,7 +870,7 @@ return sheetName;
             if (workbook.getWorksheet(this.curSheet.getSheetName()) != null) {
                 ExcelWorksheet worksheet = workbook.getWorksheet(this.curSheet.getSheetName());
                 String cells[] = range.split(":");
-                if(cells.length>1){
+                if (cells.length > 1) {
                     com.gembox.spreadsheet.CellRange cellRange = worksheet.getCells().getSubrange(cells[0], cells[1]);
                     CellRangeIterator ir = cellRange.getReadIterator();
                     while (ir.hasNext()) {
@@ -936,7 +887,8 @@ return sheetName;
     public static String getR1C1Idx(Cell cell) {
         return cell.getAddress().formatAsString();
     }
-    public  String getR1C1Idx() {
+
+    public String getR1C1Idx() {
         return getCurCell().getAddress().formatAsString();
     }
 
@@ -966,44 +918,61 @@ return sheetName;
 
 
     }
-    public  String findFirstWordInWb (String searchword,Excel excel){
 
-        int sheetSize= excel.getSheetSize();
-        for (int i=0; i< sheetSize;i++){
-            this.assignSheet(i);
-            int rowSize =excel.getLastRowNum();
-            for (int j=0; j< rowSize;j++){
-                this.assignRow(j);
-                int colSize =excel.getLastCellNum();
-                for (int k=0; k< colSize;k++){
-                    this.assignCell(k);
-                    String cellString =excel.getAbsoluteStringCellValue();
-                    if(StringUtils.containsIgnoreCase(cellString,searchword.trim())){
-                        String s =getR1C1Idx(curCell);
-                        return  s;
-                    }
+
+    public String findFirstWord(String searchword, int startRow, int endRow, int startcol, int endcol) {
+
+        for (int j = startRow; j < endRow; j++) {
+            this.assignRow(j);
+
+            for (int k = startcol; k < endcol; k++) {
+                this.assignCell(k);
+                String cellString = this.getAbsoluteStringCellValue();
+                if (StringUtils.containsIgnoreCase(cellString, searchword.trim())) {
+                    String s = getR1C1Idx(curCell);
+                    return s;
                 }
             }
         }
         return "";
     }
+
+    public String findFirstWordInWb(String searchword, Excel excel) {
+
+
+        int rowSize = excel.getLastRowNum();
+        for (int j = 0; j < rowSize; j++) {
+            this.assignRow(j);
+            int colSize = excel.getLastCellNum();
+            for (int k = 0; k < colSize; k++) {
+                this.assignCell(k);
+                String cellString = excel.getAbsoluteStringCellValue();
+                if (StringUtils.containsIgnoreCase(cellString, searchword.trim())) {
+                    String s = getR1C1Idx(curCell);
+                    return s;
+                }
+            }
+
+        }
+        return "";
+    }
+
     public String findfirstWordAtRight(int rowIdx, int colIdx) {
         int size = this.getLastCellNum();
 
-        for (int k = colIdx + 1; k <size; k++) {
+        for (int k = colIdx + 1; k < size; k++) {
             this.assignRow(rowIdx);
             this.assignCell(k);
-if (StringUtils.isNotBlank(this.getAbsoluteStringCellValue()))
-                    return this.getCellValue().toString();
+            if (StringUtils.isNotBlank(this.getAbsoluteStringCellValue()))
+                return this.getCellValue().toString();
 
 
-
-
-    }
+        }
         return "";
     }
+
     public String findfirstBlackWordAtRight(int rowIdx, int colIdx) {
-    int size = this.getLastCellNum();
+        int size = this.getLastCellNum();
         for (int k = colIdx + 1; k < size; k++) {
             this.assignRow(rowIdx);
             this.assignCell(k);
@@ -1025,6 +994,7 @@ if (StringUtils.isNotBlank(this.getAbsoluteStringCellValue()))
         }
         return "";
     }
+
     public String findfirstBlackWordAtLeft(int rowIdx, int colIdx) {
         for (int k = colIdx - 1; k >= 0; k--) {
             this.assignRow(rowIdx);
@@ -1079,9 +1049,6 @@ if (StringUtils.isNotBlank(this.getAbsoluteStringCellValue()))
     }
 
 
-
-
-
     public String getFileName() {
         return fileName;
     }
@@ -1089,4 +1056,75 @@ if (StringUtils.isNotBlank(this.getAbsoluteStringCellValue()))
     public void setFileName(String fileName) {
         this.fileName = fileName;
     }
+
+
+    /*
+   excel view setting function
+   */
+    public Sheet isDisplayGridlines(Sheet sheet, boolean DisplayGridlines) {
+        //set display grid lines or not 是否顯示儲存格框線
+        sheet.setDisplayGridlines(true);
+        return sheet;
+    }
+
+    public Sheet setMargin(Sheet sheet, double TopMargin, double BottomMargin, double LeftMargin, double RightMargin) {
+        //Set printing parameters
+        sheet.setMargin(Sheet.TopMargin, (double) TopMargin);//  Margin (top)
+        sheet.setMargin(Sheet.BottomMargin, (double) BottomMargin);//  Margin (bottom)
+        sheet.setMargin(Sheet.LeftMargin, (double) LeftMargin);//  Margin (left)
+        sheet.setMargin(Sheet.RightMargin, (double) RightMargin);//  Margin (right)
+        return sheet;
+    }
+
+    /*
+   excel view setting function block
+   */
+
+
+    /*
+    excel print setting function
+    */
+    public Excel setPrintArea(Excel excel, int sheetidx, int start_column, int end_column, int start_row, int end_row) {
+        excel.getWorkbook().setPrintArea(sheetidx, start_column, end_column, start_row, end_row);
+        return excel;
+    }
+
+    public Sheet print_setting_on_sheet_PrintSetup(Sheet sheet, int setFitWidth, int setFitHeight, short papersize) {
+        if (sheet != null) {
+            PrintSetup ps = sheet.getPrintSetup();
+            //一個page要印幾個sheet進去
+            ps.setFitWidth((short) setFitWidth);
+            ps.setFitHeight((short) setFitHeight);
+            // e.g. A4 B4
+            ps.setPaperSize(papersize);
+        }
+        return sheet;
+    }
+
+    public Sheet print_setting_on_sheet(Sheet sheet, boolean VerticallyCenter, boolean HorizontallyCenter, boolean PrintGridlines, boolean setFitToPage, boolean PrintRowAndColumnHeadings) {
+
+        if (sheet != null) {
+
+            //將sheet水平/垂直置中影印
+            sheet.setVerticallyCenter(VerticallyCenter);
+            sheet.setHorizontallyCenter(HorizontallyCenter);
+
+            //set print grid lines or not 是否影印儲存格框線
+            sheet.setPrintGridlines(PrintGridlines);
+
+            sheet.setFitToPage(setFitToPage);
+
+            //影印欄&列的名稱 i.e.ABC &123
+            sheet.setPrintRowAndColumnHeadings(PrintRowAndColumnHeadings);
+        }
+        return sheet;
+    }
+
+//    public Sheet print_setting_on_workbook (Sheet newsheet, boolean VerticallyCenter,boolean HorizontallyCenter,boolean DisplayGridlines,boolean PrintGridlines, boolean PrintRowAndColumnHeadings ){
+//
+//
+//    }
+    /*
+    end block: excel print setting function
+    */
 }// end of class

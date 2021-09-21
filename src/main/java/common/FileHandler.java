@@ -14,6 +14,7 @@ import java.util.*;
 
 import static common.StringProcessor.*;
 import static msexcel.Excel.getSheetsBykeywordsIgnoreCase;
+import static msexcel.Excel.getSheetsNameBykeywordsIgnoreCase;
 import static test.ExcelForRu.proj_path;
 
 public class FileHandler {
@@ -24,11 +25,14 @@ public class FileHandler {
         if (!theDir.exists()){
             theDir.mkdirs();
         }
+        if (!f.isFile()){
+            System.out.println("!f.isFile()");
+        }
         if (f.exists() && f.isFile()) {
             f.renameTo(new File(path + "/" + subfolderName+ "/"+f.getName()));
 //            f.renameTo(new File("C:\\Users\\tina.yu\\Desktop\\biotin_and_Eng\\test1.xlsx"));
 
-            System.out.println("!!!"+path + "/" + subfolderName+ "/"+f.getName());
+            System.out.println("move file to "+path + "/" + subfolderName+ "/"+f.getName());
             return true;
         }
         return false;
@@ -39,13 +43,13 @@ public class FileHandler {
 
 //File ff = new File("C:\\Users\\tina.yu\\Desktop\\RU\\RT30397.xlsx");
 //                Excel excel = Excel.loadExcel(ff);
-//load檔案後無法移動檔案
+//load檔案後無法移動檔案 =
 //        excel.outputFile("RT30397");
 //        File fW = new File("C:\\Users\\tina.yu\\Desktop\\RU\\RT30397.xlsx");
 //                moveFileToSubFolder(proj_path,"biotin_and_Eng",fW);
 ////                System.out.println(excel.getFileName());
 //
-////                List<String> sheet = getSheetsBykeywordsIgnoreCase(excel, "item", "micro");
+//                List<String> sheet = getSheetsNameBykeywordsIgnoreCase(excel,"micro");
 ////                System.out.println(sheet.toString());
 //                System.out.println("==========");
 //            }
