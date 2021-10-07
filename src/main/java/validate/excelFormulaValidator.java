@@ -61,6 +61,8 @@ public class excelFormulaValidator {
 return scanForSpecificationCellAddr();
         }
 
+
+
 //                while (sc.hasNext() && (sc.nextLine().equalsIgnoreCase("y"))) {//change here
 //                    System.out.println("請輸入規格的儲存格位置(R1C1)");
 //                    return scanForSpecificationCellAddr();
@@ -75,7 +77,24 @@ return scanForSpecificationCellAddr();
 
         }
 
+    public static String scanByTypingSpec() {
+        Scanner sc = new Scanner(System.in);
+        String userInput = "";
+        System.out.println("是否手動設定規格?是請輸入:y;否請按enter");
 
+        userInput = sc.nextLine();
+        if (userInput.isBlank()) {
+            System.out.println("使用預設方式找規格");
+            return "";
+        } else {
+
+            while (!userInput.matches("[yY]")) {
+                System.out.println("輸入spec字串");
+                userInput = sc.nextLine();
+            }
+            return scanForSpecificationCellAddr();
+        }
+    }
     //possibility:RSQ,D15:D19,
     public static HashSet<Cell> getCellByRef(Excel excel, String keyword) {
         String cellRef = "";
@@ -171,4 +190,33 @@ return scanForSpecificationCellAddr();
         }
         return result;
     }
+
+        //        HashMap<String, ValidGoal> result = new HashMap();
+//        for (Map.Entry<String, ValidGoal> goal : prevInfo.entrySet()) {
+//            String outputR1C1 = goal.getKey();
+//            ValidGoal prev = goal.getValue();
+//            HashSet<ExcelCell> newInputCells = new HashSet<>();
+//            List<Excel> newExcels = getNewExcels(newPath, outputR1C1);
+//            int tgt_idx =0;
+//
+//            for (Excel newExcel : newExcels) {
+//                newExcel.assignSheet(sheetName);
+//                String outputR1C1withIdx = outputR1C1 +"_"+ tgt_idx++;
+//                Cell outputCell = newExcel.getCell(outputR1C1);
+//                Cell inputCell = null;
+//                if (prev.getInput().getR1c1() != null)
+//                    inputCell = newExcel.getCell(prev.getInput().getR1c1());
+//                for (ExcelCell c : prev.getAllInputs()) {
+//                    newInputCells.add(new ExcelCell(newExcel,newExcel.getCell(Excel.getR1C1Idx(c.getCell()))).copyNote(c));
+//                }
+//                ValidGoal newv = new ValidGoal(
+//                        new ExcelCell(newExcel,inputCell),
+//                        new ExcelCell(newExcel,outputCell) ,
+//                        newInputCells);
+//                newv.getOutput().copyNote(prev.getOutput());
+//                result.put(outputR1C1withIdx, newv);
+//            }
+//        }
+//        return result;
+//    }
 }

@@ -15,6 +15,7 @@ import java.util.List;
 import static msexcel.Excel.getR1C1Idx;
 import static validate.excelFormulaProcessor.findSpecification;
 import static validate.excelFormulaProcessor.getBlueCells;
+import static validate.excelFormulaValidator.scanByTypingSpec;
 import static validate.excelFormulaValidator.scanForSpecificationOption;
 
 
@@ -36,7 +37,8 @@ public class extract {
                 String specification = findSpecification(excel, formulaCell.getRowIndex(), formulaCell.getColumnIndex());
                 System.out.println("Formula cell:" + formulaCell.getAddress().formatAsString());
                 System.out.println("specification:" + specification);
-                String r1c1ForSpec =  scanForSpecificationOption();
+               // String r1c1ForSpec =  scanForSpecificationOption();
+                String r1c1ForSpec =  scanByTypingSpec();
 //                String r1c1ForSpec =  "";
                 if(!StringUtils.isBlank(r1c1ForSpec)){
                     Cell cell = (Cell)excel.getCell(r1c1ForSpec);

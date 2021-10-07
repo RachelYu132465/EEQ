@@ -24,6 +24,35 @@ import java.util.*;
 
 public class Excel {
 
+    public static void main(String[] args) {
+        Excel n = createExcel(ExcelType.EXCEL_XLSX);
+        n.createSheet("test");
+
+        n.assignSheet(0).assignRow(0).assignCell(0);
+        Cell c0 = n.getCurCell();
+
+        CellStyle style = n.getWorkbook().createCellStyle();
+//        CellStyle style = c0.getCellStyle();
+        Font defaultFont = n.getWorkbook().createFont();
+        defaultFont.setItalic(true);
+        style.setFont(defaultFont);
+        c0.setCellStyle(style);
+        c0.setCellValue("AA");
+
+
+        n.assignSheet(0).assignRow(0).assignCell(1);
+        Cell c1 = n.getCurCell();
+        c1.setCellValue("AA");
+        CellStyle style1 = n.getWorkbook().createCellStyle();
+        Font defaultFont1 = n.getWorkbook().createFont();
+        defaultFont1.setItalic(false);
+        style1.setFont(defaultFont1);
+        c1.setCellStyle(style1);
+
+        n.saveToFile( FileSystemView.getFileSystemView().getHomeDirectory().getPath() + File.separator + "testTina.xlsx");
+
+    }
+
     public static final String CellAddrR1C1Rex = "^[A-Z][0-9]+";
     File file;
     Workbook curWb;
@@ -937,6 +966,23 @@ public class Excel {
         return "";
     }
 
+    /* loop excel
+   Excel excel  =Excel.createExcel(EXCEL_XLSX);
+            Excel templateExcel = Excel.loadExcel(template_absolute_path);
+
+            int sheetSize =excel.getNumberOfSheets();
+            for (int sheetCnt = 0; sheetCnt < sheetSize; ++sheetCnt) {
+                excel.assignSheet(sheetCnt);
+                Sheet sheet = excel.assignSheet(sheetCnt).getSheet();
+                int rowSize = excel.getLastRowNum();
+                for (int j = 0; j < rowSize; j++) {
+                    excel.assignRow(j);
+                    int colSize = excel.getLastCellNum();
+                    for (int k = 0; k < colSize; k++) {
+                        excel.assignCell(k);
+                    }}}
+    *
+    * */
     public String findFirstWordInWb(String searchword, Excel excel) {
 
 

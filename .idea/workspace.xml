@@ -5,26 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d944a863-58b2-4338-9ba2-2df1015ae098" name="Changes" comment="filehandle">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/copyExcel/CellRangeAddressWrapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/copyExcel/WriteUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/copyExcel/converter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/copyExcel/copyRow.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/copyExcel/copySheetFromWB.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/copyExcel/test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/ojdbc6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/ojdbc8_21_1_0_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EEQ.iml" beforeDir="false" afterPath="$PROJECT_DIR$/EEQ.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/micro_result.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/common/FileHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/FileHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/copyExcel/converter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/copyExcel/converter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/copyExcel/copySheetFromWB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/copyExcel/copySheetFromWB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/copyExcel/test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/copyExcel/test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/customExcel/customExcelMicro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/customExcel/customExcelMicro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mainFlow/extract.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mainFlow/extract.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/msexcel/Excel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/msexcel/Excel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/validate/customExcelMicro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/customExcel/customExcelMicro.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/common/FileHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/common/FileHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/msword/CustomTableStyle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/msword/CustomTableStyle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/test/ExcelForRu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/ExcelForRu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/validate/excelFormulaValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/validate/excelFormulaValidator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/msexcel/Excel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msexcel/Excel$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/msexcel/Excel$ExcelType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msexcel/Excel$ExcelType.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/msexcel/Excel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msexcel/Excel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/validate/customExcelMicro.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test1.xlsx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,13 +60,18 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/jxls-2.7.2/jxls-2.7.2/dist/jxls-2.7.2.jar" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/ojdbc-full.tar/ojdbc-full/OJDBC-Full/xdb6.jar" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="project.structure.side.proportion" value="0.25907752" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -80,13 +84,39 @@
       <recent name="C:\Users\tina.yu\EEQ\src\main\java\msexcel" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.converter">
-    <configuration name="CopySheets" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="copyExcel.CopySheets" />
+  <component name="RunManager" selected="Application.ExcelForRu">
+    <configuration name="Excel" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="msexcel.Excel" />
       <module name="EEQ" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="copyExcel.*" />
+          <option name="PATTERN" value="msexcel.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ExcelForRu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="test.ExcelForRu" />
+      <module name="EEQ" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ODBCConnector" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="common.ODBCConnector" />
+      <module name="EEQ" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="common.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -107,38 +137,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="copySheetFromWB" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="copyExcel.copySheetFromWB" />
+    <configuration name="test (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="test.test" />
       <module name="EEQ" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="copyExcel.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="copyExcel.test" />
-      <module name="EEQ" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="copyExcel.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="testConverter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="copyExcel.testConverter" />
-      <module name="EEQ" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="copyExcel.*" />
+          <option name="PATTERN" value="test.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -148,11 +152,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.ExcelForRu" />
+        <item itemvalue="Application.test (1)" />
+        <item itemvalue="Application.ODBCConnector" />
         <item itemvalue="Application.converter" />
-        <item itemvalue="Application.test" />
-        <item itemvalue="Application.testConverter" />
-        <item itemvalue="Application.CopySheets" />
-        <item itemvalue="Application.copySheetFromWB" />
+        <item itemvalue="Application.Excel" />
       </list>
     </recent_temporary>
   </component>
@@ -291,7 +295,14 @@
       <option name="project" value="LOCAL" />
       <updated>1631890554509</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="filehandle">
+      <created>1632237414917</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1632237414917</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -350,13 +361,38 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/msexcel/Excel.java</url>
-          <line>772</line>
+          <line>801</line>
           <option name="timeStamp" value="83" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/copyExcel/converter.java</url>
-          <line>1177</line>
+          <line>1220</line>
           <option name="timeStamp" value="84" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/copyExcel/converter.java</url>
+          <line>1127</line>
+          <option name="timeStamp" value="85" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/copyExcel/converter.java</url>
+          <line>1141</line>
+          <option name="timeStamp" value="90" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/copyExcel/converter.java</url>
+          <line>1216</line>
+          <option name="timeStamp" value="91" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/msexcel/Excel.java</url>
+          <line>30</line>
+          <option name="timeStamp" value="92" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/test/ExcelForRu.java</url>
+          <line>96</line>
+          <option name="timeStamp" value="95" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.IllegalArgumentException" package="java.lang" />
@@ -364,6 +400,11 @@
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="TobeProcessed" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/EEQ$FileHandler.ic" NAME="FileHandler Coverage Results" MODIFIED="1631511495001" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

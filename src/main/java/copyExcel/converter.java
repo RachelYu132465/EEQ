@@ -986,7 +986,9 @@ public class converter {
     public static final String proj_path = FileSystemView.getFileSystemView().getHomeDirectory().getPath() + File.separator + micro;
     public static String template = "template.xlsx";
     public static final String template_absolute_path = FileSystemView.getFileSystemView().getHomeDirectory().getPath() + File.separator + template;
-//    public static String destination = "copy.xlsx";
+
+    public static final String mrcroorganism_arr[] = {"e.", "salmonella", "aureus", "escherichia", "staphylococcus aureus", "pseudomonas", "aeruginosa"};
+    //    public static String destination = "copy.xlsx";
 //    public static final String destination_absolute_path = FileSystemView.getFileSystemView().getHomeDirectory().getPath() + File.separator + destination;
 
     //1 找尋所有舊表格需用字串
@@ -996,6 +998,7 @@ public class converter {
     //5 存檔
     public static void main(String[] args) throws IOException, InvalidFormatException {
 
+        List<String> mrcroorganism = Arrays.asList(mrcroorganism_arr);
 //        File destination = new File(destination_absolute_path);
 //        File template = new File(template_absolute_path);
 //        String micro = "micro";
@@ -1023,9 +1026,14 @@ public class converter {
                 String ProductName = destination.findFirstWordInWb("Product Name", destination);
                 String thisProductName = destination.findfirstWordAtRight(destination.getCell(ProductName).getRowIndex(), destination.getCell(ProductName).getColumnIndex());
 
+                //標題Test Item
+                String TestItem_0 = destination.findFirstWordInWb("Test Item", destination);
+                String thisTestItem_0 = destination.findfirstWordAtRight(destination.getCell(TestItem_0).getRowIndex(), destination.getCell(TestItem_0).getColumnIndex());
+
                 String Code = destination.findFirstWordInWb("Code", destination);
                 String thisCode = destination.findfirstWordAtRight(destination.getCell(Code).getRowIndex(), destination.getCell(Code).getColumnIndex());
 
+                //Test Item子項目
 //        String TestItem = excel.findFirstWordInWb("Test Item", excel);
                 String TestItem = destination.findFirstWord("Test Item", 6, destination.getLastRowNum(), 0, destination.getLastCellNum());
                 String result = destination.findFirstWord("result", 6, destination.getLastRowNum(), 0, destination.getLastCellNum());
@@ -1084,18 +1092,12 @@ public class converter {
                 for (String s : newSpecificationList) {
                     System.out.println(s);
                 }
-//
-//        specificationList.removeAll(Arrays.asList("", null));
                 System.out.println("size: " + newSpecificationList.size());
-//        String thisTestItem =  excel.findfirstWordAtRight (excel.getCell(TestItem).getRowIndex(),excel.getCell(addr).getColumnIndex());
-
                 //2 計算 test item &spec
 
                 int testItemRowStartIdx = 6;
                 int testItemNum = testItemList.size();
                 int specNum = newSpecificationList.size();
-//        int specRowStartIdx = 8;
-//        int minlRowSize = 19;
 
                 //3 刪除舊表格
                 wb_destination.removeSheetAt(wb_destination.getSheetIndex(oldSheet.getSheetName()));
@@ -1107,14 +1109,11 @@ public class converter {
                 copySheet(sheet_2, sheet_1);
                 copySheetSettings(sheet_2, sheet_1);
 
-//        System.out.print ("testItemNum"+testItemNum);
-
                 //4-1 填值入新表格
 
                 sheet_1.getRow(0).getCell(1).setCellValue(thisProductName);
                 sheet_1.getRow(1).getCell(1).setCellValue(thisCode);
-                sheet_1.getRow(3).getCell(1).setCellValue(oldSheet.getSheetName());
-
+                sheet_1.getRow(3).getCell(1).setCellValue(thisTestItem_0);
 
 
                 for (int i = testItemRowStartIdx + 1; i < testItemRowStartIdx + testItemNum; i++) {
@@ -1145,9 +1144,33 @@ public class converter {
                     if (sheet_1.getRow(i).getCell(0) == null) {
                         sheet_1.getRow(i).createCell(0);
                     }
-                    sheet_1.getRow(i).getCell(0).setCellValue(testItemList.get(count - testItemRowStartIdx));
+                    //negative control的微生物側項要斜體
+                    Cell cell = sheet_1.getRow(i).getCell(0);
+                    String testitem_w = testItemList.get(count - testItemRowStartIdx);
+
+                    CheckWords:
+                    for (String testitem : testitem_w.split(" ")) {
+
+//                        CellStyle style = cell.getCellStyle();
+                        CellStyle style = wb_destination.createCellStyle();
+                        style.setBorderBottom(BorderStyle.THIN);
+
+                        cell.setCellStyle(style);
+                        cell.setCellValue(testitem_w);
+
+                        if (mrcroorganism.contains(testitem.toLowerCase().trim())) {
+                            Font defaultFont = wb_destination.createFont();
+                            defaultFont.setItalic(true);
+                            defaultFont.setFontName("Times New Roman");
+                            defaultFont.setFontHeightInPoints((short) 12);
+                            style.setFont(defaultFont);
+                            break CheckWords;
+                        }
+                    }
+
                     count++;
                 }
+
                 for (int i = count + 1, y = 0; y < newSpecificationList.size(); i++) {
                     System.out.println(count);
                     if (sheet_1.getRow(i) == null) {
@@ -1156,7 +1179,37 @@ public class converter {
                     if (sheet_1.getRow(i).getCell(1) == null) {
                         sheet_1.getRow(i).createCell(1);
                     }
-                    sheet_1.getRow(i).getCell(1).setCellValue(newSpecificationList.get(y));
+                    String Specification_1 = newSpecificationList.get(y);
+                    Cell specCell = sheet_1.getRow(i).getCell(1);
+                    specCell.setCellValue(Specification_1);
+                    CheckWord:
+                    for (String spec_1 : Specification_1.split(" ")) {
+
+
+                        CellStyle style = wb_destination.createCellStyle();
+
+
+                        specCell.setCellStyle(style);
+                        specCell.setCellValue(Specification_1);
+                        Font defaultFont = wb_destination.createFont();
+                        defaultFont.setBold(true);
+                        defaultFont.setUnderline(Font.U_SINGLE);
+                        defaultFont.setFontHeightInPoints((short) 14);
+                        defaultFont.setFontName("Times New Roman");
+                        if (mrcroorganism.contains(spec_1.toLowerCase().trim())) {
+
+                            defaultFont.setItalic(true);
+
+                            style.setFont(defaultFont);
+
+                            break CheckWord;
+                        }
+                        style.setFont(defaultFont);
+//                        else {
+//
+//                        }
+                    }
+
                     count++;
                     y++;
                 }
@@ -1165,16 +1218,6 @@ public class converter {
                 CellRangeAddress region = CellRangeAddress.valueOf("A5:E5");
 //        short borderStyle = CellStyle.BORDER_MEDIUM;
                 RegionUtil.setBorderBottom(BorderStyle.THICK, region, sheet_1);
-//        RegionUtil.setBorderTop(borderStyle, region, activeSheet, excelWorkbook);
-//        RegionUtil.setBorderLeft(borderStyle, region, activeSheet, excelWorkbook);
-//        RegionUtil.setBorderRight(borderStyle, region, activeSheet, excelWorkbook);
-
-
-                //
-                //insert row shift row
-//        HSSFWorkbook workbook = new HSSFWorkbook(new FileInputStream("c:/input.xls"));
-//        HSSFSheet sheet = workbook.getSheet("Sheet1");
-//        copyRow.copyRow( wb_destination, sheet_1, 0, 1);
                 destination.removeLastBlankRow(sheet_1);
                 //5 存檔
                 OutputStream os = new FileOutputStream(ff.getName());
@@ -1183,18 +1226,6 @@ public class converter {
                 os.flush();
                 os.close();
                 wb_destination.close();
-//String [] spec = wb_1.getSheetAt(0).getRow(2).getCell(15).getStringCellValue().split("/n");
-//        System.out.print (spec.length);
-//        wb_1.setSheetName(0, "Actual");
-//        wb_1.createSheet(newSheet);
-//
-//        /*Get sheets from the temp file*/
-//        XSSFSheet sheet_1 = ((XSSFWorkbook) wb_1).getSheet(newSheet);
-//        XSSFSheet sheet_2 = ((XSSFWorkbook) wb_2).getSheetAt(0);
-//
-//        copyRowStyle(sheet_2,sheet_2,11,12);
-////
-////        OutputStream os = new FileOutputStream(new File(destination_absolute_path));
             }
             countfile++;
         }
