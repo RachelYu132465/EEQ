@@ -40,7 +40,7 @@ public class VBS {
             System.out.println("execute " + vbsfiles.getPath());
             try {
                 Runtime.getRuntime().exec("cscript " + vbsfiles.getPath());
-                Thread.sleep(2000);
+                Thread.sleep(10000);
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {

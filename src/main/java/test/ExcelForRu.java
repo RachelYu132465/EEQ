@@ -17,6 +17,7 @@ import static mainFlow.ProduceWordFile.writeToWord_general;
 import static mainFlow.ProduceWordFile.writeToWord_testCase;
 import static mainFlow.VBS.execAllVBSFiles;
 import static msexcel.customExcelStyle.setMyConditionalFormatting;
+import static test.test.sortCell;
 import static validate.excelFormulaValidator.getValidatedValues;
 
 
@@ -52,7 +53,7 @@ public class ExcelForRu {
 //        String fileName = "C- RT30358-LAB Spreadsheet-數字版.xlsx";
 //        String fileName = "final_RT30358_LAB_Spreadsheet複製.xlsx";
         //String fileName =  "final_RT30358_LAB_Spreadsheet_2.xlsx";
-        String output =  "RT30358-LAB_Spreadsheet.xlsx";
+        String output =  "originSpec_RT30358_LAB_Spreadsheet.xlsx";
 //        String fileName = "R000012383-LAB Spreadsheet數字.xlsx";
         Excel outputExcel = Excel.loadExcel(proj_path + output);
         //Excel excel = Excel.loadExcel(proj_path + fileName);
@@ -74,14 +75,15 @@ public class ExcelForRu {
             String excel_newData_path = proj_path + FileHandler.getFileNameWoExt(output) + "/" + sheetName_forNewFiles + "/";
 
             if (!sheetName.toLowerCase().equals("history of versions")) {
-                HashMap<String, ValidGoal> TobeProcessed = extract.extractData(outputExcel);
+                HashMap<String, ValidGoal> TobeProcessed =  sortCell(extract.extractData(outputExcel));
+
                 int validGoalsNumberInSheet = TobeProcessed.size();
 
 //set conditional formatting for all outpull cells in this sheet
                 outputExcel = setMyConditionalFormatting(TobeProcessed, outputExcel);
                 outputExcel.save();
 
-                writeToWord_general(sheetName, doc_general, TobeProcessed);
+//                writeToWord_general(sheetName, doc_general, TobeProcessed);
 
 
                 //store target goal in existing excelForRead, because vbs function--'goal seek' requires an object

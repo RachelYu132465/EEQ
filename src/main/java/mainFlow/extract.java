@@ -8,9 +8,8 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import validate.excelFormulaValidator;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Stream;
 
 import static msexcel.Excel.getR1C1Idx;
 import static validate.excelFormulaProcessor.findSpecification;
@@ -37,9 +36,9 @@ public class extract {
                 String specification = findSpecification(excel, formulaCell.getRowIndex(), formulaCell.getColumnIndex());
                 System.out.println("Formula cell:" + formulaCell.getAddress().formatAsString());
                 System.out.println("specification:" + specification);
-               // String r1c1ForSpec =  scanForSpecificationOption();
+//               // String r1c1ForSpec =  scanForSpecificationOption();
                 String r1c1ForSpec =  scanByTypingSpec();
-//                String r1c1ForSpec =  "";
+////                String r1c1ForSpec =  "";
                 if(!StringUtils.isBlank(r1c1ForSpec)){
                     Cell cell = (Cell)excel.getCell(r1c1ForSpec);
                     //newSpec
