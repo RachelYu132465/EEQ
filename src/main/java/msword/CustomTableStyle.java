@@ -10,9 +10,9 @@ import validate.customStringFormatter;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
+import static dataStructure.ValidGoal.*;
 import static msword.CustomWordStyle.getTableTitleStyle;
 import static msword.CustomWordStyle.types;
 import static msword.ManageTable.*;
@@ -128,73 +128,139 @@ public class CustomTableStyle {
     }
 
     //Excel.getCellValue_OriginalFormula(input).toString()
-    public static void appendToTable1(XWPFTable table, HashMap<String, ValidGoal> goals) {
+    public static void modifiedAppendToTable1(XWPFTable table, HashMap<String, ValidGoal> goals) {
 
         //加所有非公式的input儲存格 到column 1 & 2
-        for (Map.Entry<String, ValidGoal> goal : goals.entrySet()) {
-            for (ExcelCell input_c : goal.getValue().getAllInputs()) {
-                Cell nonFormulaCells = input_c.getCell();
-                if (!nonFormulaCells.getCellType().equals(CellType.FORMULA)) {
+
+        List<String> FormulaList = getFormulaCellAddress(goals);
+        List<String> nonFormulaList = getNonFormulaCellAddress(goals);
+        List<String> outputList = getOutputCellAddress (goals);
+        List<String> inputFormulaList = FormulaList;
+
+        for (String inputFormula :FormulaList){
+            for (String output:outputList ){
+            if (nonFormulaList.contains(output)){
+                inputFormulaList.remove(inputFormula);
+            }
+            }
+        }
+        for (String s :nonFormulaList){
 
                     addToTable(types.Content, table, table.getNumberOfRows(),
-                            input_c.getR1c1()
+                            s
                             , GENERAL_FORMAT
                             , ""
                             , ""
                     );
                 }
-            }
-        }
-        int rowIdx = 2;
-        for (Map.Entry<String, ValidGoal> goal : goals.entrySet()) {
 
-            //加所有公式的input儲存格 到column 3 & 4
-            for (ExcelCell input_c : goal.getValue().getAllInputs()) {
-                Cell formula_cells = input_c.getCell();
-                if (formula_cells.getCellType().equals(CellType.FORMULA)) {
+        int rowIdx = 2;
+      for (String s :inputFormulaList) {
+
                     addToTable(types.Content, table, ++rowIdx,
                             ""
                             , ""
-                            , input_c.getR1c1()
+                            , s
                             , GENERAL_FORMAT);
                 }
+
+            for (String s :    outputList) {
+        //加入output儲存格 到column 3 & 4
+        for (Map.Entry<String, ValidGoal> entry : goals.entrySet()){
+            if (s.equals(entry.getKey())){
+        ValidGoal goal=entry.getValue();
+        ExcelCell output=goal.getOutput();
+        String format="";
+        int MaxDecimalPlace=0;
+        int MinDecimalPlace=0;
+        MyRange range=goal.getMyRange();
+        if(range.hasMax())MaxDecimalPlace=range.getMaxDecimalPlace();
+        if(range.hasMin())MinDecimalPlace=range.getMinDecimalPlace();
+        if(MaxDecimalPlace==0&&MinDecimalPlace==0)format=INTEGER;
+        else if(MaxDecimalPlace!=0)format=NUMERIC_DECIMAL+" "+range.getMaxDecimalPlace();
+        else if(MinDecimalPlace!=0)format=NUMERIC_DECIMAL+" "+range.getMinDecimalPlace();
+        addToTable(types.Content,table,++rowIdx,
+        ""
+        ,""
+        ,output.getR1c1()
+        ,format);
             }
         }
-        //加入output儲存格 到column 3 & 4
-        for (Map.Entry<String, ValidGoal> entry : goals.entrySet()) {
-            ValidGoal goal = entry.getValue();
-            ExcelCell output = goal.getOutput();
-            String format = "";
-            int MaxDecimalPlace = 0;
-            int MinDecimalPlace = 0;
-            MyRange range = goal.getMyRange();
-            if (range.hasMax()) MaxDecimalPlace = range.getMaxDecimalPlace();
-            if (range.hasMin()) MinDecimalPlace = range.getMinDecimalPlace();
-            if (MaxDecimalPlace == 0 && MinDecimalPlace == 0) format = INTEGER;
-            else if (MaxDecimalPlace != 0) format = NUMERIC_DECIMAL + " " + range.getMaxDecimalPlace();
-            else if (MinDecimalPlace != 0) format = NUMERIC_DECIMAL + " " + range.getMinDecimalPlace();
-            addToTable(types.Content, table, ++rowIdx,
-                    ""
-                    , ""
-                    , output.getR1c1()
-                    , format);
-
         }
 
-//        for (ExcelCell input_c : goal.getAllInputs()) {
-//            Cell input = input_c.getCell();
-//            XWPFTableRow row = table.createRow();
-//            row.createCell();
-//            row.createCell();
-//            row.createCell();
-//            addToTable(types.Content, table, table.getNumberOfRows() - 1,
-//                    Excel.getR1C1Idx(input)
-//                    , input.getCellType().toString()
-//                    , goal.getOutput().getR1c1()
-//                    , goal.getOutput().getCell().getCellType().toString()
-//            );
+
 
     }
+
+//    public static void appendToTable1(XWPFTable table, HashMap<String, ValidGoal> goals) {
+//
+//        //加所有非公式的input儲存格 到column 1 & 2
+//
+//
+//        for (Map.Entry<String, ValidGoal> goal : goals.entrySet()) {
+//            for (ExcelCell input_c : goal.getValue().getAllInputs()) {
+//                Cell nonFormulaCells = input_c.getCell();
+//                if (!nonFormulaCells.getCellType().equals(CellType.FORMULA)) {
+//
+//                    addToTable(types.Content, table, table.getNumberOfRows(),
+//                            input_c.getR1c1()
+//                            , GENERAL_FORMAT
+//                            , ""
+//                            , ""
+//                    );
+//                }
+//            }
+//        }
+//        int rowIdx = 2;
+//        for (Map.Entry<String, ValidGoal> goal : goals.entrySet()) {
+//
+//            //加所有公式的input儲存格 到column 3 & 4
+//            for (ExcelCell input_c : goal.getValue().getAllInputs()) {
+//                Cell formula_cells = input_c.getCell();
+//                if (formula_cells.getCellType().equals(CellType.FORMULA)) {
+//                    addToTable(types.Content, table, ++rowIdx,
+//                            ""
+//                            , ""
+//                            , input_c.getR1c1()
+//                            , GENERAL_FORMAT);
+//                }
+//            }
+//        }
+//        //加入output儲存格 到column 3 & 4
+//        for (Map.Entry<String, ValidGoal> entry : goals.entrySet()) {
+//            ValidGoal goal = entry.getValue();
+//            ExcelCell output = goal.getOutput();
+//            String format = "";
+//            int MaxDecimalPlace = 0;
+//            int MinDecimalPlace = 0;
+//            MyRange range = goal.getMyRange();
+//            if (range.hasMax()) MaxDecimalPlace = range.getMaxDecimalPlace();
+//            if (range.hasMin()) MinDecimalPlace = range.getMinDecimalPlace();
+//            if (MaxDecimalPlace == 0 && MinDecimalPlace == 0) format = INTEGER;
+//            else if (MaxDecimalPlace != 0) format = NUMERIC_DECIMAL + " " + range.getMaxDecimalPlace();
+//            else if (MinDecimalPlace != 0) format = NUMERIC_DECIMAL + " " + range.getMinDecimalPlace();
+//            addToTable(types.Content, table, ++rowIdx,
+//                    ""
+//                    , ""
+//                    , output.getR1c1()
+//                    , format);
+//
+//        }
+//
+////        for (ExcelCell input_c : goal.getAllInputs()) {
+////            Cell input = input_c.getCell();
+////            XWPFTableRow row = table.createRow();
+////            row.createCell();
+////            row.createCell();
+////            row.createCell();
+////            addToTable(types.Content, table, table.getNumberOfRows() - 1,
+////                    Excel.getR1C1Idx(input)
+////                    , input.getCellType().toString()
+////                    , goal.getOutput().getR1c1()
+////                    , goal.getOutput().getCell().getCellType().toString()
+////            );
+//
+//    }
 
     public static void getTable_Style1(XWPFDocument doc, String worksheetName, String itemName, HashMap<String, ValidGoal> goals) {
         XWPFTable table = getCustomTable(doc, 3, 4);
@@ -207,7 +273,8 @@ public class CustomTableStyle {
         addToTable(types.Title, table, 1, ITEM_NAME + Colon + itemName);
         addToTable(types.Content, table, 2, INPUT_CELL, FORMAT_DESC, OUTPUT_CELL, FORMAT_DESC);
 
-        appendToTable1(table, goals);
+        modifiedAppendToTable1(table, goals);
+//        appendToTable1(table, goals);
 
         endTable(table);
     }
@@ -285,14 +352,73 @@ public class CustomTableStyle {
             }
         }
     }
+    public static List<String> getFormulaCellAddress (HashMap<String, ValidGoal> goals) {
+        HashSet<String> Formula = new HashSet<>();
 
+        for (Map.Entry<String,ValidGoal> entry : goals.entrySet()){
+            Formula.add(entry.getKey());
+            Formula.addAll( getCellByFormulaType (entry.getValue().getAllInputs(),true));
+
+        }
+
+        List<String> FormulaList = new ArrayList<>(Formula);
+        FormulaList=  sortStringByNumericValue (FormulaList);
+//        Formula = new HashSet<>(temp);
+        return FormulaList;
+    }
+
+    public static List<String> getNonFormulaCellAddress (HashMap<String, ValidGoal> goals) {
+        HashSet<String> non_Formula = new HashSet<>();
+        for (Map.Entry<String,ValidGoal> entry : goals.entrySet()){
+            non_Formula.addAll( getCellByFormulaType (entry.getValue().getAllInputs(),false));
+        }
+
+        List<String> nonFormulaList = new ArrayList<>(non_Formula);
+        nonFormulaList=  sortStringByNumericValue (nonFormulaList);
+//        non_Formula = new HashSet<>(temp);
+        return nonFormulaList;
+    }
+    //印output
+    public static void modifiedAppendToTable4_2 (XWPFTable table, HashMap<String, ValidGoal> goals){
+        int rowIdx = 0;
+//        HashSet<String> allCell = getAllCells(goals);
+
+        List<String> FormulaList = getFormulaCellAddress(goals);
+        List<String> nonFormulaList = getNonFormulaCellAddress(goals);
+        for (String s :FormulaList) {
+
+            String value = gettCellValueByR1C1 (s,goals);
+            addToTable(types.Content, table, ++rowIdx,
+                    ""
+                    , ""
+                    , s
+                    , ""
+                    , "", value, "");
+        }
+        rowIdx=0;
+        for (String ss :nonFormulaList) {
+            String value = gettCellValueByR1C1 (ss,goals);
+
+            addToTable(types.Content, table,++rowIdx,
+                    ss
+                    , value
+                    , ""
+                    , ""
+                    , "", "", ""
+
+            );
+        }
+    }
     //印output
     public static void appendToTable4_2(XWPFTable table, HashMap<String, ValidGoal> goals) {
         int rowIdx = 0;
+
         for (Map.Entry<String, ValidGoal> entry : goals.entrySet()) {
             ValidGoal goal = entry.getValue();
+            //印 formula cell
             rowIdx = appendToTable4_2(table, goal, rowIdx);
             ExcelCell output = goal.getOutput();
+
             addToTable(types.Content, table, ++rowIdx,
                     ""
                     , ""
@@ -302,7 +428,9 @@ public class CustomTableStyle {
         }
     }
 
-    //印output
+
+
+    //印 formula cell
     public static int appendToTable4_2(XWPFTable table, ValidGoal goal, int rowIdx) {
         for (ExcelCell input_c : goal.getAllInputs()) {
             Cell formula_cells = input_c.getCell();
@@ -332,21 +460,64 @@ public class CustomTableStyle {
         mergeCellHorizontally(table, 3, 0, 6);
     }
 
-    public static void appendToTable4_3(XWPFTable table, ValidGoal goal) {
+    public static void modifiedAppendToTable4_3(XWPFTable table, ValidGoal goal) {
+
+        HashMap<String,ValidGoal> goals= new HashMap<>();
+        goals.put(goal.getOutput().getR1c1(), goal);
+        List<String> FormulaList = getFormulaCellAddress(goals);
+        List<String> nonFormulaList = getNonFormulaCellAddress(goals);
+
         table.createRow();
         int newRowIdx = table.getNumberOfRows() - 1;
         if (table.getRow(newRowIdx).getTableCells().size() > 6)
             mergeCellHorizontally(table, newRowIdx, 0, 6);
         table.getRow(newRowIdx).getCell(0).setText("Range Validation: OOS " + goal.getOutput().getNote());
-        appendToTable4_1(table, goal);
-        newRowIdx = appendToTable4_2(table, goal, newRowIdx);
 
-        addToTable(types.Content, table, newRowIdx + 1,
-                "", "", goal.getOutput().getR1c1(), "", "", goal.getOutput().getValue());
+        int FormulaIndex =newRowIdx;
+        int nonFormulaIndex = newRowIdx;
+        for (String s : nonFormulaList) {
+
+            String value = gettCellValueByR1C1 (s,goals);
+
+                addToTable(types.Content, table,  ++nonFormulaIndex,
+                        s
+                        , value
+                        , ""
+                        , ""
+                        , "", "", ""
+
+                );
+            }
 
 
+        for (String s : FormulaList) {
+
+            String value = gettCellValueByR1C1(s, goals);
+
+            addToTable(types.Content, table,  ++FormulaIndex,
+                    "", "", s, "", "", value);
+
+        }
     }
 
+
+//    public static void appendToTable4_3(XWPFTable table, ValidGoal goal) {
+//
+//        HashMap<String,ValidGoal> rangeValidation= new HashMap<>();
+
+//        table.createRow();
+//        int newRowIdx = table.getNumberOfRows() - 1;
+//        if (table.getRow(newRowIdx).getTableCells().size() > 6)
+//            mergeCellHorizontally(table, newRowIdx, 0, 6);
+//        table.getRow(newRowIdx).getCell(0).setText("Range Validation: OOS " + goal.getOutput().getNote());
+//        appendToTable4_1(table, goal);
+//        newRowIdx = appendToTable4_2(table, goal, newRowIdx);
+//
+//        addToTable(types.Content, table, newRowIdx + 1,
+//                "", "", goal.getOutput().getR1c1(), "", "", goal.getOutput().getValue());
+//
+//
+//    }
     public static void getTable_Style4(XWPFDocument doc, HashMap<String, ValidGoal> goals, HashMap<String, ValidGoal> newGoals, int testCaseIdx) {
         XWPFTable headTable = getCustomTable(doc, 4, 7);
         getHeadStyle_tbl4(headTable);
@@ -359,21 +530,36 @@ public class CustomTableStyle {
         XWPFTable table = getCustomTable(doc, 1, 7);
         addToTable(types.Content, table, 0, INPUT_CELL, "Input value",
                 OUTPUT_CELL, "Output " + RESULT, "Calculated " + RESULT, "Expected " + RESULT, "Test " + RESULT + "(Pass/Fail)");
-        for (Map.Entry<String, ValidGoal> goal : goals.entrySet()) {
-            //加所有非公式的儲存格
-            appendToTable4_1(table, goal.getValue());
-        }
-        //加所有公式的儲存格
-        appendToTable4_2(table, goals);
+
+//        for (Map.Entry<String, ValidGoal> goal : goals.entrySet()) {
+//            //加所有非公式的儲存格
+//            appendToTable4_1(table, goal.getValue());
+//        }
+//        //加所有公式的儲存格
+//        appendToTable4_2(table, goals);
+
+        modifiedAppendToTable4_2(table, goals);
+int count =0;
+
+        List<String> newDataR1C1 =  getOutputCellAddress (newGoals);
+//         newlist = new ArrayList<>(newDataR1C1);
+        newDataR1C1= sortStringByNumericValue(newDataR1C1);
+
 
         //test validation的table
-        for (Map.Entry<String, ValidGoal> goal : newGoals.entrySet()) {
-            //加所有公式的、非公式的儲存格
-            if (goal.getKey() != null && goal.getValue() != null && goal.getKey().split("_").length > 1) //(goal.getKey().split("_")[1]+1)
-                goal.getValue().getOutput().setNote(goal.getValue().getOutput().getNote() + " #" + "(Case " +testCaseIdx +"- Attachment )");
-            appendToTable4_3(table, goal.getValue());
-        }
+        for(String s :newDataR1C1) {
 
+        for (Map.Entry<String, ValidGoal> goal : newGoals.entrySet()) {
+            if (s.equals(goal.getKey())){
+                System.out.println("test validation = " +s);
+            //加所有公式的、非公式的儲存格
+            if (goal.getKey() != null && goal.getValue() != null && goal.getKey().split("_").length > 1)// (goal.getKey().split("_")[1]+1)
+                goal.getValue().getOutput().setNote(goal.getValue().getOutput().getNote() + " #" + "(Case " +testCaseIdx +"- Attachment "+ ++count+")");
+//            appendToTable4_3(table, goal.getValue());
+            modifiedAppendToTable4_3(table, goal.getValue());
+        }        }
+
+        }
         endTable(table);
     }
 

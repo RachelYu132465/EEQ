@@ -40,9 +40,8 @@ public class extract {
                 String r1c1ForSpec =  scanByTypingSpec();
 ////                String r1c1ForSpec =  "";
                 if(!StringUtils.isBlank(r1c1ForSpec)){
-                    Cell cell = (Cell)excel.getCell(r1c1ForSpec);
-                    //newSpec
-                    specification = cell.getStringCellValue();
+
+                    specification = r1c1ForSpec;
                 }
 
 
@@ -54,6 +53,7 @@ public class extract {
 //                } else {
 //                    specification = excel.getCellValue(specificationR1C1).toString().replace(SPECIFICATION + ":", "");
 //                }
+
                 HashSet<ExcelCell> inputCells = excelFormulaValidator.getInputCells(excel, formulaCell);
                 ExcelCell inputCell = null;
                 ValidGoal goal = new ValidGoal();

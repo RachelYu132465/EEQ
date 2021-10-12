@@ -12,12 +12,14 @@ import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import javax.swing.filechooser.FileSystemView;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
+
 
 import static mainFlow.ProduceWordFile.writeToWord_general;
 import static mainFlow.ProduceWordFile.writeToWord_testCase;
 import static mainFlow.VBS.execAllVBSFiles;
 import static msexcel.customExcelStyle.setMyConditionalFormatting;
-import static test.test.sortCell;
+
 import static validate.excelFormulaValidator.getValidatedValues;
 
 
@@ -52,7 +54,7 @@ public class ExcelForRu {
 //        String fileName =  "格式_RT30397_LABSpreadsheet數字(1).xlsx";
 //        String fileName = "C- RT30358-LAB Spreadsheet-數字版.xlsx";
 //        String fileName = "final_RT30358_LAB_Spreadsheet複製.xlsx";
-        //String fileName =  "final_RT30358_LAB_Spreadsheet_2.xlsx";
+//        String output =  "final_RT30358_LAB_Spreadsheet.xlsx";
         String output =  "originSpec_RT30358_LAB_Spreadsheet.xlsx";
 //        String fileName = "R000012383-LAB Spreadsheet數字.xlsx";
         Excel outputExcel = Excel.loadExcel(proj_path + output);
@@ -75,7 +77,7 @@ public class ExcelForRu {
             String excel_newData_path = proj_path + FileHandler.getFileNameWoExt(output) + "/" + sheetName_forNewFiles + "/";
 
             if (!sheetName.toLowerCase().equals("history of versions")) {
-                HashMap<String, ValidGoal> TobeProcessed =  sortCell(extract.extractData(outputExcel));
+                HashMap<String, ValidGoal> TobeProcessed =   extract.extractData(outputExcel);
 
                 int validGoalsNumberInSheet = TobeProcessed.size();
 
@@ -83,10 +85,10 @@ public class ExcelForRu {
                 outputExcel = setMyConditionalFormatting(TobeProcessed, outputExcel);
                 outputExcel.save();
 
-//                writeToWord_general(sheetName, doc_general, TobeProcessed);
+                writeToWord_general(sheetName, doc_general, TobeProcessed);
 
 
-                //store target goal in existing excelForRead, because vbs function--'goal seek' requires an object
+//                store target goal in existing excelForRead, because vbs function--'goal seek' requires an object
                 HashMap<String, ExcelCell> allTarget = VBS.storeTargetInFile(outputExcel, TobeProcessed);
                 outputExcel.save();
                 VBS.produceVBSFiles(output, outputExcel.getSheet(), vbs_newData_path, allTarget, TobeProcessed);
@@ -94,10 +96,12 @@ public class ExcelForRu {
 //                //get new Excel everytime vbs file produce new file
                 HashMap<String, ValidGoal> newData = getValidatedValues(outputExcel, sheetName, TobeProcessed, excel_newData_path);
 
-                int testCaseIdx = a + 2;
-                //要把hashmap裡面的Key改成OutputR1C1 + index -->因為有值會有上下標，需要有兩個新excel檔案!!
-                writeToWord_testCase(doc_testCase, TobeProcessed, newData, testCaseIdx);
 
+
+                int testCaseIdx = a + 2;
+//                //要把hashmap裡面的Key改成OutputR1C1 + index -->因為有值會有上下標，需要有兩個新excel檔案!!
+                writeToWord_testCase(doc_testCase, TobeProcessed, newData, testCaseIdx);
+//
                 FileHandler.save(doc_general, proj_path + sheetName + "_result.docx");
                 FileHandler.save(doc_testCase, proj_path + sheetName + "_test case.docx");
             }

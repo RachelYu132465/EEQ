@@ -80,7 +80,7 @@ return scanForSpecificationCellAddr();
     public static String scanByTypingSpec() {
         Scanner sc = new Scanner(System.in);
         String userInput = "";
-        System.out.println("是否手動設定規格?是請輸入:y;否請按enter");
+        System.out.println("是否手動設定?是請輸入:y;否請按enter");
 
         userInput = sc.nextLine();
         if (userInput.isBlank()) {
@@ -89,11 +89,17 @@ return scanForSpecificationCellAddr();
         } else {
 
             while (!userInput.matches("[yY]")) {
-                System.out.println("輸入spec字串");
+                System.out.println("是請輸入:y;否請按enter");
                 userInput = sc.nextLine();
             }
-            return scanForSpecificationCellAddr();
+
         }
+        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+        System.out.println("Enter spec");
+
+        String spec = myObj.nextLine();
+
+        return spec;
     }
     //possibility:RSQ,D15:D19,
     public static HashSet<Cell> getCellByRef(Excel excel, String keyword) {
@@ -166,11 +172,12 @@ return scanForSpecificationCellAddr();
         for (Map.Entry<String, ValidGoal> goal : prevInfo.entrySet()) {
             String outputR1C1 = goal.getKey();
             ValidGoal prev = goal.getValue();
-            HashSet<ExcelCell> newInputCells = new HashSet<>();
+
             List<Excel> newExcels = getNewExcels(newPath, outputR1C1);
             int tgt_idx =0;
 
             for (Excel newExcel : newExcels) {
+                HashSet<ExcelCell> newInputCells = new HashSet<>();
                 newExcel.assignSheet(sheetName);
                 String outputR1C1withIdx = outputR1C1 +"_"+ tgt_idx++;
                 Cell outputCell = newExcel.getCell(outputR1C1);

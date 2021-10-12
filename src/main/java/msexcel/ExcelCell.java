@@ -1,5 +1,6 @@
 package msexcel;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.poi.ss.usermodel.Cell;
 
 import static msexcel.Excel.getCellValue;
@@ -9,7 +10,7 @@ import static validate.excelFormulaProcessor.findBlackTitleAtTop;
 public class ExcelCell {
     String note;
     String r1c1;
-    //formula cell will store formula
+    //formula cell will store its result value
     String value;
     Cell cell;
 
@@ -22,10 +23,13 @@ public class ExcelCell {
     }
 
     public void setNote(Excel excel,Cell c) {
-        String description1 = findBlackTitleAtLeft(excel,c);
-        String description2 = findBlackTitleAtTop(excel,c);
+        String description2 ="";
+         String description1 = findBlackTitleAtLeft(excel,c);
+        if (StringUtils.isBlank(description1)){findBlackTitleAtTop(excel,c);}
         //to-do: logic of appending description
-        this.setNote(description1 +" "+description2);
+        if (StringUtils.isBlank(description1)&&StringUtils.isBlank(description2))
+        this.setNote(cell.getAddress().toString());
+       else this.setNote(description1 +" "+description2);
     }
 
     public ExcelCell copyNote(ExcelCell c) {
@@ -102,6 +106,8 @@ public class ExcelCell {
         if (!(o instanceof ExcelCell))
             return false;
         else {
+//            if(((ExcelCell)(o)).getR1c1().equalsIgnoreCase(this.getR1c1())){
+//                return true;
             if(((ExcelCell)(o)).getCell().equals(this.getCell())){
                 return true;
             }

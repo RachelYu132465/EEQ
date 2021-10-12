@@ -51,7 +51,7 @@ public class excelFormulaProcessor {
                 }
             }
         }
-        return "not find title at Left";
+        return "";
     }
 
     public static String findBlackTitleAtTop(Excel excel, Cell cell) {
@@ -77,7 +77,7 @@ public class excelFormulaProcessor {
                 }
             }
         }
-        return "not find title at Top";
+        return "";
     }
 
     /*
