@@ -4,30 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d944a863-58b2-4338-9ba2-2df1015ae098" name="Changes" comment="new changes">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_11.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_13.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_collections4_4_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_collections4_4_4.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_ooxml_security_1_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bouncycastle_bcprov_jdk15on_1_59.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="d944a863-58b2-4338-9ba2-2df1015ae098" name="Changes" comment="no duplicate input cells on word files">
+      <change afterPath="$PROJECT_DIR$/src/main/java/msword/CustomTableText.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EEQ.iml" beforeDir="false" afterPath="$PROJECT_DIR$/EEQ.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/StringProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/StringProcessor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dataStructure/ValidGoal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dataStructure/ValidGoal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mainFlow/ProduceWordFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mainFlow/ProduceWordFile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mainFlow/VBS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mainFlow/VBS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mainFlow/extract.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mainFlow/extract.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/msexcel/Excel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/msexcel/Excel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/msexcel/ExcelCell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/msexcel/ExcelCell.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/msword/CustomTableStyle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/msword/CustomTableStyle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/msword/CustomWordStyle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/msword/CustomWordStyle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/test/ExcelForRu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/ExcelForRu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/validate/excelFormulaProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/validate/excelFormulaProcessor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/validate/excelFormulaValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/validate/excelFormulaValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/common/StringProcessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/common/StringProcessor.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/dataStructure/ValidGoal.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dataStructure/ValidGoal.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mainFlow/ProduceWordFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mainFlow/ProduceWordFile.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/mainFlow/VBS.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mainFlow/VBS.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mainFlow/extract.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mainFlow/extract.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/msexcel/Excel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msexcel/Excel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/msexcel/ExcelCell.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msexcel/ExcelCell.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/msword/CustomTableStyle.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msword/CustomTableStyle.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/msword/CustomWordStyle.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msword/CustomWordStyle.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/test/ExcelForRu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/test/ExcelForRu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/validate/excelFormulaValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/validate/excelFormulaValidator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/validate/excelFormulaProcessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/validate/excelFormulaProcessor.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +70,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$USER_HOME$/Downloads/ojdbc-full.tar/ojdbc-full/OJDBC-Full/xdb6.jar" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.25907752" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
@@ -313,7 +311,14 @@
       <option name="project" value="LOCAL" />
       <updated>1633603406530</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="no duplicate input cells on word files">
+      <created>1633996964568</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1633996964568</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -341,16 +346,12 @@
     <MESSAGE value="getSheetsBykeywordsIgnoreCase" />
     <MESSAGE value="filehandle" />
     <MESSAGE value="new changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="new changes" />
+    <MESSAGE value="no duplicate input cells on word files" />
+    <option name="LAST_COMMIT_MESSAGE" value="no duplicate input cells on word files" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/msword/CustomTableStyle.java</url>
-          <line>151</line>
-          <option name="timeStamp" value="60" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/common/FileHandler.java</url>
           <line>74</line>
@@ -393,41 +394,37 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/test/ExcelForRu.java</url>
-          <line>96</line>
-          <option name="timeStamp" value="113" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/test/ExcelForRu.java</url>
-          <line>105</line>
+          <line>119</line>
           <option name="timeStamp" value="117" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/test/ExcelForRu.java</url>
-          <line>102</line>
+          <line>116</line>
           <option name="timeStamp" value="120" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/msword/CustomTableStyle.java</url>
-          <line>558</line>
-          <option name="timeStamp" value="121" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/msword/CustomTableStyle.java</url>
-          <line>466</line>
-          <option name="timeStamp" value="122" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/msword/CustomTableStyle.java</url>
-          <line>467</line>
-          <option name="timeStamp" value="123" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/validate/excelFormulaValidator.java</url>
           <line>171</line>
           <option name="timeStamp" value="124" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/msword/CustomTableText.java</url>
+          <line>22</line>
+          <option name="timeStamp" value="154" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/msword/CustomTableText.java</url>
+          <line>44</line>
+          <option name="timeStamp" value="155" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="org.apache.xmlbeans.impl.schema.SchemaTypeImpl" memberName="_selfref" />
+        <PinnedItemInfo parentTag="org.apache.poi.xssf.usermodel.XSSFCell" memberName="_cell" />
+      </pinned-members>
+    </pin-to-top-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="TobeProcessed" />

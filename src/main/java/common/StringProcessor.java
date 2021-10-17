@@ -3,6 +3,8 @@ package common;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,6 +18,29 @@ public class StringProcessor {
     public final static String extract_digit_rex = "(\\d+(?:\\.\\d+)?)";
 
 
+    public static List<String> sortStringByNumericValue(List<String> String) {
+        Collections.sort(String, new Comparator<String>() {
+            public int compare(String o1, String o2) {
+
+                String o1StringPart = o1.replaceAll("\\d", "");
+                String o2StringPart = o2.replaceAll("\\d", "");
+
+
+                if(o1StringPart.equalsIgnoreCase(o2StringPart))
+                {
+                    return extractInt(o1) - extractInt(o2);
+                }
+                return o1.compareTo(o2);
+            }
+
+            int extractInt(String s) {
+                String num = s.replaceAll("\\D", "");
+                // return 0 if no digits found
+                return num.isEmpty() ? 0 : Integer.parseInt(num);
+            }
+        });
+        return String;
+    }
     public static List<String> extractStringByPattern(String string,String pattern) {
 
         Pattern regex = Pattern.compile(pattern);

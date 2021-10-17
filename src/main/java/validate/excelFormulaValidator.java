@@ -95,9 +95,8 @@ return scanForSpecificationCellAddr();
 
         }
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
-        System.out.println("Enter spec");
+        System.out.println("Enter spec (只能貼入純文字，不包含換行等)");
 
-        String spec = myObj.nextLine();
 
         return spec;
     }

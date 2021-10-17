@@ -45,6 +45,14 @@ public class CustomWordStyle {
     public static XWPFRun getTableContentStyle(XWPFRun run){
         run.setFontFamily("Arial");
         run.setFontSize(10);
+
         return run;
     }
+    public static XWPFRun getTableBoldContentStyle(XWPFRun run){
+        run.setFontFamily("Arial");
+        run.setFontSize(10);
+        run.setBold(true);
+        return run;
+    }
+
 }

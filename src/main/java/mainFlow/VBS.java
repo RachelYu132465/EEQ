@@ -40,7 +40,7 @@ public class VBS {
             System.out.println("execute " + vbsfiles.getPath());
             try {
                 Runtime.getRuntime().exec("cscript " + vbsfiles.getPath());
-                Thread.sleep(5000);
+                Thread.sleep(10000);
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {
@@ -113,7 +113,7 @@ public class VBS {
                 "objExcel.Application.Quit");
     }
 
-    public static void produceVBSFiles(String FileName, Sheet sheet, String newPath, HashMap<String, ExcelCell> allTarget, HashMap<String, ValidGoal> TobeProcessed)
+    public static void produceVBSFiles(String FileName, Sheet sheet, String newexcelPath, String newvbsPath, HashMap<String, ExcelCell> allTarget, HashMap<String, ValidGoal> TobeProcessed)
 //            throws RangeException
     {
         String sheetName = sheet.getSheetName();
@@ -125,8 +125,8 @@ public class VBS {
                 String index = outputR1C1_index[1];
                 String output = outputR1C1_index[0];
                 if (TobeProcessed.containsKey(output)) {
-                    String newExcelPath = newPath + output + "_" + index + FileName.substring(FileName.indexOf("."), FileName.length());
-                    String newVBSPath = newPath + output + "_" + index + ".vbs";
+                    String newExcelPath = newexcelPath + output + "_" + index + FileName.substring(FileName.indexOf("."), FileName.length());
+                    String newVBSPath = newvbsPath + output + "_" + index + ".vbs";
                     ValidGoal data = TobeProcessed.get(output);
                     vbsFileContent.append(saveVBSFile(data.getInput().getR1c1(), data.getOutput().getR1c1(), target.getValue().getR1c1()));
                     completeVBSContent(vbsFileContent, FileName, sheetName, newExcelPath);

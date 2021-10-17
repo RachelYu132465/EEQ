@@ -983,6 +983,8 @@ public class Excel {
                     }}}
     *
     * */
+
+    //return R1C1 of the FirstWord
     public String findFirstWordInWb(String searchword, Excel excel) {
 
 
@@ -1003,14 +1005,44 @@ public class Excel {
         return "";
     }
 
+    public  List<String>  findAllkeyWordR1C1InWb(String searchword, Excel excel) {
+
+        List<String> keywordR1C1 = new ArrayList<>();
+
+        int rowSize = excel.getLastRowNum();
+        Sheet sheet = excel.getSheet()==null? excel.getWorkbook().getSheetAt(0): excel.getSheet();
+        if(excel.getSheet()==null) {System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!+at excel findAllkeyWordR1C1InWb: sheet is not assign");}
+
+        for (int j = 0; j < rowSize; j++) {
+           Row row = sheet.getRow(j);
+           if(row != null){
+               int colSize = excel.getLastCellNum();
+               for (int k = 0; k < colSize; k++) {
+                   Cell cell = row.getCell(k);
+                   String cellString = excel.getAbsoluteStringCellValue();
+                   if (StringUtils.containsIgnoreCase(cellString, searchword.trim())) {
+                       String s = getR1C1Idx(curCell);
+
+                       keywordR1C1.add(s);
+                   }
+               }
+           }
+
+
+        }
+        return keywordR1C1;
+    }
     public String findfirstWordAtRight(int rowIdx, int colIdx) {
         int size = this.getLastCellNum();
 
+        Sheet sheet = this.getSheet()==null? this.getWorkbook().getSheetAt(0): this.getSheet();
+        if(this.getSheet()==null) {System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!+at excel findAllkeyWordR1C1InWb: sheet is not assign");}
+
+       Row row=  sheet.getRow(rowIdx);
         for (int k = colIdx + 1; k < size; k++) {
-            this.assignRow(rowIdx);
-            this.assignCell(k);
-            if (StringUtils.isNotBlank(this.getAbsoluteStringCellValue()))
-                return this.getCellValue().toString();
+            Cell cell = row.getCell(k);
+            if (StringUtils.isNotBlank(cell.getStringCellValue()))
+                return cell.getStringCellValue();
 
 
         }
