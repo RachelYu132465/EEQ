@@ -2,6 +2,7 @@ package msexcel;
 
 
 import com.gembox.spreadsheet.*;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
@@ -49,7 +50,7 @@ public class Excel {
         style1.setFont(defaultFont1);
         c1.setCellStyle(style1);
 
-        n.saveToFile( FileSystemView.getFileSystemView().getHomeDirectory().getPath() + File.separator + "testTina.xlsx");
+        n.saveToFile(FileSystemView.getFileSystemView().getHomeDirectory().getPath() + File.separator + "testTina.xlsx");
 
     }
 
@@ -106,9 +107,9 @@ public class Excel {
     private Excel() {
     }
 
-    public Excel(String fileName) throws IOException {
-        this(new FileInputStream(new File(fileName)), fileName);
-        this.fileName = fileName;
+    public Excel(String fileAbsolutePath) throws IOException {
+        this(new FileInputStream(new File(fileAbsolutePath)), fileAbsolutePath);
+        this.fileName = fileAbsolutePath;
     }
 
     private Excel(InputStream in, String fileName) {
@@ -760,13 +761,13 @@ public class Excel {
         return excel;
     }
 
-    public void removeLastBlankRow(Sheet sheet){
+    public void removeLastBlankRow(Sheet sheet) {
         int lastRowIdx = sheet.getLastRowNum();
         Check1:
-        for(int idx=lastRowIdx; idx>0;idx--){
-            Row row=sheet.getRow(idx);
-            for(int cellIdx =0; cellIdx<row.getLastCellNum(); cellIdx++){
-                if(row.getCell(cellIdx)!=null && StringUtils.isNotBlank(getCellValueAsString(row.getCell(cellIdx)))){
+        for (int idx = lastRowIdx; idx > 0; idx--) {
+            Row row = sheet.getRow(idx);
+            for (int cellIdx = 0; cellIdx < row.getLastCellNum(); cellIdx++) {
+                if (row.getCell(cellIdx) != null && StringUtils.isNotBlank(getCellValueAsString(row.getCell(cellIdx)))) {
                     break Check1;
                 }
             }
@@ -885,6 +886,17 @@ public class Excel {
         return loadExcel(pathName);
     }
 
+    public static Excel saveToFile(Workbook wb, String pathName) {
+        try (FileOutputStream outputStream = new FileOutputStream(pathName)) {
+            wb.write(outputStream);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return loadExcel(pathName);
+    }
+
     //this method use api from third party
     //if range passed in is D11:D13 --> return ["D11","D12","D13"]
     public List<String> getCellsAddrByRange(String range) throws IOException {
@@ -921,6 +933,137 @@ public class Excel {
         return getCurCell().getAddress().formatAsString();
     }
 
+
+    public static List<Sheet> getAllSheets(Excel excel) {
+        List<Sheet> list = new ArrayList<>();
+        Workbook wb = excel.curWb;
+        int sheetNumbers = wb.getNumberOfSheets();
+        for (int i = 0; i < sheetNumbers; i++) {
+            list.add(wb.getSheetAt(i));
+        }
+        return list;
+    }
+
+    //    public static List<Workbook> createOneWbWithOneSheet  ( List<Sheet> sheetList, String Path){
+    public static List<Excel> dividExcelBySheet(Excel originalExcel, String Path) {
+        List<Excel> list = new ArrayList<>();
+        List<File> Filelist = new ArrayList<>();
+        int sheetNumbers = originalExcel.getNumberOfSheets();
+        for (int i = 0; i < sheetNumbers; i++) {
+
+            Workbook wb = originalExcel.getWorkbook();
+
+            originalExcel.saveToFile(Path + i + ".xlsx");
+            File file = new File(Path + i + ".xlsx");
+            Filelist.add(file);
+        }
+        //for (int i = 0; i < sheetNumbers; i++){
+//            File f =Filelist.get(i);
+        for (File f : Filelist) {
+
+            Excel excel = Excel.loadExcel(f);
+            Workbook wb = excel.getWorkbook();
+            String fileNameWithOutExt = FilenameUtils.removeExtension(f.getName());
+            int sheetindex = Integer.valueOf(fileNameWithOutExt);
+            String sheetName = wb.getSheetName(sheetindex);
+//            System.out.println("sheetName :" + sheetName);
+
+//for (int i = 0; i < sheetNumbers; i++){
+//    if(i!=sheetindex){
+//        wb.removeSheetAt(i);
+//    }
+//
+//}
+//            int count = 0;
+            while (wb.getNumberOfSheets() > 1 && !(wb.getNumberOfSheets() <= 0)) {
+//                System.out.println("wb getsheet :" +  wb.getSheetName(0));
+//                System.out.println("wb.getNumberOfSheets()" + wb.getNumberOfSheets());
+                if (!(wb.getSheetName(0).equals(sheetName))) {
+
+                    wb.removeSheetAt(0);
+
+                }
+                else {
+
+
+                    int loopTime= wb.getNumberOfSheets()-1;
+//                    if (loopTime>1) {
+                        for (int i = 0; i < loopTime; i++) {
+                            wb.removeSheetAt(1);
+                        }
+//                    }
+                }
+//                count++;
+                if (wb.getNumberOfSheets() == 1) {
+//                    count = 0;
+                    break;
+                }
+            }
+            excel.save();
+            list.add(excel);
+        }
+        return list;
+
+    }
+
+
+    //
+////    public static List<Workbook> createOneWbWithOneSheet  ( List<Sheet> sheetList, String Path){
+//        public static List<Excel> createOneWbWithOneSheet  ( List<Sheet> sheetList, String Path){
+//            List<Excel> list  = new ArrayList<>();
+////        List<Workbook> list  = new ArrayList<>();
+//            try{
+//                int sheetNumbers = sheetList.size();
+//                for (int i =0; i<sheetNumbers;i++){
+//                    String sheetName =sheetList.get(i).getSheetName();
+//                    FileOutputStream fout = new FileOutputStream(Path+sheetName+".xlsx");
+//                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+//                    Workbook workBook = new XSSFWorkbook();
+//                    Sheet sheet = workBook.createSheet(sheetName);
+//                    workBook.removeSheetAt();
+//                    sheetList.get(i);
+//                    workBook.write(outputStream);
+//
+//                    outputStream.writeTo(fout);
+//                    outputStream.close();
+//                    fout.close();
+//                    Excel excel = new Excel(Path+sheetList.get(i).getSheetName()+".xlsx");
+//                    list.add(excel);
+//                }}
+//            catch (IOException  e){e.printStackTrace(); System.out.println("!!!!");}
+////    public static List<Workbook> createOneWbWithOneSheet  ( List<Sheet> sheetList, String Path){
+//        public static List<Excel> createOneWbWithOneSheet  ( List<Sheet> sheetList, String Path){
+//            List<Excel> list  = new ArrayList<>();
+////        List<Workbook> list  = new ArrayList<>();
+//        try{
+//        int sheetNumbers = sheetList.size();
+//        for (int i =0; i<sheetNumbers;i++){
+//           String sheetName =sheetList.get(i).getSheetName();
+//            FileOutputStream fout = new FileOutputStream(Path+sheetName+".xlsx");
+//            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+//           Workbook workBook = new XSSFWorkbook();
+//            Sheet sheet = workBook.createSheet(sheetName);
+//            workBook.removeSheetAt();
+//            sheetList.get(i);
+//            workBook.write(outputStream);
+//
+//            outputStream.writeTo(fout);
+//            outputStream.close();
+//            fout.close();
+//Excel excel = new Excel(Path+sheetList.get(i).getSheetName()+".xlsx");
+//            list.add(excel);
+//           }}
+//           catch (IOException  e){e.printStackTrace(); System.out.println("!!!!");}
+//
+////           Workbook wb =new XSSFWorkbook();
+////            Excel.saveToFile(wb,Path);
+////            Excel excel =Excel.loadExcel(file);
+////            System.out.println(Path+sheetList.get(i).getSheetName()+".xlsx");
+////            excel.curWb.createSheet(sheetList.get(i).getSheetName());
+//
+//
+//        return list;
+//    }
     public void setCellValue(String r1c1, Object value) {
         CellReference cellReference = new CellReference(r1c1);
         Row row = this.curSheet.getRow(cellReference.getRow());
@@ -1005,40 +1148,45 @@ public class Excel {
         return "";
     }
 
-    public  List<String>  findAllkeyWordR1C1InWb(String searchword, Excel excel) {
+    public List<String> findAllkeyWordR1C1InWb(String searchword, Excel excel) {
 
         List<String> keywordR1C1 = new ArrayList<>();
 
         int rowSize = excel.getLastRowNum();
-        Sheet sheet = excel.getSheet()==null? excel.getWorkbook().getSheetAt(0): excel.getSheet();
-        if(excel.getSheet()==null) {System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!+at excel findAllkeyWordR1C1InWb: sheet is not assign");}
+        Sheet sheet = excel.getSheet() == null ? excel.getWorkbook().getSheetAt(0) : excel.getSheet();
+        if (excel.getSheet() == null) {
+            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!+at excel findAllkeyWordR1C1InWb: sheet is not assign");
+        }
 
         for (int j = 0; j < rowSize; j++) {
-           Row row = sheet.getRow(j);
-           if(row != null){
-               int colSize = excel.getLastCellNum();
-               for (int k = 0; k < colSize; k++) {
-                   Cell cell = row.getCell(k);
-                   String cellString = excel.getAbsoluteStringCellValue();
-                   if (StringUtils.containsIgnoreCase(cellString, searchword.trim())) {
-                       String s = getR1C1Idx(curCell);
+            Row row = sheet.getRow(j);
+            if (row != null) {
+                int colSize = excel.getLastCellNum();
+                for (int k = 0; k < colSize; k++) {
+                    Cell cell = row.getCell(k);
+                    String cellString = excel.getAbsoluteStringCellValue();
+                    if (StringUtils.containsIgnoreCase(cellString, searchword.trim())) {
+                        String s = getR1C1Idx(curCell);
 
-                       keywordR1C1.add(s);
-                   }
-               }
-           }
+                        keywordR1C1.add(s);
+                    }
+                }
+            }
 
 
         }
         return keywordR1C1;
     }
+
     public String findfirstWordAtRight(int rowIdx, int colIdx) {
         int size = this.getLastCellNum();
 
-        Sheet sheet = this.getSheet()==null? this.getWorkbook().getSheetAt(0): this.getSheet();
-        if(this.getSheet()==null) {System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!+at excel findAllkeyWordR1C1InWb: sheet is not assign");}
+        Sheet sheet = this.getSheet() == null ? this.getWorkbook().getSheetAt(0) : this.getSheet();
+        if (this.getSheet() == null) {
+            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!+at excel findAllkeyWordR1C1InWb: sheet is not assign");
+        }
 
-       Row row=  sheet.getRow(rowIdx);
+        Row row = sheet.getRow(rowIdx);
         for (int k = colIdx + 1; k < size; k++) {
             Cell cell = row.getCell(k);
             if (StringUtils.isNotBlank(cell.getStringCellValue()))

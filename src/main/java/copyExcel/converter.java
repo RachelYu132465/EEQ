@@ -480,7 +480,7 @@ public class converter {
 
     }
 
-    private static void copySheet(XSSFSheet source, XSSFSheet destination) {
+    public static void copySheet(XSSFSheet source, XSSFSheet destination) {
         copySheet(source, destination, true);
     }
 
@@ -509,8 +509,10 @@ public class converter {
      * @param destRow   the row to create.
      * @param styleMap  -
      */
+    private static int  count =0;
     private static void copyRow(XSSFSheet srcSheet, XSSFSheet destSheet, XSSFRow srcRow, XSSFRow destRow,
                                 List<CellStyle> styleMap) {
+//        System.out.println("flag in copyRow++++++++++++++++" +count++);
         Set<CellRangeAddressWrapper> mergedRegions = new TreeSet<CellRangeAddressWrapper>();
         short dh = srcSheet.getDefaultRowHeight();
         if (srcRow.getHeight() != dh) {
@@ -539,9 +541,12 @@ public class converter {
                             mergedRegion.getLastRow(), mergedRegion.getFirstColumn(), mergedRegion.getLastColumn());
                     CellRangeAddressWrapper wrapper = new CellRangeAddressWrapper(newMergedRegion);
 //modify: the CellRangeAddress of a merged region is contained in a set (i.e.mergedRegions), we should add merged region before check
-
+//                    mergedRegions.add(wrapper);
+//                    destSheet.addMergedRegion(wrapper.range);
+                    for (CellRangeAddressWrapper C: mergedRegions)
+                    System.out.print("mergedRegions++++  "+ C.range);
                     if (isNewMergedRegion(wrapper, mergedRegions)) {
-                        mergedRegions.add(wrapper);
+                        System.out.print("NewMergedRegion++++  "+ wrapper.toString());
                         destSheet.addMergedRegion(wrapper.range);
                     }
                 }
@@ -755,9 +760,12 @@ public class converter {
         switch (oldCell.getCellType()) {
             case STRING:
                 newCell.setCellValue(oldCell.getStringCellValue());
+                System.out.print(newCell.getStringCellValue());
                 break;
             case NUMERIC:
                 newCell.setCellValue(oldCell.getNumericCellValue());
+                System.out.print(newCell.getNumericCellValue());
+
                 break;
             case BLANK:
                 newCell.setCellValue("");

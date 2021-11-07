@@ -4,38 +4,72 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d944a863-58b2-4338-9ba2-2df1015ae098" name="Changes" comment="no duplicate input cells on word files">
-      <change afterPath="$PROJECT_DIR$/src/main/java/msword/CustomTableText.java" afterDir="false" />
+    <list default="true" id="2e765ee2-cf0a-468f-808b-bc73de3e9cf7" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/test/moveExcelSheet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_gembox_gembox_spreadsheet_1_1_1173.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_virtuald_curvesapi_1_06.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_zaxxer_SparseBitSet_1_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_2_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_lang_commons_lang_2_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_collections4_4_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_compress_1_19.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_math3_3_6_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_4_1_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_ooxml_4_1_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_ooxml_schemas_4_1_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlbeans_xmlbeans_3_1_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_annotations_22_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/ojdbc6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/ojdbc8_21_1_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/common/StringProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/StringProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dataStructure/ValidGoal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dataStructure/ValidGoal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mainFlow/ProduceWordFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mainFlow/ProduceWordFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EEQ.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/copyExcel/converter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/copyExcel/converter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mainFlow/VBS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mainFlow/VBS.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/msexcel/Excel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/msexcel/Excel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/msword/CustomTableStyle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/msword/CustomTableStyle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/msword/CustomWordStyle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/msword/CustomWordStyle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/msword/CustomTableText.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/msword/CustomTableText.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/test/ExcelForRu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/ExcelForRu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/validate/excelFormulaValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/validate/excelFormulaValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/common/FileHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/common/FileHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/common/NumberProcessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/common/NumberProcessor.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/common/StringProcessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/common/StringProcessor.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/dataStructure/ValidGoal.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dataStructure/ValidGoal.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/mainFlow/ProduceWordFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mainFlow/ProduceWordFile.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/mainFlow/VBS.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mainFlow/VBS.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mainFlow/extract.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mainFlow/extract.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/msexcel/Excel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msexcel/Excel$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/msexcel/Excel$ExcelType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msexcel/Excel$ExcelType.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/msexcel/Excel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msexcel/Excel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/msexcel/ExcelCell.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msexcel/ExcelCell.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/msexcel/Range.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msexcel/Range.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/msexcel/customExcelStyle.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msexcel/customExcelStyle.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/msword/CustomTableStyle.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msword/CustomTableStyle.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/msword/CustomWordStyle$types.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msword/CustomWordStyle$types.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/msword/CustomWordStyle.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msword/CustomWordStyle.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/msword/ManageTable.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msword/ManageTable.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/msword/ManageText.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msword/ManageText.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/msword/StrOnCustomWord.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/msword/StrOnCustomWord.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/test/ExcelForRu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/test/ExcelForRu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/validate/MyRange.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/validate/MyRange.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/validate/OperatorConvertor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/validate/OperatorConvertor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/validate/RangeException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/validate/RangeException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/validate/customStringFormatter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/validate/customStringFormatter.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/validate/excelFormulaProcessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/validate/excelFormulaProcessor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/validate/excelFormulaValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/validate/excelFormulaValidator.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="ChangesViewManager">
-    <option name="groupingKeys">
-      <option value="directory" />
-    </option>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -55,36 +89,26 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
-  <component name="ProjectId" id="1wOr6oi3y7GE3KVUMsBSamFIz3D" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="C:\Users\yy369708\.m2\repository" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1zwEdnNvxFOsW3uF4L6xEssX3bO" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="Downloaded.Files.Path.Enabled" value="false" />
-    <property name="Repository.Attach.Annotations" value="false" />
-    <property name="Repository.Attach.JavaDocs" value="false" />
-    <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/ojdbc-full.tar/ojdbc-full/OJDBC-Full/xdb6.jar" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.25907752" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\tina.yu\EEQ\src\main\java\validate" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\YUY139\workspace\EEQ\src\main\java\copyExcel" />
-      <recent name="C:\Users\tina.yu\EEQ\src\main\java\validate" />
-      <recent name="C:\Users\tina.yu\EEQ\src\main\java\common" />
-      <recent name="C:\Users\tina.yu\EEQ\src\main\java\msexcel" />
-    </key>
+    <property name="project.structure.side.proportion" value="0.47816092" />
+    <property name="settings.editor.selected.configurable" value="project.propCompiler" />
   </component>
   <component name="RunManager" selected="Application.ExcelForRu">
     <configuration name="ExcelForRu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -100,47 +124,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ODBCConnector" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="common.ODBCConnector" />
-      <module name="EEQ" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="common.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ValidGoal" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="dataStructure.ValidGoal" />
-      <module name="EEQ" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="dataStructure.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="converter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="copyExcel.converter" />
-      <module name="EEQ" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="copyExcel.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="test (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="test.test" />
+    <configuration name="moveExcelSheet" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="test.moveExcelSheet" />
       <module name="EEQ" />
       <extension name="coverage">
         <pattern>
@@ -155,170 +140,19 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.ExcelForRu" />
-        <item itemvalue="Application.ValidGoal" />
-        <item itemvalue="Application.test (1)" />
-        <item itemvalue="Application.converter" />
-        <item itemvalue="Application.ODBCConnector" />
+        <item itemvalue="Application.moveExcelSheet" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="d944a863-58b2-4338-9ba2-2df1015ae098" name="Changes" comment="" />
-      <created>1628340304144</created>
+      <changelist id="2e765ee2-cf0a-468f-808b-bc73de3e9cf7" name="Changes" comment="" />
+      <created>1635050843573</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1628340304144</updated>
+      <updated>1635050843573</updated>
     </task>
-    <task id="LOCAL-00001" summary=" 一個目標--&gt;一個vbs (特定命名方式= output的r1c1+目標的index)">
-      <created>1628948981658</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1628948981658</updated>
-    </task>
-    <task id="LOCAL-00002" summary="word第三個表格完成">
-      <created>1629008443383</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1629008443383</updated>
-    </task>
-    <task id="LOCAL-00003" summary="word第三個表格完成">
-      <created>1629008475828</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1629008475828</updated>
-    </task>
-    <task id="LOCAL-00004" summary="1)完成執行vbs。2)完成word最後一個表格。3)每一個目標要產出一個新的key放上hashmap(先前是每個output產出一個key)">
-      <created>1629083081857</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1629083081857</updated>
-    </task>
-    <task id="LOCAL-00005" summary="myrange/OOS/custom excel+word formatter">
-      <created>1629632721631</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1629632721631</updated>
-    </task>
-    <task id="LOCAL-00006" summary="modify OOS">
-      <created>1629640123485</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1629640123485</updated>
-    </task>
-    <task id="LOCAL-00007" summary="modify OOS">
-      <created>1629691044074</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1629691044074</updated>
-    </task>
-    <task id="LOCAL-00008" summary="modify OOS">
-      <created>1630116432000</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1630116432000</updated>
-    </task>
-    <task id="LOCAL-00009" summary="modify OOS">
-      <created>1630116462596</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1630116462596</updated>
-    </task>
-    <task id="LOCAL-00010" summary="MODIFY WORD">
-      <created>1630127126489</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1630127126489</updated>
-    </task>
-    <task id="LOCAL-00011" summary="modify word table1(input &amp; output cells add to table respectively)">
-      <created>1630227579880</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1630227579880</updated>
-    </task>
-    <task id="LOCAL-00012" summary="modify manually enter spec function and modify excel">
-      <created>1631003098815</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1631003098815</updated>
-    </task>
-    <task id="LOCAL-00013" summary="modify manually enter spec function and modify excel">
-      <created>1631003531133</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1631003531133</updated>
-    </task>
-    <task id="LOCAL-00014" summary="modify manually enter spec function and modify excel">
-      <created>1631088196657</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1631088196657</updated>
-    </task>
-    <task id="LOCAL-00015" summary="very important note">
-      <created>1631338529174</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1631338529174</updated>
-    </task>
-    <task id="LOCAL-00016" summary="getSheetsBykeywordsIgnoreCase">
-      <created>1631357428990</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1631357428990</updated>
-    </task>
-    <task id="LOCAL-00017" summary="filehandle">
-      <created>1631468093818</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1631468093818</updated>
-    </task>
-    <task id="LOCAL-00018" summary="filehandle">
-      <created>1631890554509</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1631890554509</updated>
-    </task>
-    <task id="LOCAL-00019" summary="filehandle">
-      <created>1632237414917</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1632237414917</updated>
-    </task>
-    <task id="LOCAL-00020" summary="new changes">
-      <created>1633603406530</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1633603406530</updated>
-    </task>
-    <task id="LOCAL-00021" summary="no duplicate input cells on word files">
-      <created>1633996964568</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1633996964568</updated>
-    </task>
-    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -333,107 +167,18 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value=" 一個目標--&gt;一個vbs (特定命名方式= output的r1c1+目標的index)" />
-    <MESSAGE value="word第三個表格完成" />
-    <MESSAGE value="1)完成執行vbs。2)完成word最後一個表格。3)每一個目標要產出一個新的key放上hashmap(先前是每個output產出一個key)" />
-    <MESSAGE value="myrange/OOS/custom excel+word formatter" />
-    <MESSAGE value="modify OOS" />
-    <MESSAGE value="MODIFY WORD" />
-    <MESSAGE value="modify word table1(input &amp; output cells add to table respectively)" />
-    <MESSAGE value="modify manually enter spec function and modify excel" />
-    <MESSAGE value="very important note" />
-    <MESSAGE value="getSheetsBykeywordsIgnoreCase" />
-    <MESSAGE value="filehandle" />
-    <MESSAGE value="new changes" />
-    <MESSAGE value="no duplicate input cells on word files" />
-    <option name="LAST_COMMIT_MESSAGE" value="no duplicate input cells on word files" />
-  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/common/FileHandler.java</url>
-          <line>74</line>
-          <option name="timeStamp" value="72" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/common/FileHandler.java</url>
-          <line>61</line>
-          <option name="timeStamp" value="73" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/msexcel/Excel.java</url>
-          <line>801</line>
-          <option name="timeStamp" value="83" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/copyExcel/converter.java</url>
-          <line>1220</line>
-          <option name="timeStamp" value="84" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/copyExcel/converter.java</url>
-          <line>1127</line>
-          <option name="timeStamp" value="85" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/copyExcel/converter.java</url>
-          <line>1141</line>
-          <option name="timeStamp" value="90" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/copyExcel/converter.java</url>
-          <line>1216</line>
-          <option name="timeStamp" value="91" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/msexcel/Excel.java</url>
-          <line>30</line>
-          <option name="timeStamp" value="92" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/test/ExcelForRu.java</url>
-          <line>119</line>
-          <option name="timeStamp" value="117" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/test/ExcelForRu.java</url>
-          <line>116</line>
-          <option name="timeStamp" value="120" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/validate/excelFormulaValidator.java</url>
-          <line>171</line>
-          <option name="timeStamp" value="124" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/msword/CustomTableText.java</url>
-          <line>22</line>
-          <option name="timeStamp" value="154" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/msword/CustomTableText.java</url>
-          <line>44</line>
-          <option name="timeStamp" value="155" />
-        </line-breakpoint>
+        <breakpoint type="java-exception">
+          <properties class="java.lang.IllegalStateException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
       </breakpoints>
     </breakpoint-manager>
-    <pin-to-top-manager>
-      <pinned-members>
-        <PinnedItemInfo parentTag="org.apache.xmlbeans.impl.schema.SchemaTypeImpl" memberName="_selfref" />
-        <PinnedItemInfo parentTag="org.apache.poi.xssf.usermodel.XSSFCell" memberName="_cell" />
-      </pinned-members>
-    </pin-to-top-manager>
-    <watches-manager>
-      <configuration name="Application">
-        <watch expression="TobeProcessed" />
-      </configuration>
-    </watches-manager>
   </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/EEQ$FileHandler.ic" NAME="FileHandler Coverage Results" MODIFIED="1631511495001" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>common.*</FILTER>
-    </SUITE>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

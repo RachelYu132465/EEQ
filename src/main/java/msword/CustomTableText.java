@@ -139,10 +139,23 @@ public class CustomTableText {
                 if (input_c.getR1c1().equals(targetR1C1)) return input_c.getValue();
             }
         }
+        return "";
+    }
 
+        public static ExcelCell getCellByR1C1(String targetR1C1, HashMap<String, ValidGoal> goals) {
+            //  HashSet<String> FormulaCells = new HashSet<>();
+            // HashSet<String> AllIuputs =getAllInputs(goals) ;
+            //  for (String C1R1 : getAllCells) {
+            for (Map.Entry<String, ValidGoal> goal : goals.entrySet()) {
+                if (goal.getKey().equals(targetR1C1)) return goal.getValue().getOutput();
+
+                for (ExcelCell input_c : goal.getValue().getAllInputs()) {
+                    if (input_c.getR1c1().equals(targetR1C1)) return input_c;
+                }
+            }
 
         //  }
-        return "";
+        return null;
     }
 
     public static HashSet<String> getCellByFormulaType(HashSet<ExcelCell> AllInputs, boolean ifFormula) {

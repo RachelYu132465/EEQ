@@ -218,15 +218,25 @@ List<String> outputList =CustomTableText.getOutputList();
 //for (String formatCellAddress : CustomTableText.getFormulaList()){
 //    if
 //}
-        for (Map.Entry<String, ValidGoal> goal : goals.entrySet()) {
+        for (String sortedFormulaCellAddress : CustomTableText.getFormulaList()) {
+            String value = gettCellValueByR1C1(sortedFormulaCellAddress, goals);
+ExcelCell cell = getCellByR1C1(sortedFormulaCellAddress, goals);
             XWPFTableRow row = table.createRow();
-
             addToTable(types.Content, table, table.getNumberOfRows() - 1,
-                    goal.getValue().getOutput().getCell().getCellFormula(),
-                    goal.getValue().getOutput().getR1c1(),
-                    goal.getValue().getOutput().getNote()
-            );
+                    cell.getCell().getCellFormula(),
+                    sortedFormulaCellAddress,
+                    cell.getNote()
+                  );
         }
+//        for (Map.Entry<String, ValidGoal> goal : goals.entrySet()) {
+//            XWPFTableRow row = table.createRow();
+//
+//            addToTable(types.Content, table, table.getNumberOfRows() - 1,
+//                    goal.getValue().getOutput().getCell().getCellFormula(),
+//                    goal.getValue().getOutput().getR1c1(),
+//                    goal.getValue().getOutput().getNote()
+//            );
+//        }
     }
 
     public static void getTable_Style2(XWPFDocument doc, HashMap<String, ValidGoal> goals,CustomTableText CustomTableText) {
@@ -331,11 +341,18 @@ List<String> outputList =CustomTableText.getOutputList();
             int FormulaIndex = newRowIdx;
             int nonFormulaIndex = newRowIdx;
 
+            for (String sortedFormulaCellAddress : CustomTableText.getFormulaList()) {
+                String value = gettCellValueByR1C1(sortedFormulaCellAddress, oneValidGoal);
 
+                addToTable(types.Content, table, ++FormulaIndex,
+                        "", "", sortedFormulaCellAddress, "", "", value);
+            }
             for (String s : CustomTableText.getNonFormulaList()) {
                 String value = gettCellValueByR1C1(s, oneValidGoal);
 
                 if (value.equals(changedValue)) {
+
+                    System.out.println("validate goal: "+outputCellAddress + "bold cell: "+changedValue);
                     addToTable(types.Title, table, ++nonFormulaIndex,
                             s
                             , value
@@ -357,12 +374,7 @@ List<String> outputList =CustomTableText.getOutputList();
 
 
             }
-            for (String sortedFormulaCellAddress : CustomTableText.getFormulaList()) {
-                String value = gettCellValueByR1C1(sortedFormulaCellAddress, oneValidGoal);
 
-                addToTable(types.Content, table, ++FormulaIndex,
-                        "", "", sortedFormulaCellAddress, "", "", value);
-            }
         }
 
 

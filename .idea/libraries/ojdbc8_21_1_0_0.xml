@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="ojdbc8-21.1.0.0">
-    <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/com/oracle/JDBC/ojdbc8-21.1.0.0.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

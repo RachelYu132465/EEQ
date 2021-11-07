@@ -8,9 +8,12 @@ import mainFlow.extract;
 import msexcel.Excel;
 import msexcel.ExcelCell;
 import msword.CustomTableText;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
 import javax.swing.filechooser.FileSystemView;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,6 +24,7 @@ import java.util.List;
 import static mainFlow.ProduceWordFile.writeToWord_general;
 import static mainFlow.ProduceWordFile.writeToWord_testCase;
 import static mainFlow.VBS.execAllVBSFiles;
+import static msexcel.Excel.*;
 import static msexcel.customExcelStyle.setMyConditionalFormatting;
 
 import static msword.CustomTableText.getFormulaCellAddress;
@@ -30,7 +34,7 @@ import static validate.excelFormulaValidator.getValidatedValues;
 
 
 /*
-執行前要: 1.檔案要存在桌面 2.檔案名稱不能有空格 (CMD無法執行，VBS會無法產新excel)
+執行前要: 1.檔案要存在桌面 2.檔案名稱不能有空格&中文!!!! (CMD無法執行，VBS會無法產新excel)
 [Extract]
     1.找規格(=目標值)
     2.找輸入格
@@ -52,33 +56,26 @@ import static validate.excelFormulaValidator.getValidatedValues;
 
 
 public class ExcelForRu {
-    public static final String proj_path = FileSystemView.getFileSystemView().getHomeDirectory().getPath() + "/";
+    public static final String proj_path = FileSystemView.getFileSystemView().getHomeDirectory().getPath() + File.separator ;
 
     public static void main(String[] args) throws IOException, InterruptedException
 //            ,RangeException
     {
-//        String fileName =  "格式_RT30397_LABSpreadsheet數字(1).xlsx";
-//        String fileName = "C- RT30358-LAB Spreadsheet-數字版.xlsx";
-//        String fileName = "final_RT30358_LAB_Spreadsheet複製.xlsx";
-//        String output =  "final_RT30358_LAB_Spreadsheet1.xlsx";
-        String output =  "originSpec_RT30358_LAB_Spreadsheet1.xlsx";
-//        String output =  "final_RT30358_LAB_Spreadsheet_2.xlsx";
-//        String fileName = "R000012383-LAB Spreadsheet數字.xlsx";
-        Excel outputExcel = Excel.loadExcel(proj_path + output);
-        //Excel excel = Excel.loadExcel(proj_path + fileName);
+//        String output = "RT30354-LAB_Spreadsheet.xlsx";
+        String output = "C-RT30358LABSpreadsheet.xlsx";
+        Excel excel = Excel.loadExcel(proj_path + output);
 
-
-//        System.out.println(outputExcel.assignSheet(0).assignRow(34).assignCell(1));
-//        System.out.println(outputExcel.getCurCell().getAddress().toString() + outputExcel.getCurCell().getNumericCellValue()+outputExcel.getCurCell().getCellType());
+if (excel==null)   System.out.println("NULL!");
+        List<Excel> excelList = dividExcelBySheet(excel,proj_path);
 
 
         XWPFDocument doc_general = new XWPFDocument();
         XWPFDocument doc_testCase = new XWPFDocument();
 
-        int sheetSize = outputExcel.getNumberOfSheets();
-
-        for (int a = 0; a < sheetSize; a++) {
-            outputExcel.assignSheet(a);
+//        int sheetSize = Excel.getNumberOfSheets();
+ int count =0;
+        for (Excel outputExcel: excelList) {
+            outputExcel.assignSheet(0);
 
              //outputExcel.assignSheet(a);
             String sheetName = outputExcel.getSheet().getSheetName();
@@ -103,14 +100,14 @@ public class ExcelForRu {
 //                store target goal in existing excelForRead, because vbs function--'goal seek' requires an object
                 HashMap<String, ExcelCell> allTarget = VBS.storeTargetInFile(outputExcel, TobeProcessed);
                 outputExcel.save();
-                VBS.produceVBSFiles(output, outputExcel.getSheet(), excel_newData_path,vbs_newData_path, allTarget, TobeProcessed);
+                VBS.produceVBSFiles(String.valueOf(count), output,outputExcel.getSheet(), excel_newData_path,vbs_newData_path, allTarget, TobeProcessed);
                 execAllVBSFiles(vbs_newData_path);
 //                //get new Excel everytime vbs file produce new file
                 HashMap<String, ValidGoal> newData = getValidatedValues(outputExcel, sheetName, TobeProcessed, excel_newData_path);
 
 
 
-                int testCaseIdx = a + 2;
+                int testCaseIdx = count + 2;
 
 
 //                //要把hashmap裡面的Key改成OutputR1C1 + index -->因為有值會有上下標，需要有兩個新excel檔案!!
@@ -118,6 +115,7 @@ public class ExcelForRu {
 //
                 FileHandler.save(doc_general, proj_path + sheetName + "_result.docx");
                 FileHandler.save(doc_testCase, proj_path + sheetName + "_test case.docx");
+                count++;
             }
         }
 
